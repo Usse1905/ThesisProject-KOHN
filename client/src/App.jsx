@@ -8,6 +8,7 @@ import MainPageUser from "./Components/User/MainPageUser";
 import CarDetails from "./Components/User/CarDetails";
 import AddCar from "./Components/Company/AddCar";
 import ProfilePage from "./Components/Company/ProfilePage";
+import AdminDashboard from "./Components/AdminDashborard";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
     <Route path="/Company/AddCar" element={<AddCar/>}/>
     <Route path="/Company/Mainpage" element={<MainPageC/>}/>
     <Route path="/Company/Profile" element={<ProfilePage/>}/>
+    <ProtectedAdminRoute path="/admin" component={AdminDashboard} />
   </Routes>
   </div>
   </BrowserRouter>
