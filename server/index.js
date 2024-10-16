@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require('cors');
-const route = require("./Routes/Routes.js")
+const route = require("./Routes/CarRoutes.js")
 const projectdb = require("./database/indexDb.js")
 const app = express();
 const PORT = 8080;

@@ -33,4 +33,5 @@ Object.keys(projectdb).forEach(model => {
 
   projectdb.Sequelize = Sequelize;
   projectdb.connection = connection
-module.exports = connection
+
+module.exports = projectdb
