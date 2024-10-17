@@ -3,8 +3,7 @@ import {BrowserRouter,Routes,Route} from "react-router-dom";
 import "./App.css";
 import LogIn from "./Components/LogIn";
 import SignUp from "./Components/SignUp";
-import MainPageC from "./Components/Company/MainPageC";
-import MainPageUser from "./Components/User/MainPageUser";
+import MainPage from "./Components/User/MainPage";
 import CarDetails from "./Components/User/CarDetails";
 import AddCar from "./Components/Company/AddCar";
 import ProfilePage from "./Components/Company/ProfilePage";
@@ -12,15 +11,13 @@ import ProfilePage from "./Components/Company/ProfilePage";
 const App = () => {
   return (
     <BrowserRouter>
-  <Navbar/>
   <div >
   <Routes>
     <Route path="/login" element={<LogIn/>}/>
     <Route path="/signup" element={<SignUp/>}/>
-    <Route path="/User/Mainpage" element={<MainPageUser/>}/>
-    <Route path="/User/CarDetails" element={<CarDetails/>}/>
+    <Route path="/allcars" element={<MainPage/>}/>
+    <Route path="/one/:id" element={<CarDetails/>}/>
     <Route path="/Company/AddCar" element={<AddCar/>}/>
-    <Route path="/Company/Mainpage" element={<MainPageC/>}/>
     <Route path="/Company/Profile" element={<ProfilePage/>}/>
   </Routes>
   </div>
