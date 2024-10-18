@@ -4,7 +4,7 @@ import "./App.css";
 import LogIn from "./Components/LogIn";
 import SignUp from "./Components/SignUp";
 import MainPage from "./Components/User/MainPage";
-import CarDetails from "./Components/User/CarDetails";
+import OneCar from "./Components/User/OneCar";
 import AddCar from "./Components/Company/AddCar";
 import ProfilePage from "./Components/Company/ProfilePage";
 
@@ -16,7 +16,7 @@ const App = () => {
     <Route path="/login" element={<LogIn/>}/>
     <Route path="/signup" element={<SignUp/>}/>
     <Route path="/allcars" element={<MainPage/>}/>
-    <Route path="/one/:id" element={<CarDetails/>}/>
+    <Route path="/one" element={<OneCar/>}/>
     <Route path="/Company/AddCar" element={<AddCar/>}/>
     <Route path="/Company/Profile" element={<ProfilePage/>}/>
   </Routes>

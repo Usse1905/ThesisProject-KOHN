@@ -13,6 +13,8 @@ const [companyid,setCompanyid] = useState("")
 const [search,setSearch] = useState("")
 const [sortOrder,setSortOrder] = useState("")
 
+const navigate = useNavigate()
+
   useEffect(()=>{
     axios.get(`http://localhost:8080/api/allcars`)
         .then((response)=>{
@@ -58,24 +60,24 @@ console.log(data);
             })
         }
 
-        if (sortOrder) {
-          result = result.sort((a, b) => {
-            if (sortOrder === "priceHigh") return b.price - a.price;
-            if (sortOrder === "priceLow") return a.price - b.price;
-            if (sortOrder === "yearHigh") return b.year - a.year;
-            if (sortOrder === "yearLow") return a.year - b.year;
-            if (sortOrder === "mileageHigh") return b.mileage - a.mileage;
-            if (sortOrder === "mileageLow") return a.mileage - b.mileage;
-            return 0;
-          });
-        }
+        // if (sortOrder) {
+        //   result = result.sort((a, b) => {
+        //     if (sortOrder === "priceHigh") return b.price - a.price;
+        //     if (sortOrder === "priceLow") return a.price - b.price;
+        //     if (sortOrder === "yearHigh") return b.year - a.year;
+        //     if (sortOrder === "yearLow") return a.year - b.year;
+        //     if (sortOrder === "mileageHigh") return b.mileage - a.mileage;
+        //     if (sortOrder === "mileageLow") return a.mileage - b.mileage;
+        //     return 0;
+        //   });
+        // }
 
         setFilteredData(result)
     }
 
     filterData()
 
-},[search,cartype,data,shift,ac,companyid,sortOrder])
+},[search,cartype,data,shift,ac,companyid])
 
 const handleSortChange = (e) => {
   setSortOrder(e.target.value);
@@ -141,10 +143,10 @@ const allcompanies = [...new Set(data.map((element)=>{
           ))}
         </select>
       </div>
-      <div className="cars">
+      <div  className="cars">
         {(search || cartype || shift || ac || companyid ? filteredData : data).map((element,index)=>{
           return <>
-          <div className="car">
+          <div className="car" onClick={()=>navigate("/one",{ state:element })}>
             <div className="namehead"><h1>{element.Name}</h1></div>
             <div className="other-specs">
               <p>from {element.companyId}</p>
@@ -152,9 +154,8 @@ const allcompanies = [...new Set(data.map((element)=>{
               <p>{element.shift}</p>
               <p>{element.ac}</p>
             </div>
-            <div className="price"><h1>{element.price}</h1></div>
+            <div className="price"><h1>{element.price} TND/Day</h1></div>
           </div>
-          <button className="submit">Submit</button>
           </>
         })}
       </div>
