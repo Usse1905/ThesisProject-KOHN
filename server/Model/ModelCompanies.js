@@ -1,12 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
+
     const Companies = sequelize.define('Companies', {
+
       name: {
         type: DataTypes.STRING(255),
         allowNull: false,
       },
-      address:{
-        type:DataTypes.STRING(255),
-        allowNull:false
+      address: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+      },
+      isApproved: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       phoneNumber:{
         type : DataTypes.INTEGER,
@@ -28,13 +35,13 @@ module.exports = (sequelize, DataTypes) => {
     }, {
       timestamps: false,  
     });
-  
+    
     Companies.associate = function (models) {
       Companies.hasMany(models.Cars, {
         foreignKey: 'companyId',
         as: 'Cars',
       });
     };
-  
     return Companies;
   };
+
