@@ -1,5 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    const Company = sequelize.define('Company', {
+
+    const Companies = sequelize.define('Companies', {
+
       name: {
         type: DataTypes.STRING(255),
         allowNull: false,
@@ -13,15 +15,33 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: false,
       },
+      phoneNumber:{
+        type : DataTypes.INTEGER,
+        allowNull:false
+      },
+      website : {
+        type : DataTypes.STRING(255),
+        allowNull : false
+      },
+      licensesinceWhen:{
+        type : DataTypes.INTEGER,
+        allowNull:false
+      },
+      lei:{
+        type : DataTypes.INTEGER,
+        allowNull:false
+      },
+      
+    }, {
+      timestamps: false,  
     });
-  
-    Company.associate = function (models) {
-      Company.hasMany(models.Cars, {
+    
+    Companies.associate = function (models) {
+      Companies.hasMany(models.Cars, {
         foreignKey: 'companyId',
         as: 'Cars',
       });
     };
-  
-    return Company;
+    return Companies;
   };
-  
+

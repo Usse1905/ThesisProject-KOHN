@@ -7,6 +7,8 @@ const connection = new Sequelize(Cfg.database, Cfg.user, Cfg.password, {
     dialect: Cfg.dialect
 })
 
+projectdb.Admins = require("../Model/ModelAdmins.js")(connection,DataTypes);
+projectdb.Users = require("../Model/ModelUsers.js")(connection,DataTypes);
 projectdb.Companies = require("../Model/ModelCompanies.js")(connection,DataTypes);
 projectdb.Cars = require("../Model/ModelCars.js")(connection,DataTypes);
 
