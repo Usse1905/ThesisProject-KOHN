@@ -23,7 +23,7 @@ Object.keys(projectdb).forEach(model => {
   async function testConnection() {
     try {
     await connection.authenticate();
-    console.log('Connection has been established successfully.');
+    console.log('database is succefully connected.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
@@ -35,3 +35,4 @@ Object.keys(projectdb).forEach(model => {
   projectdb.connection = connection
 
 module.exports = projectdb
+

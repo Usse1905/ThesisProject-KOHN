@@ -1,4 +1,3 @@
-
 // controllers/carController.js
 const { Cars } = require('../Model/ModelCars');
 const projectdb = require("../database/indexDb.js")
@@ -43,6 +42,32 @@ module.exports={
             console.error("Error fetching car:", error)
             res.status(500).send({ message: "Internal Server Error", error })
           }
-        }
+        },
+  addCar=async(req,res)=>{
+    try{
+        const body=req.body
+        console.log(body);
+        const newCar=await projectdb.Cars.create(body)
+        res.status(200).send(newCar)
+    }
+    catch(error){
+        res.status(500).send(error)
+    }
+},
+  updateCar=async(req,res)=>{
+try{
+    const body=req.body
+    const id=req.params.id
+    const updateCar=projectdb.Cars.update(body,{
+        where:{id}
+    })
+    const getOneCar=await projectdb.Cars.findOne({where:{id}})
+    res.status(200).send(getOneCar)
 }
+    catch(error){
+        res.status(500).send(error)
+    }
+}
+}
+
 

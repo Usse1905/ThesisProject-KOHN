@@ -6,8 +6,8 @@ const projectdb = require("./database/indexDb.js")
 const app = express();
 const PORT = 8080;
 
-app.use(cors())
 app.use(express.json());
+app.use(cors())
 app.use("/cars", CarRoutes);
 app.use("/company", CompanyRoutes);
 app.use(express.static(__dirname + '../react-client/indexFront.jsx'))
