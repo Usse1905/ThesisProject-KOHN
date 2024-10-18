@@ -16,7 +16,7 @@ const [sortOrder,setSortOrder] = useState("")
 const navigate = useNavigate()
 
   useEffect(()=>{
-    axios.get(`http://localhost:8080/api/allcars`)
+    axios.get(`http://localhost:8080/cars/allcars`)
         .then((response)=>{
             console.log("data is ", response.data)
             setData(response.data)

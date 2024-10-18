@@ -20,7 +20,7 @@ const App = () => {
     <Route path="/one" element={<OneCar/>}/>
     <Route path="/Company/AddCar" element={<AddCar/>}/>
     <Route path="/Company/Profile" element={<ProfilePage/>}/>
-    <ProtectedAdminRoute path="/admin" component={AdminDashboard} />
+    {/* <ProtectedAdminRoute path="/admin" component={<AdminDashboard/>} /> */}
   </Routes>
   </div>
   </BrowserRouter>
