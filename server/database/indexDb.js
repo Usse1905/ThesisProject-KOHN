@@ -1,22 +1,38 @@
-const {Sequelize,DataTypes}=require("sequelize")
-const config=require('./configDb.js')
-const connection= new Sequelize(config.database,config.user,config.password,
-    {
-        host:config.host,
-        dialect:"mysql"
-    })
+const { Sequelize, DataTypes } = require("sequelize");
+const Cfg = require('./configDb.js');
+const projectdb = {}
 
-    const DB={}
-    DB.Sequelize=Sequelize;
-    DB.connection=connection;
-    DB.compagnies=require("../Model/compagnies.js")(connection,DataTypes)
-    DB.Cars=require("../Model/Cars.js")(connection,DataTypes)
+const connection = new Sequelize(Cfg.database, Cfg.user, Cfg.password, {
+    host: Cfg.host,
+    dialect: Cfg.dialect
+})
 
-    // connection.sync({alter:true})
-    connection.authenticate()
-    .then(()=>{console.log("database is succefully connected");
-    })
-    .catch((error)=>{console.log(error)});
+projectdb.Admins = require("../Model/ModelAdmins.js")(connection,DataTypes);
+projectdb.Users = require("../Model/ModelUsers.js")(connection,DataTypes);
+projectdb.Companies = require("../Model/ModelCompanies.js")(connection,DataTypes);
+projectdb.Cars = require("../Model/ModelCars.js")(connection,DataTypes);
 
-    module.exports=DB;
-    
+Object.keys(projectdb).forEach(model => {
+    if (projectdb[model].associate) {
+      projectdb[model].associate(projectdb); 
+    }
+  });
+
+  connection.sync({ alter : true })  
+
+  async function testConnection() {
+    try {
+    await connection.authenticate();
+    console.log('database is succefully connected.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+  }
+
+  testConnection()
+
+  projectdb.Sequelize = Sequelize;
+  projectdb.connection = connection
+
+module.exports = projectdb
+
