@@ -1,7 +1,7 @@
 const express = require("express");
 var cors = require('cors')
-const route = require("./Routes/Routes.js")
-const gdb = require("./db-mysql/indexDb.js")
+const route = require("./Routes/UserRoute.js")
+const gdb = require("./database/indexDb.js")
 const app = express();
 const PORT = 8080;
 
