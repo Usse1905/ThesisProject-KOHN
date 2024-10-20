@@ -1,5 +1,6 @@
 const express = require("express");
-const cors = require('cors');
+var cors = require('cors')
+const UserRoutes = require("./Routes/UserRoute.js")
 const CarRoutes = require ("./Routes/CarRoutes")
 const CompanyRoutes = require ("./Routes/CompanyRoutes")
 const projectdb = require("./database/indexDb.js")
