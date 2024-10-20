@@ -1,27 +1,33 @@
 module.exports = (sequelize, DataTypes) => {
-    const Users = sequelize.define('Users', {
+    const User = sequelize.define('User', {
       userName: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(50),
+        allowNull: true,
+        unique:true,
+      },
+      password: {
+        type: DataTypes.STRING(50),
         allowNull: false,
       },
       email: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        unique:true,
       },
-      password: {
-        type: DataTypes.STRING(255),
+      role:{
+        type: DataTypes.ENUM('user','admin','company'),
         allowNull: false,
       },
     }, {
       timestamps: false,  
     });
 
-    Users.associate = function (models) {
-        Users.hasMany(models.Cars, {
+    User.associate = function (models) {
+        User.hasMany(models.Cars, {
           foreignKey: 'userId',
           as: 'Cars',
         });
       };
   
-    return Users;
+    return User;
   };

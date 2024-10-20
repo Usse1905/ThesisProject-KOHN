@@ -25,7 +25,7 @@ const navigate = useNavigate()
             console.log("error is ", error) 
         })
   },[refresh])
-console.log(data);
+
 
   useEffect(()=>{
     let filterData = ()=>{
@@ -60,28 +60,33 @@ console.log(data);
             })
         }
 
-        // if (sortOrder) {
-        //   result = result.sort((a, b) => {
-        //     if (sortOrder === "priceHigh") return b.price - a.price;
-        //     if (sortOrder === "priceLow") return a.price - b.price;
-        //     if (sortOrder === "yearHigh") return b.year - a.year;
-        //     if (sortOrder === "yearLow") return a.year - b.year;
-        //     if (sortOrder === "mileageHigh") return b.mileage - a.mileage;
-        //     if (sortOrder === "mileageLow") return a.mileage - b.mileage;
-        //     return 0;
-        //   });
-        // }
+        if (sortOrder) {
+          if (sortOrder === "priceLow") {
+            result.sort((a, b) => b.price - a.price);
+          } else if (sortOrder === "priceHigh") {
+            result.sort((a, b) => a.price - b.price);
+          } else if (sortOrder === "yearHigh") {
+            result.sort((a, b) => b.year - a.year);
+          } else if (sortOrder === "yearLow") {
+            result.sort((a, b) => a.year - b.year);
+          } else if (sortOrder === "mileageHigh") {
+            result.sort((a, b) => b.mileage - a.mileage);
+          } else if (sortOrder === "mileageLow") {
+            result.sort((a, b) => a.mileage - b.mileage);
+          }
+        }
 
         setFilteredData(result)
     }
 
     filterData()
 
-},[search,cartype,data,shift,ac,companyid])
+},[search,cartype,data,shift,ac,companyid,sortOrder])
 
 const handleSortChange = (e) => {
-  setSortOrder(e.target.value);
+  setSortOrder(e)
 };
+
 
 const alltypes = [...new Set(data.map((element)=>{
   return element.carType
@@ -103,17 +108,17 @@ const allcompanies = [...new Set(data.map((element)=>{
   return (
     <div className="main">
       <div className="filters">
-        <select onChange={handleSortChange} value={sortOrder}>
+        <select onChange={(e)=>handleSortChange(e.target.value)} value={sortOrder}>
           <option value="">Sort by price</option>
           <option value="priceLow">Most expensive</option>
           <option value="priceHigh">Cheapest</option>
         </select> 
-        <select onChange={handleSortChange} value={sortOrder}>
+        <select onChange={(e)=>handleSortChange(e.target.value)} value={sortOrder}>
           <option value="">Sort by Year</option>
           <option value="yearLow">Oldest to Newest</option>
           <option value="yearHigh">Newest to Oldest</option>
         </select>
-        <select onChange={handleSortChange} value={sortOrder}>
+        <select onChange={(e)=>handleSortChange(e.target.value)} value={sortOrder}>
           <option value="">Sort by Mileage</option>
           <option value="mileageLow">Less Used</option>
           <option value="mileageHigh">Most Used</option>

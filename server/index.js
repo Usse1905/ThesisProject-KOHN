@@ -1,6 +1,6 @@
 const express = require("express");
 var cors = require('cors')
-const UserRoutes = require("./Routes/UserRoute.js")
+const UserRoutes = require("./Routes/UserRoutes.js")
 const CarRoutes = require ("./Routes/CarRoutes")
 const CompanyRoutes = require ("./Routes/CompanyRoutes")
 const projectdb = require("./database/indexDb.js")
@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(cors())
 app.use("/cars", CarRoutes);
 app.use("/company", CompanyRoutes);
+app.use("/api/auth",UserRoutes)
 app.use(express.static(__dirname + '../react-client/indexFront.jsx'))
 
 app.listen(PORT, () => {
