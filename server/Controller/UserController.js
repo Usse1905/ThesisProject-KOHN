@@ -1,8 +1,10 @@
+
 //const { request } = require("express");
 const User = require('../Model/ModelUser.js');
 const bcrypt = require('bcrypt');
 let x = require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const DB=require("../database/indexDb.js")
 
      //Signup
      exports.signup = async (req, res) => {
@@ -32,4 +34,55 @@ const jwt = require('jsonwebtoken');
        res.json({ message: 'Login successful', token });
      };
 
+
+
+// const { updateCar, deleteCar } = require("./CarController")
+
+exports.getAllUser=async(req,res)=>{
+    try{
+        const allUsers=await DB.Users.findAll({})
+        res.status(200). send(allUsers)
+    }
+    catch(error){res.status(500).send(error)}
+}
+
+exports.getOneUser=async(req,res)=>{
+    try{
+        const id=req.params.id
+        getOne=await DB.Users.findOne({where:{id}})
+        res.status(200).send(getOne)
+    }
+    catch(error){res.status(500).send(error)
+    }
+}
+exports.addUser=async(req,res)=>{
+    try{
+        const body=req.body
+        const addUsers=await DB.create(body)
+        res.status(200).send(addUsers)
+    }
+    catch(error){res.status(500).send(error)
+    }
+}
+
+exports.updateUser=async(req,res)=>{
+    try{
+        const id=req.params.id
+        const addUsers=await DB.update(body,{where:{id}})
+        res.status(200).send(addUsers)
+    }
+    catch(error){res.status(500).send(error)
+    }
+}
+
+exports.deleteUser=async(req,res)=>{
+    try{
+        const id=req.params.id
+        getOneUser=await DB.Users.findOne({where:{id}})
+        const deleteUs=await DB.destroy({where:{id}})
+        res.status(200).send(deleteUs)
+    }
+    catch(error){res.status(500).send(error)
+    }
+}
 
