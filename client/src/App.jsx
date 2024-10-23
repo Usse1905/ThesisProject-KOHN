@@ -10,6 +10,7 @@ const App = () => {
     <BrowserRouter>
 
   <div >
+  
   <Routes>
     <Route path="/login" element={<LogIn/>}/>
     <Route path="/signup" element={<SignUp/>}/>
