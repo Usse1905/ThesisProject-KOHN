@@ -8,7 +8,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', {
+      const response = await axios.post('http://localhost:8080/api/login', {
         userName,
         password,
       });
@@ -16,7 +16,11 @@ const Login = () => {
 
       localStorage.setItem('token', response.data.token);
     } catch (error) {
-      alert(error);
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert('An unexpected error occurred');
+      }
     }
   };
 

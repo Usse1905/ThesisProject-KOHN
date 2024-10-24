@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors())
 app.use("/cars", CarRoutes);
 app.use("/company", CompanyRoutes);
-app.use("/api/auth",UserRoutes)
+app.use("/api",UserRoutes)
 app.use(express.static(__dirname + '../react-client/indexFront.jsx'))
 
 app.listen(PORT, () => {
