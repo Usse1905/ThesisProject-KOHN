@@ -1,13 +1,10 @@
+
 module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define('User', {
-      userName: {
+    const UserRequests = sequelize.define('UserRequests', {
+      carName: {
         type: DataTypes.STRING(50),
         allowNull: true,
         unique:true,
-      },
-      password: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
       },
       email: {
         type: DataTypes.STRING(50),
@@ -29,30 +26,32 @@ module.exports = (sequelize, DataTypes) => {
       },
       image: {
         type: DataTypes.BLOB,
-        allowNull: true,
-        unique:false,
+        allowNull: true
       },
-      role:{
-        type: DataTypes.ENUM('user','admin','company'),
+      pickupDate:{
+        type: DataTypes.DATE,
         allowNull: false,
       },
-    }, {
+      returnDate:{
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      totalPrice:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    }, 
+    {
       timestamps: false,  
     });
 
-    User.associate = function (models) {
-        User.hasMany(models.Cars, {
+    UserRequests.associate = function (models) {
+        UserRequests.belongsTo(models.Users, {
           foreignKey: 'userId',
-          as: 'Cars',
+          as: 'User',
         });
       };
-      User.associate = function (models) {
-        User.hasMany(models.UserRequests, {
-          foreignKey: 'userId',
-          as: 'UserRequests',
-        });
-      }; 
-       
 
-    return User;
+    
+    return UserRequests;
   };
