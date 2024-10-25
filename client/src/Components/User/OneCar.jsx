@@ -18,6 +18,9 @@ const OneCar = () => {
             </div>
             <div className="price-one"><h1>{car.price} TND/Day</h1></div>
             <button>Submit</button>
+            <div className="requestform" style={{display:"none"}}>
+              
+            </div>
     </div>
   )
 }

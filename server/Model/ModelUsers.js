@@ -14,6 +14,20 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique:true,
       },
+      phoneNumber: {
+        type: DataTypes.STRING(15),
+        allowNull: true,
+        unique:true
+      },
+      dateOfBirth: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      image: {
+        type: DataTypes.BLOB,
+        allowNull: true,
+        unique:false,
+      },
       role:{
         type: DataTypes.ENUM('user','admin','company'),
         allowNull: false,
@@ -28,6 +42,13 @@ module.exports = (sequelize, DataTypes) => {
           as: 'Cars',
         });
       };
-  
+      User.associate = function (models) {
+        User.hasMany(models.UserRequests, {
+          foreignKey: 'userId',
+          as: 'UserRequests',
+        });
+      }; 
+       
+
     return User;
   };

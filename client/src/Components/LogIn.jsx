@@ -16,7 +16,11 @@ const Login = () => {
 
       localStorage.setItem('token', response.data.token);
     } catch (error) {
-      alert(error);
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert('An unexpected error occurred');
+      }
     }
   };
 
