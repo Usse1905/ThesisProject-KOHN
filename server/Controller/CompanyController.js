@@ -58,7 +58,7 @@ deleteCompany : async(req,res)=>{
     try{
         const id=req.params.id
         getOne=await projectdb.Companies.findOne({where:{id}})
-        const deleteOne=await DB.Companies.destroy({where:{id}})
+        const deleteOne=await projectdb.Companies.destroy({where:{id}})
         res.status(200).send(getOne)
     }
     catch(error){
