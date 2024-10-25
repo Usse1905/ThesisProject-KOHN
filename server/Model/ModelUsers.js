@@ -15,12 +15,16 @@ module.exports = (sequelize, DataTypes) => {
         unique:true,
       },
       phoneNumber: {
-        type: DataTypes.STRING(15),
+        type: DataTypes.INTEGER,
         allowNull: true,
         unique:true
       },
       dateOfBirth: {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      dateOfLicense: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       image: {
