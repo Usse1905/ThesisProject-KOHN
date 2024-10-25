@@ -17,10 +17,26 @@ const OneCar = () => {
               <p>{car.ac}</p>
             </div>
             <div className="price-one"><h1>{car.price} TND/Day</h1></div>
-            <button>Submit</button>
-            <div className="requestform" style={{display:"none"}}>
-              
+            <div className="requestform" >
+              <form action="">
+                <label htmlFor="">Name : </label>
+                <input type="text" /><br />
+                <label htmlFor="">email : </label>
+                <input type="text" /><br />
+                <label htmlFor="">Phone Number (optional) : </label>
+                <input type="text" /><br />
+                <label htmlFor="">Birth Year : </label>
+                <input type="text" /><br />
+                <label htmlFor="">Year where you obtained your license : </label>
+                <input type="text" /><br />
+                <label htmlFor="">Pickup Date : </label>
+                <input type="date" /><br />
+                <label htmlFor="">Return Date : </label>
+                <input type="date" /><br />
+              </form>
+              <p>Your total Price is : </p>
             </div>
+            <button>Submit</button>
     </div>
   )
 }
