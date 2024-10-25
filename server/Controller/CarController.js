@@ -56,7 +56,7 @@ try{
 deleteCar : async (req, res) => {
   try {
     const carId = req.params.carId;
-    const car = await Cars.findByPk(carId);
+    const car = await projectdb.Cars.findByPk(carId);
 
     if (!car) {
       return res.status(404).json({ message: 'Car not found' });

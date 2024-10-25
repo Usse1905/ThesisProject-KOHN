@@ -13,7 +13,7 @@ const AdminDashboard = () => {
 
   const fetchUnapprovedCompanies = async () => {
     try {
-      const response = await axios.get('/companies/unapproved', {
+      const response = await axios.get('/Admin/unapproved', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setUnapprovedCompanies(response.data);
@@ -24,7 +24,7 @@ const AdminDashboard = () => {
 
   const fetchCars = async () => {
     try {
-      const response = await axios.get('/cars', {
+      const response = await axios.get('/cars/allcars', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setCars(response.data);
@@ -35,7 +35,7 @@ const AdminDashboard = () => {
 
   const approveCompany = async (companyId) => {
     try {
-      await axios.post(`/api/companies/approve/${companyId}`, {}, {
+      await axios.post(`/Admin/approve/${companyId}`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       fetchUnapprovedCompanies(); // Refresh the list
@@ -46,7 +46,7 @@ const AdminDashboard = () => {
 
   const deleteCar = async (carId) => {
     try {
-      await axios.delete(`/api/cars/${carId}`, {
+      await axios.delete(`/Admin/car/${carId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       fetchCars(); // Refresh the list of cars
