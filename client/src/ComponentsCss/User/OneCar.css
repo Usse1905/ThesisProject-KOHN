@@ -32,7 +32,7 @@
     color: goldenrod; /* Price color for visibility */
 }
 
-button {
+.proceed-button {
     padding: 10px 20px; /* Button padding */
     border: none; /* No border */
     border-radius: 5px; /* Rounded corners */
@@ -43,6 +43,6 @@ button {
     transition: background-color 0.3s; /* Smooth transition */
 }
 
-button:hover {
+.proceed-button:hover {
     background-color: #ffcc00; /* Slightly lighter on hover */
 }

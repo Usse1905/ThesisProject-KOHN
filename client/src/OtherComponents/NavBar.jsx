@@ -18,8 +18,8 @@ const NavBar = () => {
     return (
         <div className='nav'>
             <div className="search-container">
-                <input type="text" placeholder='Search cars...' />
-                <button>Search</button>
+                <input className="search-input" type="text" placeholder='Search cars...' />
+                <button className='search-button'>Search</button>
             </div>
             <nav className='links'>
                 <a href="/allcars">Home</a>

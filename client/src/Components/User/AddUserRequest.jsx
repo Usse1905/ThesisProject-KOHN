@@ -2,7 +2,7 @@ import React , { useEffect , useState } from 'react'
 import { useNavigate,useLocation } from "react-router-dom"
 import { useUser } from '../../UserProvider';
 import axios from "axios";
-import "../../ComponentsCss/OtherComponentsCss/Login&Signup.css"
+import "../../ComponentsCss/OtherComponentsCss/AddUserRequest.css"
 
 const AddUserRequest = () => {
     const [name,setName] = useState("")
@@ -61,26 +61,26 @@ const AddUserRequest = () => {
     }
   return (
     <>
-    <div className="requestform" >
-              <form action="">
-                <label htmlFor=""> * Name : </label>
-                <input type="text" defaultValue={cartoOrder.Name} onChange={(e)=>{setName(e.target.value)}}/><br />
-                <label htmlFor="">* email : </label>
-                <input type="text" defaultValue={user? user.email : ""} onChange={(e)=>{setEmail(e.target.value)}}/><br />
-                <label htmlFor="">Phone Number (optional) : </label>
-                <input type="text" onChange={(e)=>{setPnumber(e.target.value)}}/><br />
-                <label htmlFor="">* Birth Year : </label>
-                <input type="text" onChange={(e)=>{setByear(e.target.value)}}/><br />
-                <label htmlFor="">* Year where you obtained your license : </label>
-                <input type="text" onChange={(e)=>{setLyear(e.target.value)}}/><br />
-                <label htmlFor="">* Pickup Date : </label>
-                <input type="date" onChange={(e)=>{setPdate(e.target.value)}}/><br />
-                <label htmlFor="">* Return Date : </label>
-                <input type="date" onChange={(e)=>{setRdate(e.target.value)}}/><br />
+    <div className="requestform-body" >
+              <form className="requestform" action="">
+                <label className='request-label'> * Name : </label>
+                <input type="text" className='input-request' defaultValue={cartoOrder.Name} onChange={(e)=>{setName(e.target.value)}}/><br />
+                <label className='request-label'>* email : </label>
+                <input type="text" className='input-request' defaultValue={user? user.email : ""} onChange={(e)=>{setEmail(e.target.value)}}/><br />
+                <label className='request-label'>Phone Number (optional) : </label>
+                <input type="text" className='input-request' onChange={(e)=>{setPnumber(e.target.value)}}/><br />
+                <label className='request-label'>* Birth Year : </label>
+                <input type="text" className='input-request' onChange={(e)=>{setByear(e.target.value)}}/><br />
+                <label className='request-label'>* Year where you obtained your license : </label>
+                <input type="text" className='input-request' onChange={(e)=>{setLyear(e.target.value)}}/><br />
+                <label className='request-label'>* Pickup Date : </label>
+                <input type="date" className='input-request' onChange={(e)=>{setPdate(e.target.value)}}/><br />
+                <label className='request-label'>* Return Date : </label>
+                <input type="date" className='input-request' onChange={(e)=>{setRdate(e.target.value)}}/><br />
               </form>
-              <p>Your total Price is : {tprice}</p>
+              <p className='totalprice'>Your total Price is : {tprice}</p>
             </div>
-            <button onClick={()=>{handleadd()}}>Submit</button>
+            <button className="submitRequest" onClick={()=>{handleadd()}}>Submit</button>
             </>
   )
 }
