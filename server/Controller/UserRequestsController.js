@@ -4,13 +4,23 @@ const projectdb = require("../database/indexDb.js");
 module.exports = {
     getAllReq : async (req, res) => {
         try {
-            const userequest = await projectdb.UserRequests.findAll()
+            const userequest = await projectdb.UserRequests.findAll({})
             res.status(200).send(userequest)
         }
         catch (error) {
           console.error("Error fetching user requests:", error)
             res.status(500).send({ message: "Internal Server Error", error })
         }
+    },
+    getUserReqs : async(req,res)=>{
+      try {
+        const userequest = await projectdb.UserRequests.findAll()
+        res.status(200).send(userequest)
+    }
+    catch (error) {
+      console.error("Error fetching user requests:", error)
+        res.status(500).send({ message: "Internal Server Error", error })
+    }
     },
     getOnereq : async(req, res) => {
         try{

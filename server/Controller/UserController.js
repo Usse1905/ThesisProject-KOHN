@@ -37,7 +37,7 @@ module.exports = {
        }
 
          const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET);
-       res.json({ message: 'Login successful', token });
+       res.json({ message: 'Login successful', token,user:user });
      },
 
 
