@@ -20,8 +20,12 @@ module.exports = (sequelize, DataTypes) => {
         unique:true
       },
       dateOfBirth: {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      dateOfLicense: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
       image: {
         type: DataTypes.BLOB,

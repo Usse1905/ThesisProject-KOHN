@@ -11,14 +11,13 @@ INSERT INTO Users (userName, email, password,dateOfBirth,dateOfLicense,role) VAL
 ('Benjamin Lee', 'benjamin.lee@example.com', 'password9',1986,2008,"user"),
 ('Isabella Anderson', 'isabella.anderson@example.com', 'password10',1994,2013,"user"),
 ('Liam White', 'liam.white@example.com', 'password11',1995,2021,"user"),
-('Ava Thompson', 'ava.thompson@example.com', 'password12',1996,2023,"user");
+('Ava Thompson', 'ava.thompson@example.com', 'password12',1996,2023,"user"),
 
 
-INSERT INTO Admins (userName, email, password) VALUES
-('Oussema Karoui', 'oussema.karoui@example.com', 'passwordouss'),
-('Hadda jaouabi', 'hadda.jaouabi@example.com', 'passwordhadda'),
-('Khouloud Trabelsi', 'khouloud.trabelsioe@example.com', 'passwordkhou'),
-('Nourhen Abdellaoui', 'nourhen.abdellaoui@example.com', 'passwordnour');
+('Oussema Karoui', 'oussema.karoui@example.com', 'passwordouss',1996,2023, "admin"),
+('Hadda jaouabi', 'hadda.jaouabi@example.com', 'passwordhadda',1996,2023, "admin"),
+('Khouloud Trabelsi', 'khouloud.trabelsioe@example.com', 'passwordkhou',1996,2023, "admin"),
+('Nourhen Abdellaoui', 'nourhen.abdellaoui@example.com', 'passwordnour',1996,2023, "admin");
 
 
 INSERT INTO Cars (Name,image, price, carType, mileage, year, shift, ac , companyId, userId) VALUES
@@ -42,7 +41,6 @@ INSERT INTO Companies (name, address, phoneNumber, website,email,password,isAppr
 ('Karya & Karya','Habib Street Charguia',71221356,'kx2.com','kx2@gmail.com','karya2018',true,2018,10111213),
 ('AutoTn','38 town street laouina',71457231,'autotn.com','autotn@gmail.com','autotn2015',true,2015,14151617),
 ('Karhba','5621 Manar buisness complex',71068021,'karhba.com','karhba@gmail.com','karhba2017',true,2017,18192021);
-
 
 
 
