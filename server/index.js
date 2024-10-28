@@ -6,6 +6,7 @@ const CarRoutes = require ("./Routes/CarRoutes")
 const CompanyRoutes = require ("./Routes/CompanyRoutes")
 const signupCompanyRoutes=require ("./Routes/signupCompayRoutes.js")
 const AdminRoutes = require ("./Routes/AdminRoutes.js")
+const UserReqRoutes = require("./Routes/UserRequestsRoutes.js")
 const projectdb = require("./database/indexDb.js")
 
 const app = express();
@@ -18,6 +19,7 @@ app.use("/company", CompanyRoutes);
 app.use("/api",UserRoutes)
 app.use("/api",signupCompanyRoutes)
 app.use("/Admin",AdminRoutes)
+app.use("/api",UserReqRoutes)
 app.use(express.static(__dirname + '../react-client/indexFront.jsx'))
 
 app.listen(PORT, () => {

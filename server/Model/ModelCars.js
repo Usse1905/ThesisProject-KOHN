@@ -3,11 +3,12 @@ module.exports = (sequelize, DataTypes) => {
       Name: {
         type: DataTypes.STRING(255),
         allowNull: false,
-        unique:true
+        unique:true,
       },
       image:{
-        type:DataTypes.BLOB,
-        allowNull:true
+        type:DataTypes.STRING(2550),
+        allowNull:false,
+        defaultValue:"",
       },
       price:{
         type : DataTypes.INTEGER,
@@ -35,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       location : {
         type : DataTypes.STRING(255),
-        allowNull : false
+        allowNull : true
       },
       companyId: {
         type: DataTypes.INTEGER,

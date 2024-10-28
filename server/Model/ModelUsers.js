@@ -7,34 +7,37 @@ module.exports = (sequelize, DataTypes) => {
       },
       password: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
         unique:true,
       },
       phoneNumber: {
-        type: DataTypes.STRING(15),
+        type: DataTypes.INTEGER,
         allowNull: true,
-        unique:true
+        unique:true,
+        defaultValue:0
       },
       dateOfBirth: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue:0
       },
       dateOfLicense: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue:0
       },
       image: {
-        type: DataTypes.BLOB,
+        type: DataTypes.STRING(300),
         allowNull: true,
-        unique:false,
+        unique:true,
       },
       role:{
         type: DataTypes.ENUM('user','admin','company'),
-        allowNull: false,
+        allowNull: true,
       },
     }, {
       timestamps: false,  
