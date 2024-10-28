@@ -3,9 +3,10 @@ module.exports = (sequelize, DataTypes) => {
       Name: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        unique:true
       },
       image:{
-        type:DataTypes.STRING(255),
+        type:DataTypes.BLOB,
         allowNull:true
       },
       price:{
@@ -29,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       ac : {
+        type : DataTypes.STRING(255),
+        allowNull : false
+      },
+      location : {
         type : DataTypes.STRING(255),
         allowNull : false
       },

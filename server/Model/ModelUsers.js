@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
       userName: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(255),
         allowNull: true,
         unique:true,
       },
@@ -10,9 +10,27 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       email: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(255),
         allowNull: false,
         unique:true,
+      },
+      phoneNumber: {
+        type: DataTypes.STRING(15),
+        allowNull: true,
+        unique:true
+      },
+      dateOfBirth: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      dateOfLicense: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      image: {
+        type: DataTypes.BLOB,
+        allowNull: true,
+        unique:false,
       },
       role:{
         type: DataTypes.ENUM('user','admin','company'),
@@ -28,6 +46,13 @@ module.exports = (sequelize, DataTypes) => {
           as: 'Cars',
         });
       };
-  
+      User.associate = function (models) {
+        User.hasMany(models.UserRequests, {
+          foreignKey: 'userId',
+          as: 'UserRequests',
+        });
+      }; 
+       
+
     return User;
   };

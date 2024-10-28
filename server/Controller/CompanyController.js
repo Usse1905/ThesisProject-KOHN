@@ -58,7 +58,7 @@ deleteCompany : async(req,res)=>{
     try{
         const id=req.params.id
         getOne=await projectdb.Companies.findOne({where:{id}})
-        const deleteOne=await DB.Companies.destroy({where:{id}})
+        const deleteOne=await projectdb.Companies.destroy({where:{id}})
         res.status(200).send(getOne)
     }
     catch(error){
@@ -66,32 +66,6 @@ deleteCompany : async(req,res)=>{
     }
 },
 
-approveCompany : async (req, res) => {
-    try {
-      const companyId = req.params.companyId;
-      const company = await Companies.findByPk(companyId);
-      
-      if (!company) {
-        return res.status(404).json({ message: 'Company not found' });
-      }
-  
-      company.isApproved = true;
-      await company.save();
-      res.json({ message: 'Company approved successfully' });
-    } catch (error) {
-      res.status(500).json({ message: 'Error approving company', error });
-    }
-  },
-  
-
-  getUnapprovedCompanies : async (req, res) => {
-    try {
-      const companies = await Companies.findAll({ where: { isApproved: false } });
-      res.json(companies);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching unapproved companies', error });
-    }
-  },
 }
 
 
