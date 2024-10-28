@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -16,8 +17,9 @@ const Login = () => {
 
       localStorage.setItem('token', response.data.token);
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message);
+      alert(error.response?.data?.message || "Login failed");
+
+      
       } else {
         alert('An unexpected error occurred');
       }
@@ -35,6 +37,10 @@ const Login = () => {
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       </div>
       <button type="submit">Login</button>
+      <p>
+        Don't have an account? <Link to="/signup">Sign Up</Link>
+           <Link to="/signupCompany">Sign Up Company</Link>
+      </p>
     </form>
   );
 };

@@ -3,6 +3,7 @@ import {BrowserRouter,Routes,Route} from "react-router-dom";
 //import "./App.css";
 import LogIn from "./Components/LogIn";
 import SignUp from "./Components/SignUp";
+import SignupCompany from "./Components/SignupCompany";
 import MainPage from "./Components/User/MainPage";
 import OneCar from "./Components/User/OneCar";
 import AddCar from "./Components/Company/AddCar";
@@ -16,8 +17,11 @@ const App = () => {
   const isAdmin = token ? JSON.parse(atob(token.split('.')[1])).role === 'admin' : false;  
   return (
     <BrowserRouter>
+
   <div >
   <Routes>
+    <Route path="/SignupCompany" element={<SignupCompany/>}/>
+    <Route path="/login" element={<LogIn/>}/>
     <Route path="/login" element={<LogIn/>}/>
     <Route path="/signup" element={<SignUp/>}/>
     <Route path="/allcars" element={<MainPage/>}/>
