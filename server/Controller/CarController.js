@@ -1,5 +1,6 @@
 // controllers/carController.js
-const  Cars  = require('../Model/ModelCars.js');
+// const { Where } = require('sequelize/lib/utils');
+// const  Cars  = require('../Model/ModelCars.js');
 const projectdb = require("../database/indexDb.js")
 
 module.exports={
@@ -16,7 +17,7 @@ module.exports={
     getOneCar : async(req, res) => {
         try{
           const carId = req.params.id
-          const car = await projectdb.Cars.findOne({where:{id:carId}})
+          const car = await projectdb.Cars.findOne({where:{carId}})
           if (!car) {
             return res.status(404).send({ message: "Car not found" });
         }
@@ -55,14 +56,14 @@ try{
 
 deleteCar : async (req, res) => {
   try {
-    const carId = req.params.carId;
-    const car = await projectdb.Cars.findByPk(carId);
+    const carId= req.params.id;
+    const car = await projectdb.Cars.findOne({where:{id:carId}});
 
-    if (!car) {
-      return res.status(404).json({ message: 'Car not found' });
-    }
+    // if (!car) {
+    //   return res.status(404).json({ message: 'Car not found' });
+    // }
 
-    await car.destroy();
+    await projectdb.Cars.destroy({where:{id:carId}});
     res.json({ message: 'Car deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error deleting car', error });

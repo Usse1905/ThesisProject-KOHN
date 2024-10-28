@@ -4,7 +4,9 @@ const Users = require('../Model/ModelUsers.js');
 const bcrypt = require('bcryptjs');
 let x = require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const projectdb=require("../database/indexDb.js")
+// const DB=require("../database/indexDb.js");
+const projectdb = require('../database/indexDb.js');
+
 
 module.exports = {
 
@@ -15,6 +17,7 @@ module.exports = {
 
        try {
            const user = await projectdb.Users.create({ userName, password: hashedPassword, email,phoneNumber,dateOfBirth,image, role });
+
           res.status(201).json({ message: 'User created', user });
        } catch (error) {
         console.error(error)
