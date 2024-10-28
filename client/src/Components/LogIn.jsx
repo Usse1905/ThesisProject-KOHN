@@ -27,11 +27,8 @@ const Login = () => {
       alert(error.response?.data?.message || "Login failed");
 
       
-      } else {
-        alert('An unexpected error occurred');
-      }
+      } 
     }
-  };
 
   return (
     <form onSubmit={handleLogin}>
