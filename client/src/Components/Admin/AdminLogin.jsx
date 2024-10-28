@@ -11,11 +11,12 @@ const AdminLogin = () => {
     const handleLogin = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('/Admin/signin', { email, password });
+        const response = await axios.post('http://localhost:8080/Admin/signin', { email, password });
         localStorage.setItem('token', response.data.token);
         navigate('/admin'); 
       } catch (error) {
         console.error('Login failed', error);
+        alert('Login failed. Please check your credentials or try again later.');
       }
     };
   

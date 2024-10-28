@@ -3,6 +3,7 @@ import {BrowserRouter,Routes,Route} from "react-router-dom";
 //import "./App.css";
 import LogIn from "./Components/LogIn";
 import SignUp from "./Components/SignUp";
+import SignupCompany from "./Components/SignupCompany";
 import MainPage from "./Components/User/MainPage";
 import AddUserRequest from "./Components/User/AddUserRequest";
 import OneCar from "./Components/User/OneCar";

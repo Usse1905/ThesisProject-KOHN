@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserProvider';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -23,8 +24,9 @@ const Login = () => {
       setUser(response.data.user)
       navigate("/allcars")
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message);
+      alert(error.response?.data?.message || "Login failed");
+
+      
       } else {
         alert('An unexpected error occurred');
       }
@@ -42,6 +44,10 @@ const Login = () => {
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       </div>
       <button type="submit">Login</button>
+      <p>
+        Don't have an account? <Link to="/signup">Sign Up</Link>
+           <Link to="/signupCompany">Sign Up Company</Link>
+      </p>
     </form>
   );
 };
