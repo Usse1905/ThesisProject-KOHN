@@ -52,15 +52,6 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,  
     });
     
-    lei:{
-      type : DataTypes.INTEGER,
-      allowNull:false
-    },
-    
-  }, {
-    timestamps: false,  
-  });
-  
   Companies.associate = function (models) {
     Companies.hasMany(models.Cars, {
       foreignKey: 'companyId',

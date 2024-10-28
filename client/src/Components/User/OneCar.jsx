@@ -22,7 +22,7 @@ const OneCar = () => {
               <p>{car.ac}</p>
             </div>
             <div className="price-one"><h1>{car.price} TND/Day</h1></div>
-            <button onClick={()=>navigate("/addrequest",{state:car})}>Proceed</button>
+            <button className="proceed-button" onClick={()=>navigate("/addrequest",{state:car})}>Proceed</button>
     </div>
   )
 }

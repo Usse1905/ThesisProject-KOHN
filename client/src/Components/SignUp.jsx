@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import "../../src/index.css"
 
 
 const SignUp = () => {
@@ -27,32 +28,34 @@ const SignUp = () => {
   };
 
   return (
-    <form onSubmit={handleSignup}>
-      <div>
-        <label>Username:</label>
-        <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required />
+    <div className='signup-body'>
+    <form className="signup-form" onSubmit={handleSignup}>
+      <div className='signup-user-div'>
+        <label className='signup-label'>Username:</label>
+        <input className="signup-input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required />
+      </div>
+      <div className='signup-psw-div'> 
+        <label  className='signup-label'>Password:</label>
+        <input className="signup-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       </div>
       <div>
-        <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <label className='signup-label'>Email:</label>
+        <input className="signup-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      </div>
-      <div>
-        <label>Role:</label>
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
+      <div className='signup-select-div'>
+        <label className='signup-label'>Role:</label>
+        <select className="signup-select-input" value={role} onChange={(e) => setRole(e.target.value)}>
           <option value="user">User</option>
           <option value="admin">Admin</option>
           <option value="company">Company</option>
         </select>
       </div>
-      <button type="submit">Sign Up</button>
-      <p>
+      <button className="signup-submit" type="submit">Sign Up</button>
+      <p className='signup-altlink'>
         Already have an account? <Link to="/login">Login</Link>
       </p>
     </form>
+    </div>
   );
 };
 

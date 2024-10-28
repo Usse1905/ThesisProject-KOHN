@@ -1,4 +1,7 @@
 .requestform {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack form elements */
+    gap: 15px; /* Space between elements */
     background-color: #f9f9f9; /* Light background for better contrast */
     padding: 20px; /* Padding for spacing */
     border-radius: 10px; /* Rounded corners */
@@ -7,31 +10,25 @@
     margin: 20px auto; /* Centered on the page */
 }
 
-form {
-    display: flex; /* Flexbox for layout */
-    flex-direction: column; /* Stack form elements */
-    gap: 15px; /* Space between elements */
-}
 
-label {
+.request-label {
     font-weight: bold; /* Bold labels */
 }
 
-input[type="text"],
-input[type="date"] {
-    padding: 10px; /* Padding for input fields */
+
+.input-request{
+    padding: 10px; /* Padding for input-request fields */
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
     font-size: 14px; /* Font size */
     transition: border-color 0.3s; /* Smooth transition for border */
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus {
+.input-request:focus {
     border-color: goldenrod; /* Highlight on focus */
 }
 
-button {
+.submitRequest {
     padding: 10px 20px; /* Button padding */
     border: none; /* No border */
     border-radius: 5px; /* Rounded corners */
@@ -42,11 +39,11 @@ button {
     transition: background-color 0.3s; /* Smooth transition */
 }
 
-button:hover {
+.submitRequest:hover {
     background-color: #ffcc00; /* Slightly lighter on hover */
 }
 
-p {
+.totalprice {
     font-weight: bold; /* Make total price stand out */
     margin: 15px 0; /* Margin for spacing */
     color: #333; /* Darker text for visibility */
