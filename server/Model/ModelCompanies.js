@@ -52,12 +52,12 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,  
     });
     
-    Companies.associate = function (models) {
-      Companies.hasMany(models.Cars, {
-        foreignKey: 'companyId',
-        as: 'Cars',
-      });
-    };
-    return Companies;
+  Companies.associate = function (models) {
+    Companies.hasMany(models.Cars, {
+      foreignKey: 'companyId',
+      as: 'Cars',
+    });
   };
+  return Companies;
+};
 

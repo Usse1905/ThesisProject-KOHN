@@ -18,7 +18,9 @@ Object.keys(projectdb).forEach(model => {
     }
   });
 
-  connection.sync({ force : true })  
+
+   connection.sync({ alter : true })  
+
 
   async function testConnection() {
     try {

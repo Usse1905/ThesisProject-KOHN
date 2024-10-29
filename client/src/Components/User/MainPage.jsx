@@ -1,6 +1,8 @@
 import React , { useEffect , useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../../ComponentsCss/User/MainPage.css"
+
 
 const MainPage = () => {
 const [data,setData] = useState([])
@@ -106,12 +108,12 @@ const allcompanies = [...new Set(data.map((element)=>{
 
 
   return (
-    <div className="main">
+    <div className="main">{data.length > 0 && (
       <div className="filters">
-        <select onChange={(e)=>handleSortChange(e.target.value)} value={sortOrder}>
+        <select onChange={(e)=>handleSortChange(e.target.value) } value={sortOrder}>
           <option value="">Sort by price</option>
-          <option value="priceLow">Most expensive</option>
-          <option value="priceHigh">Cheapest</option>
+          <option value="priceLow">Cheapest</option>
+          <option value="priceHigh">Most expensive</option>
         </select> 
         <select onChange={(e)=>handleSortChange(e.target.value)} value={sortOrder}>
           <option value="">Sort by Year</option>
@@ -147,23 +149,37 @@ const allcompanies = [...new Set(data.map((element)=>{
             <option key={el} value={el}>{el}</option>
           ))}
         </select>
-      </div>
-      <div  className="cars">
-        {(search || cartype || shift || ac || companyid ? filteredData : data).map((element,index)=>{
-          return <>
-          <div className="car" onClick={()=>navigate("/one",{ state:element })}>
-            <div className="namehead"><h1>{element.Name}</h1></div>
-            <div className="other-specs">
-              <p>from {element.companyId}</p>
-              <p>{element.carType}</p>
-              <p>{element.shift}</p>
-              <p>{element.ac}</p>
+      </div>)}
+      <div className="cars">
+    {(search || cartype || shift || ac || companyid ? filteredData : data).map((element, index) => (
+        <div className="car-container" key={index}>
+            <div
+                className="car"
+                onClick={() => navigate("/one", { state: element })}
+                style={{
+                    backgroundImage: `url(${element.image})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                <div className="namehead">
+                    <h1>{element.Name}</h1>
+                </div>
+                <div className="other-specs">
+                    <p>from {element.companyId}</p>
+                    <p>{element.carType}</p>
+                    <p>{element.shift}</p>
+                    <p>{element.ac}</p>
+                </div>
             </div>
-            <div className="price"><h1>{element.price} TND/Day</h1></div>
-          </div>
-          </>
-        })}
-      </div>
+            <div className="price">
+                <h1>{element.price} TND/Day</h1>
+            </div>
+        </div>
+    ))}
+</div>
+
     </div>
   )
 }

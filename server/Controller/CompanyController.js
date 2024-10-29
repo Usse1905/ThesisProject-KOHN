@@ -1,6 +1,6 @@
 // const { where } = require("sequelize")
 const projectdb = require("../database/indexDb.js")
-const Companies = require("../Model/ModelCompanies.js")
+// const Companies = require("../Model/ModelCompanies.js")
 
 module.exports={
 

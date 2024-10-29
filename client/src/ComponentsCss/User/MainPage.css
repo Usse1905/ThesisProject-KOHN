@@ -1,0 +1,78 @@
+.main {
+    background-color: #f9f9f9; 
+    padding: 20px; 
+}
+
+.filters {
+    display: flex; /* Use flexbox */
+    flex-wrap: wrap; /* Allow wrapping if necessary */
+    gap: 10px; /* Space between items */
+    margin-bottom: 20px; /* Keep existing margin */
+}
+
+.filters select {
+    flex: 1; /* Allow elements to grow and fill available space */
+    min-width: 150px; /* Minimum width for responsiveness */
+    max-width: 250px; /* Maximum width to prevent overflowing */
+    padding: 10px; /* Adjust padding */
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Maintain existing styles */
+    font-size: 14px;
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.filters select:hover {
+    border-color: goldenrod; /* Highlight on hover */
+}
+
+.cars {
+    display: flex; /* Use flexbox for horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+    gap: 40px; 
+}
+
+.car-container {
+    display: flex;
+    flex-direction: column; /* Stack the car and price vertically */
+    align-items: center; /* Center items */
+    width: 300px; /* Fixed width for each car item */
+}
+
+.car {
+    color: white;
+    width: 100%; /* Make it responsive */
+    height: 300px; /* Set a fixed height for each car item */
+    background-size: cover; /* Cover the entire div */
+    background-position: center; /* Center the image */
+    cursor: pointer; /* Change cursor on hover */
+    border-radius: 10px; /* Optional: add some border radius */
+    display: flex;
+    flex-direction: column; /* Allow stacking of content */
+    justify-content: flex-end; /* Align content to the bottom */
+    padding: 10px; /* Add some padding for text visibility */
+    
+}
+
+.car:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    
+}
+
+.namehead {
+    background: rgba(0, 0, 0, 0.5); /* Dark background for text readability */
+    padding: 10px; /* Add some padding */
+    border-radius: 5px 5px 0 0; /* Round top corners */
+}
+
+.other-specs {
+    font-weight: bold;
+    padding: 10px; /* Add some padding */
+    background: rgba(0, 0, 0, 0.5); /* Background for contrast */
+    border-radius: 0 0 5px 5px; /* Round bottom corners */
+}
+
+.price {
+    margin-top: 10px; /* Space between car and price */
+    font-weight: bold; /* Make the price stand out */
+    color: goldenrod; 
+}

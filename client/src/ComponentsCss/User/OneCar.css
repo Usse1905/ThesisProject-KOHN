@@ -1,0 +1,48 @@
+.onecar {
+    color: white; /* Text color */
+    width: 100%; /* Full width */
+    height: 100vh; /* Full viewport height */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    padding: 20px; /* Padding for spacing */
+    position: relative; /* For absolute positioning of the button */
+}
+
+.namehead-one {
+    background: rgba(0, 0, 0, 0.7); /* Dark overlay for readability */
+    padding: 10px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 15px; /* Space below the name */
+}
+
+.other-specs-one {
+    background: rgba(0, 0, 0, 0.7); /* Dark overlay for readability */
+    padding: 10px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 15px; /* Space below the specs */
+    font-weight: bold; /* Make text bold */
+}
+
+.price-one {
+    margin: 15px 0; /* Margin for spacing */
+    font-weight: bold; /* Make price stand out */
+    color: goldenrod; /* Price color for visibility */
+}
+
+.proceed-button {
+    padding: 10px 20px; /* Button padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: goldenrod; /* Button color */
+    color: white; /* Button text color */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.proceed-button:hover {
+    background-color: #ffcc00; /* Slightly lighter on hover */
+}

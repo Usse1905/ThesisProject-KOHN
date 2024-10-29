@@ -1,0 +1,84 @@
+.nav {
+    overflow: visible;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1a1a; /* Darker background for contrast */
+    padding: 10px 20px; /* Added padding for spacing */
+    font-family: sans-serif;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between input and button */
+}
+
+.search-input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Light border */
+    transition: border-color 0.3s; /* Transition for hover effect */
+}
+
+.search-input:focus {
+    border-color: goldenrod; /* Highlight border on focus */
+}
+
+.search-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: goldenrod;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #ffcc00; /* Lighter shade on hover */
+}
+
+.links {
+    display: flex;
+    gap: 30px; /* Space out links evenly */
+}
+
+.links a {
+    text-decoration: none;
+    color: goldenrod;
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.links a:hover {
+    color: #ffcc00; /* Highlight color on hover */
+}
+
+.user-avatar {
+    color: goldenrod;
+    display: flex;
+    align-items: center; /* Center the items */
+    gap: 10px; /* Space between avatar and name/button */
+}
+
+.avatar {
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover; /* Maintain aspect ratio */
+}
+
+.user-name {
+    margin-left: 10px;
+    font-weight: bold; /* Make the username bold */
+}
+
+.login-link {
+    color: goldenrod; /* Link color */
+    text-decoration: none; /* No underline */
+    font-weight: bold; /* Bold link text */
+}
+
+.login-link:hover {
+    color: #ffcc00; /* Highlight on hover */
+}
