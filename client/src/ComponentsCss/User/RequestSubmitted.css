@@ -1,0 +1,65 @@
+.request-submitted {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px auto; /* Keeps horizontal centering */
+    margin-top: 280px; /* Adjust this value as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative; /* Add this for better centering */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
+}
+
+.icon-container {
+    background-color: #e0f7fa;
+    border-radius: 50%;
+    padding: 15px; /* Increased padding for better visual */
+    margin-bottom: 15px;
+}
+
+.icon {
+    width: 70px; /* Increased size */
+    height: 70px; /* Increased size */
+    color: #00796b;
+}
+
+.submit-header {
+    margin: 10px 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.submit-message, .thank-you {
+    margin: 5px 0;
+    color: #666;
+}
+
+.thank-you {
+    font-weight: bold;
+    color: #00796b;
+}
+
+.reroute-button {
+    background-color: #00796b; /* Match the icon color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for size */
+    font-size: 1rem; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    margin-top: 15px; /* Space above the button */
+}
+
+/* Hover effect */
+.reroute-button:hover {
+    background-color: #005b4f; /* Darker shade on hover */
+}
+

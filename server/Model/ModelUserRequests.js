@@ -4,17 +4,22 @@ module.exports = (sequelize, DataTypes) => {
       carName: {
         type: DataTypes.STRING(50),
         allowNull: false,
-        unique:true,
+        
+      },
+      requestername: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        
       },
       email: {
         type: DataTypes.STRING(50),
         allowNull: false,
-        unique:true,
+        
       },
       phoneNumber: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        unique:true
+        
       },
       dateOfBirth: {
         type: DataTypes.INTEGER,
@@ -40,6 +45,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      approval:{
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
     }, 
     {
       timestamps: false,  
@@ -52,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
         });
       };
 
-      UserRequests.associate = function (models) {
+    UserRequests.associate = function (models) {
         UserRequests.belongsTo(models.Companies, {
           foreignKey: 'companyId',
           as: 'Company',

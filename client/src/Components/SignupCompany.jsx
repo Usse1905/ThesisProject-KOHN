@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import "../../src/index.css"
 
 
 
@@ -42,10 +43,12 @@ const SignupCompany = () => {
       <input className="signupcompany-input" type="password" name="password" placeholder="Password" onChange={handleChange} required />
       <input className="signupcompany-input" type="text" name="licensesinceWhen" placeholder="License Since When" onChange={handleChange} required />
       <input className="signupcompany-input" type="text" name="lei" placeholder="LEI" onChange={handleChange} required />
-      <button className="signupcompany-submit" type="submit">Sign Up Company</button>
+      <div className="signupcompany-submit-div">
+      <button  type="submit" className="signupcompany-submit-button">Sign Up Company</button>
       <p className='signupcompany-altlinks'>
         Already have an account? <Link to="/login">Login</Link>
       </p>
+      </div>
     </form>
     </div>
   );

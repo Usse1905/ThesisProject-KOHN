@@ -15,6 +15,7 @@ import AdminLogin from "./Components/Admin/AdminLogin";
 import { UserProvider } from "./UserProvider";
 import { CompanyProvider } from "./CompanyProvider";
 import NavBar from "./OtherComponents/NavBar";
+import RequestSubmitted from "./Components/User/RequestSubmitted";
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/allcars" element={<MainPage/>}/>
             <Route path="/one" element={<OneCar/>}/>
             <Route path="/addrequest" element={<AddUserRequest/>}/>
+            <Route path="/reqsubmitted" element={<RequestSubmitted/>}/>
             <Route path="/Company/AddCar" element={<AddCar/>}/>
             <Route path="/Company/Profile" element={<ProfilePage/>}/>
             <Route path="/admin" element={<ProtectedAdminRoute element={<AdminDashboard />} isAdmin={isAdmin} />} />

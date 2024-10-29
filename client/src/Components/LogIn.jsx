@@ -34,19 +34,21 @@ const Login = () => {
   return (
     <div className='login-body'>
     <form className="login-form" onSubmit={handleLogin}>
-      <div className='login-user-div'>
+      
         <label className='login-label'>Username:</label>
         <input className="login-input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required />
-      </div>
-      <div className='login-psw-div'>
+      
+      
         <label className='login-label'>Password:</label>
         <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      </div>
-      <button type="submit" className='login-submit'>Login</button>
+      
+      <div className='login-submit-div'>
+        <button type="submit" className='login-submit-button'>Login</button>
       <p className='login-altlink'>
-        Don't have an account? <Link to="/signup">Sign Up</Link>
-           <Link to="/signupCompany">Sign Up Company</Link>
+        Don't have an account? <Link to="/signup" style={{color:"white"}}>Sign Up as a User</Link> or
+           <Link to="/signupCompany" style={{color:"white"}}> Sign Up as a Company</Link>
       </p>
+      </div>
     </form>
     </div>
   );
