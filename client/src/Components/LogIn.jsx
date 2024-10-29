@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
-        username,
+      const response = await axios.post('http://localhost:8080/api/login', {
+        userName,
         password,
       });
       alert(response.data.message);
 
       localStorage.setItem('token', response.data.token);
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 
@@ -25,13 +25,19 @@ const Login = () => {
     <form onSubmit={handleLogin}>
       <div>
         <label>Username:</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+        <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required />
       </div>
       <div>
         <label>Password:</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       </div>
       <button type="submit">Login</button>
+      <p>
+        Don't have an account? <Link to="/signup">Sign Up</Link>
+      
+      </p>
+      <p><Link to="/signup">Sign Up Company</Link></p>
+     
     </form>
   );
 };
