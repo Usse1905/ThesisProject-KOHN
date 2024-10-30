@@ -150,7 +150,7 @@ const allcompanies = [...new Set(data.map((element)=>{
           ))}
         </select>
       </div>
-      <div className="cars">
+      <div className="cars"> 
     {(search || cartype || shift || ac || companyid ? filteredData : data).map((element, index) => (
         <div className="car-container" key={index}>
             <div

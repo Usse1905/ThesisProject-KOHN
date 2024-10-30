@@ -32,14 +32,14 @@ const SignupCompany = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="name" placeholder="Company Name" onChange={handleChange} required />
-      <input type="text" name="address" placeholder="Address" onChange={handleChange} />
-      <input type="text" name="phoneNumber" placeholder="Phone Number" onChange={handleChange} required />
-      <input type="text" name="website" placeholder="Website" onChange={handleChange} required />
-      <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-      <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-      <input type="text" name="licensesinceWhen" placeholder="License Since When" onChange={handleChange} required />
-      <input type="text" name="lei" placeholder="LEI" onChange={handleChange} required />
+      <input type="text" name="name" placeholder="Company Name..." onChange={handleChange} required />
+      <input type="text" name="address" placeholder="Address..." onChange={handleChange} />
+      <input type="text" name="phoneNumber" placeholder="Phone Number..123" onChange={handleChange} required />
+      <input type="text" name="website" placeholder="Website...www" onChange={handleChange} required />
+      <input type="email" name="email" placeholder="Email..." onChange={handleChange} required />
+      <input type="password" name="password" placeholder="Password..." onChange={handleChange} required />
+      <input type="text" name="licensesinceWhen" placeholder="License Since When..." onChange={handleChange} required />
+      <input type="text" name="lei" placeholder="LEI..." onChange={handleChange} required />
       <button type="submit">Sign Up Company</button>
       <p>
         Already have an account? <Link to="/login">Login</Link>
