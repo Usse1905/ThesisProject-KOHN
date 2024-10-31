@@ -32,6 +32,7 @@ const SignupCompany = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+        <h1> Sign Up Company : </h1>
       <input type="text" name="name" placeholder="Company Name..." onChange={handleChange} required />
       <input type="text" name="address" placeholder="Address..." onChange={handleChange} />
       <input type="text" name="phoneNumber" placeholder="Phone Number..123" onChange={handleChange} required />
@@ -40,7 +41,7 @@ const SignupCompany = () => {
       <input type="password" name="password" placeholder="Password..." onChange={handleChange} required />
       <input type="text" name="licensesinceWhen" placeholder="License Since When..." onChange={handleChange} required />
       <input type="text" name="lei" placeholder="LEI..." onChange={handleChange} required />
-      <button type="submit">Sign Up Company</button>
+      <button type="submit">Sign Up </button>
       <p>
         Already have an account? <Link to="/login">Login</Link>
       </p>
