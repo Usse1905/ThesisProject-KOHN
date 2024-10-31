@@ -1,17 +1,4 @@
 
-INSERT INTO Users (userName, password, email, phoneNumber,dateOfBirth,dateOfLicense,role) VALUES 
-('John Doe', 'password1','john.doe@example.com',54123698 ,1995,2017,"user"),
-('Jane Smith', 'password2','jane.smith@example.com',94223687 ,1990,2009,"user"),
-('Michael Brown', 'password3','michael.brown@example.com', 93214568,1991,2011,"user"),
-('Emily Davis', 'password4','emily.davis@example.com',26457888 ,1993,2013,"user");
-
-
-INSERT INTO Companies (name, address, phoneNumber, website,email,password,isApproved, licensesinceWhen, lei) VALUES
-('Tunisia Renting','19 City street Lafayette',71564239,'tunisiarentig.com','tunisiarentig@gmail.com','TR2015',true,2007,1234),
-('Ikri','dora street La Marsa',71000111,'ikri.com','ikri@gmail.com','ikri2012',true,2021,5678),
-('Karya & Karya','Habib Street Charguia',71221356,'kx2.com','kx2@gmail.com','karya2018',true,2018,10111213),
-('AutoTn','38 town street laouina',71457231,'autotn.com','autotn@gmail.com','autotn2015',true,2015,14151617),
-('Karhba','5621 Manar buisness complex',71068021,'karhba.com','karhba@gmail.com','karhba2017',true,2017,18192021);
 
 
 INSERT INTO Cars (Name,image, price, carType, mileage, year, shift, ac , companyId, userId) VALUES

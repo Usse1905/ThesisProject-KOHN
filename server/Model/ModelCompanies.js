@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       password: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
 
@@ -47,6 +47,12 @@ module.exports = (sequelize, DataTypes) => {
         type : DataTypes.INTEGER,
         allowNull:false
       },
+
+      notificationSeen: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      }
       
     }, {
       timestamps: false,  
