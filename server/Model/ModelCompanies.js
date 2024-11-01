@@ -52,7 +52,6 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,  
     });
     
-  
   Companies.associate = function (models) {
     Companies.hasMany(models.Cars, {
       foreignKey: 'companyId',

@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {BrowserRouter,Routes,Route} from "react-router-dom";
-//import "./App.css";
+import "./App.css";
 import LogIn from "./Components/LogIn";
 import SignUp from "./Components/SignUp";
 import SignupCompany from "./Components/SignupCompany";
@@ -23,10 +23,9 @@ const App = () => {
   return (
     <UserProvider>
       <CompanyProvider>
-        
         <BrowserRouter>
         <NavBar/>
-        <div >
+        <div>
           <Routes>
             <Route path="/SignupCompany" element={<SignupCompany/>}/>
             <Route path="/login" element={<LogIn/>}/>

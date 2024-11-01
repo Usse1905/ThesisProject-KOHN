@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
+
 const SignupCompany = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -31,21 +32,22 @@ const SignupCompany = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <h1> Sign Up Company : </h1>
-      <input type="text" name="name" placeholder="Company Name..." onChange={handleChange} required />
-      <input type="text" name="address" placeholder="Address..." onChange={handleChange} />
-      <input type="text" name="phoneNumber" placeholder="Phone Number..123" onChange={handleChange} required />
-      <input type="text" name="website" placeholder="Website...www" onChange={handleChange} required />
-      <input type="email" name="email" placeholder="Email..." onChange={handleChange} required />
-      <input type="password" name="password" placeholder="Password..." onChange={handleChange} required />
-      <input type="text" name="licensesinceWhen" placeholder="License Since When..." onChange={handleChange} required />
-      <input type="text" name="lei" placeholder="LEI..." onChange={handleChange} required />
-      <button type="submit">Sign Up </button> 
-      <p>
+    <div className='signupcompany-body'>
+    <form className="signupcompany-form" onSubmit={handleSubmit}>
+      <input className="signupcompany-input" type="text" name="name" placeholder="Company Name" onChange={handleChange} required />
+      <input className="signupcompany-input" type="text" name="address" placeholder="Address" onChange={handleChange} />
+      <input className="signupcompany-input" type="text" name="phoneNumber" placeholder="Phone Number" onChange={handleChange} required />
+      <input className="signupcompany-input" type="text" name="website" placeholder="Website" onChange={handleChange} required />
+      <input className="signupcompany-input" type="email" name="email" placeholder="Email" onChange={handleChange} required />
+      <input className="signupcompany-input" type="password" name="password" placeholder="Password" onChange={handleChange} required />
+      <input className="signupcompany-input" type="text" name="licensesinceWhen" placeholder="License Since When" onChange={handleChange} required />
+      <input className="signupcompany-input" type="text" name="lei" placeholder="LEI" onChange={handleChange} required />
+      <button className="signupcompany-submit" type="submit">Sign Up Company</button>
+      <p className='signupcompany-altlinks'>
         Already have an account? <Link to="/login">Login</Link>
       </p>
     </form>
+    </div>
   );
 };
 

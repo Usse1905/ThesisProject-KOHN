@@ -1,21 +1,23 @@
 .main {
-    background-color: #f9f9f9; /* Lighter background for better contrast */
-    padding: 20px; /* Add some padding */
+    background-color: #f9f9f9; 
+    padding: 20px; 
 }
 
 .filters {
-    margin-bottom: 20px;
-    display: flex; /* Use flexbox for filter layout */
-    flex-wrap: wrap; /* Wrap filters to the next line if needed */
-    gap: 10px; /* Space between filters */
+    display: flex; /* Use flexbox */
+    flex-wrap: wrap; /* Allow wrapping if necessary */
+    gap: 10px; /* Space between items */
+    margin-bottom: 20px; /* Keep existing margin */
 }
 
 .filters select {
-    padding: 10px;
+    flex: 1; /* Allow elements to grow and fill available space */
+    min-width: 150px; /* Minimum width for responsiveness */
+    max-width: 250px; /* Maximum width to prevent overflowing */
+    padding: 10px; /* Adjust padding */
     border-radius: 5px;
-    border: 1px solid #ccc; /* Light border */
+    border: 1px solid #ccc; /* Maintain existing styles */
     font-size: 14px;
-    background-color: white; /* White background for dropdowns */
     transition: border-color 0.3s; /* Smooth transition for border color */
 }
 
@@ -26,7 +28,7 @@
 .cars {
     display: flex; /* Use flexbox for horizontal layout */
     flex-wrap: wrap; /* Allow wrapping to the next line if needed */
-    gap: 40px; /* Space between car items */
+    gap: 40px; 
 }
 
 .car-container {
@@ -72,5 +74,5 @@
 .price {
     margin-top: 10px; /* Space between car and price */
     font-weight: bold; /* Make the price stand out */
-    color: goldenrod; /* Change price color for visibility */
+    color: goldenrod; 
 }

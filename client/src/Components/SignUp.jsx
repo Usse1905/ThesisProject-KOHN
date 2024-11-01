@@ -41,10 +41,16 @@ const SignUp = () => {
       <div>
         <label className='signup-label'>Email:</label>
         <input className="signup-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <div className='signup-user-div'>
-        <label className='signup-label'>phoneNumber:</label>
-        <input className="signup-input"  value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+
       </div>
+      <div className='signup-select-div'>
+        <label className='signup-label'>Role:</label>
+        <select className="signup-select-input" value={role} onChange={(e) => setRole(e.target.value)}>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+          <option value="company">Company</option>
+        </select>
+
       </div>
       <button className="signup-submit" type="submit">Sign Up</button>
       <p className='signup-altlink'>

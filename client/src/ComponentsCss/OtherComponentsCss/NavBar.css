@@ -1,4 +1,5 @@
 .nav {
+    overflow: visible;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,18 +14,18 @@
     gap: 5px; /* Space between input and button */
 }
 
-input[type="text"] {
+.search-input {
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc; /* Light border */
     transition: border-color 0.3s; /* Transition for hover effect */
 }
 
-input[type="text"]:focus {
+.search-input:focus {
     border-color: goldenrod; /* Highlight border on focus */
 }
 
-button {
+.search-button {
     padding: 8px 12px;
     border: none;
     border-radius: 5px;

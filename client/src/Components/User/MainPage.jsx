@@ -108,9 +108,9 @@ const allcompanies = [...new Set(data.map((element)=>{
 
 
   return (
-    <div className="main">
+    <div className="main">{data.length > 0 && (
       <div className="filters">
-        <select onChange={(e)=>handleSortChange(e.target.value)} value={sortOrder}>
+        <select onChange={(e)=>handleSortChange(e.target.value) } value={sortOrder}>
           <option value="">Sort by price</option>
           <option value="priceLow">Cheapest</option>
           <option value="priceHigh">Most expensive</option>
@@ -149,8 +149,10 @@ const allcompanies = [...new Set(data.map((element)=>{
             <option key={el} value={el}>{el}</option>
           ))}
         </select>
-      </div>
-      <div className="cars"> 
+
+      </div>)}
+      <div className="cars">
+
     {(search || cartype || shift || ac || companyid ? filteredData : data).map((element, index) => (
         <div className="car-container" key={index}>
             <div

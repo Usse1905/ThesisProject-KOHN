@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserProvider';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import "../../src/index.css"
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -31,21 +32,23 @@ const Login = () => {
     }
 
   return (
-    <form onSubmit={handleLogin}>
-      <div>
-        <label>Username:</label>
-        <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required />
+    <div className='login-body'>
+    <form className="login-form" onSubmit={handleLogin}>
+      <div className='login-user-div'>
+        <label className='login-label'>Username:</label>
+        <input className="login-input" type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required />
       </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+      <div className='login-psw-div'>
+        <label className='login-label'>Password:</label>
+        <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       </div>
-      <button type="submit">Login</button>
-      <p>
+      <button type="submit" className='login-submit'>Login</button>
+      <p className='login-altlink'>
         Don't have an account? <Link to="/signup">Sign Up</Link>
            <Link to="/signupCompany">Sign Up Company</Link>
       </p>
     </form>
+    </div>
   );
 };
 
