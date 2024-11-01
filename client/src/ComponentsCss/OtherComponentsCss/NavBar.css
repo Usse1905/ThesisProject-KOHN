@@ -1,87 +1,104 @@
-/* Updated navbar CSS */
+/* Reset body margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Updated navbar CSS with top position adjustments */
 .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background for consistency */
-    padding: 15px 20px; /* Adjusted padding for better spacing */
-    font-family: Arial, sans-serif; /* Consistent font with Admin Dashboard */
-    position: fixed; /* Keep the navbar fixed at the top */
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    height: 60px;
+    position: fixed; /* Keep the navbar fixed */
+    top: 0; /* Align the navbar to the very top */
+    left: 0;
     width: 100%; /* Full width */
-    z-index: 10; /* Ensure it appears above other content */
+    z-index: 10;
+    box-sizing: border-box;
 }
 
+/* Remaining styles */
 .search-container {
     display: flex;
     align-items: center;
-    gap: 5px; /* Space between input and button */
+    gap: 5px;
 }
 
 .search-input {
-    padding: 10px; /* Slightly increased padding for better usability */
+    padding: 8px;
+    font-size: 0.9rem;
     border-radius: 5px;
-    border: 1px solid rgba(255, 215, 0, 0.7); /* Gold border to match theme with some transparency */
-    transition: border-color 0.3s; /* Transition for hover effect */
+    border: 1px solid rgba(255, 215, 0, 0.7);
+    transition: border-color 0.3s;
 }
 
 .search-input:focus {
-    border-color: #FFC107; /* Highlight border on focus */
+    border-color: #FFC107;
 }
 
 .search-button {
-    padding: 10px 15px; /* Increased padding for a more button-like appearance */
+    padding: 8px 12px;
+    font-size: 0.9rem;
     border: none;
     border-radius: 5px;
-    background-color: rgba(255, 215, 0, 0.8); /* Gold background */
-    color: black; /* Black text for buttons */
+    background-color: rgba(255, 215, 0, 0.8);
+    color: black;
     cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition */
+    transition: background-color 0.3s;
 }
 
 .search-button:hover {
-    background-color: #FFC107; /* Slightly darker yellow on hover */
+    background-color: #FFC107;
 }
 
 .links {
     display: flex;
-    gap: 30px; /* Space out links evenly */
+    gap: 20px;
 }
 
 .links a {
     text-decoration: none;
-    color: rgba(255, 215, 0, 0.9); /* Gold/yellow for links */
-    transition: color 0.3s; /* Smooth color transition */
+    color: rgba(255, 215, 0, 0.9);
+    font-size: 1rem;
+    transition: color 0.3s;
 }
 
 .links a:hover {
-    color: #FFC107; /* Highlight color on hover */
+    color: #FFC107;
 }
 
 .user-avatar {
-    color: rgba(255, 215, 0, 0.9); /* Gold/yellow for text */
+    color: rgba(255, 215, 0, 0.9);
     display: flex;
-    align-items: center; /* Center the items */
-    gap: 10px; /* Space between avatar and name/button */
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
 }
 
 .avatar {
-    width: 40px; 
-    height: 40px;
-    border-radius: 50%; /* Circular avatar */
-    object-fit: cover; /* Maintain aspect ratio */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .user-name {
-    margin-left: 10px;
-    font-weight: bold; /* Make the username bold */
+    margin-left: 8px;
+    font-weight: bold;
 }
 
 .login-link {
-    color: rgba(255, 215, 0, 0.9); /* Gold/yellow for login link */
-    text-decoration: none; /* No underline */
-    font-weight: bold; /* Bold link text */
+    color: rgba(255, 215, 0, 0.9);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 .login-link:hover {
-    color: #FFC107; /* Highlight on hover */
+    color: #FFC107;
 }
