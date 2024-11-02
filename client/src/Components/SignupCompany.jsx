@@ -41,7 +41,7 @@ const SignupCompany = () => {
       <input type="password" name="password" placeholder="Password..." onChange={handleChange} required />
       <input type="text" name="licensesinceWhen" placeholder="License Since When..." onChange={handleChange} required />
       <input type="text" name="lei" placeholder="LEI..." onChange={handleChange} required />
-      <button type="submit">Sign Up </button>
+      <button type="submit">Sign Up </button> 
       <p>
         Already have an account? <Link to="/login">Login</Link>
       </p>

@@ -7,7 +7,7 @@ const DB=require("../database/indexDb.js")
 module.exports = {
 
      //Signup
-     signup : async (req, res) => {
+     signUp : async (req, res) => {
         const {name, address, phoneNumber, website, email, password, licensesinceWhen, lei } = req.body;
        const hashedPassword = await bcrypt.hash(password, 10);
 
