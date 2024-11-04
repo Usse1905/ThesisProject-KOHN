@@ -1,4 +1,4 @@
-
+.
 INSERT INTO Users (userName, email, password,dateOfBirth,dateOfLicense,role) VALUES 
 ('John Doe', 'john.doe@example.com', 'password1',1995,2017,"user"),
 ('Jane Smith', 'jane.smith@example.com', 'password2',1990,2009,"user"),
@@ -13,7 +13,7 @@ INSERT INTO Users (userName, email, password,dateOfBirth,dateOfLicense,role) VAL
 ('Liam White', 'liam.white@example.com', 'password11',1995,2021,"user"),
 ('Ava Thompson', 'ava.thompson@example.com', 'password12',1996,2023,"user");
 
-
+source 
 INSERT INTO Admins (userName, email, password) VALUES
 ('Oussema Karoui', 'oussema.karoui@example.com', 'passwordouss'),
 ('Hadda jaouabi', 'hadda.jaouabi@example.com', 'passwordhadda'),
