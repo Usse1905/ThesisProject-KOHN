@@ -1,5 +1,5 @@
 const Users = require('../Model/ModelUsers.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 let x = require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const DB=require("../database/indexDb.js")
@@ -22,6 +22,7 @@ module.exports = {
             password: hashedPassword,
             licensesinceWhen,
             lei,
+            isApproved: false, 
             });
           res.status(201).json({ message: 'Company created', company });
        } catch (error) {
