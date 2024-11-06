@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useUser } from '../UserProvider';
 import { useNavigate } from 'react-router-dom';
-import { UserRound } from 'lucide-react';
+import { Bell, MessageCircle, LogOut } from 'lucide-react';
+import io from 'socket.io-client';
+import Mylogo from "../../../client/logo.png";
 import "../ComponentsCss/OtherComponentsCss/NavBar.css";
 
+const socket = io('http://localhost:8080'); // Your backend socket server URL
+
 const NavBar = () => {
-    const { user, setUser } = useUser();
+    const { user, notificationCount, updateNotifications } = useUser();
     const navigate = useNavigate();
 
+    // Listen for new notification events
+    useEffect(() => {
+        if (user) {
+            socket.on('newNotification', (data) => {
+                if (data.userId === user.id) {
+                    // Update the notification count when a new notification arrives
+                    updateNotifications((prevCount) => prevCount + data.newNotificationCount);
+                }
+            });
+        }
+
+        // Clean up the socket listener when the component unmounts or user changes
+        return () => {
+            socket.off('newNotification');
+        };
+    }, [user, updateNotifications]);
+
     const handleLogout = () => {
-        setUser(null);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         navigate('/login');
@@ -17,6 +37,9 @@ const NavBar = () => {
 
     return (
         <div className='nav'>
+            <div className='logo-div'>
+                <img src={Mylogo} alt="logo" />
+            </div>
             <div className="search-container">
                 <input className="search-input" type="text" placeholder='Search cars...' />
                 <button className='search-button'>Search</button>
@@ -29,15 +52,30 @@ const NavBar = () => {
             </nav>
             {user ? (
                 <div className="user-avatar">
-                    <div className="avatar-name">
-                        <img src={user.image} className="avatar" />
-                        <span className="user-name">{user.userName}</span>
+                    <div className='nav-icons'>
+                        <div className="bell-container">
+                            <Bell size={24} />
+                            {notificationCount > 0 && (
+                                <span className="notification-badge">{notificationCount}</span>
+                            )}
+                        </div>
+                        <MessageCircle />
                     </div>
-                    <button onClick={handleLogout}>Logout</button>
+                    <div className="user-part">
+                        <div className="avatar-container">
+                            <img src={user.image} className="avatar" onClick={() => navigate("/userprofile")} />
+                        </div>
+                        <div className="user-name">{user.userName}</div>
+                    </div>
+                    
+                    <div className="logout-container" onClick={handleLogout}>
+                        <LogOut />
+                        <span>Logout</span>
+                    </div>
                 </div>
             ) : (
                 <div className="user-avatar">
-                    <UserRound className="avatar" style={{color: "white"}} />
+                    <UserRound className="avatar" style={{ color: "white" }} onClick={() => navigate("/login")} />
                     <a href="/login" className="login-link">Login</a>
                 </div>
             )}

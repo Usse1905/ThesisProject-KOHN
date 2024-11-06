@@ -12,11 +12,11 @@ module.exports = {
 
      //Signup
      signup : async (req, res) => {
-        const { userName, password, email,phoneNumber,dateOfBirth,image, role } = req.body;
+        const { userName, password, email,cin,dateOfBirth,dateOfLicense,role } = req.body;
        const hashedPassword = await bcrypt.hash(password, 10);
 
        try {
-           const user = await projectdb.Users.create({ userName, password: hashedPassword, email,phoneNumber,dateOfBirth,image, role });
+           const user = await projectdb.Users.create({ userName, password: hashedPassword, email,cin,dateOfBirth,dateOfLicense, joined : new Date(),role });
 
           res.status(201).json({ message: 'User created', user });
        } catch (error) {
@@ -91,6 +91,27 @@ getOneUser:async(req,res)=>{
   } catch (error) {
       res.status(500).json({ error: 'Server error' });
   }
-}
+},
+
+updateUser: async (req, res) => {
+    try {
+      const body = req.body;
+      const id = req.params.id;
+  
+      const [updated] = await projectdb.Users.update(body, {
+        where: { id }
+      });
+  
+      if (updated) {
+        const updatedUser = await projectdb.Users.findOne({ where: { id } });
+        return res.status(200).json(updatedUser);
+      }
+  
+      return res.status(404).json({ message: 'User not found' });
+    } catch (error) {
+      return res.status(500).send(error.message); 
+    }
+  }
+  
 
 }

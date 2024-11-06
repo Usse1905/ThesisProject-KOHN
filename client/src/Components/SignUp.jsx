@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../../src/index.css"
 
 
@@ -8,7 +8,12 @@ const SignUp = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [cin, setCin] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState(0);
+  const [dateOfLicense, setDateOfLicense] = useState(0);
   const [role, setRole] = useState('user');
+
+  const navigate = useNavigate()
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -17,13 +22,16 @@ const SignUp = () => {
         userName,
         password,
         email,
+        cin,
+        dateOfBirth,
+        dateOfLicense,
         role
         });
-        setPassword("");
-        setUserName("");
       alert(response.data.message);
+      console.log(response.data);
+      navigate("/login")
     } catch (error) {
-      alert(error);
+      alert(error.message);
     }
   };
 
@@ -41,6 +49,15 @@ const SignUp = () => {
       
         <label className='signup-label'>Email:</label>
         <input className="signup-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+
+        <label className='signup-label'>CIN:</label>
+        <input className="signup-input" type='text' value={cin} onChange={(e) => setCin(e.target.value)} required />
+
+        <label className='signup-label'>What year were you born in :</label>
+        <input className="signup-input" type='text' value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
+
+        <label className='signup-label'>What year did you obtain your Driver's license :</label>
+        <input className="signup-input" type='text' value={dateOfLicense} onChange={(e) => setDateOfLicense(e.target.value)} required />
       
       <div className='signup-select-div'>
         <label className='signup-label'>Role:</label>

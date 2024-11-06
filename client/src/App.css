@@ -4,7 +4,9 @@
     text-align: center;
     width: 450px;
 } */
-
+#root {
+    background-image: url(../background.jpg);
+}
 .image-car{
     flex: 1;
     padding: 20px;

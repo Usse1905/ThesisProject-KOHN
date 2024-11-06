@@ -16,6 +16,8 @@ import { UserProvider } from "./UserProvider";
 import { CompanyProvider } from "./CompanyProvider";
 import NavBar from "./OtherComponents/NavBar";
 import RequestSubmitted from "./Components/User/RequestSubmitted";
+import UserProfile from "./Components/User/User Profile/UserProfile";
+import 'leaflet/dist/leaflet.css';
 
 
 const App = () => {
@@ -32,6 +34,7 @@ const App = () => {
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
             <Route path="/allcars" element={<MainPage/>}/>
+            <Route path="/userprofile" element={<UserProfile/>}/>
             <Route path="/one" element={<OneCar/>}/>
             <Route path="/addrequest" element={<AddUserRequest/>}/>
             <Route path="/reqsubmitted" element={<RequestSubmitted/>}/>
