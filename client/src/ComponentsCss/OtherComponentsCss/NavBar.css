@@ -1,28 +1,28 @@
-/* Reset body margin and padding */
+
 body, html {
     margin: 0;
     padding: 0;
 }
 
-/* Updated navbar CSS with top position adjustments */
+
 .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.7); 
     padding: 10px 20px;
     font-family: Arial, sans-serif;
     font-size: 1rem;
     height: 60px;
-    position: fixed; /* Keep the navbar fixed */
-    top: 0; /* Align the navbar to the very top */
+    position: fixed; 
+    top: 0;
     left: 0;
-    width: 100%; /* Full width */
+    width: 100%; 
     z-index: 10;
     box-sizing: border-box;
 }
 
-/* Remaining styles */
+
 .search-container {
     display: flex;
     align-items: center;
