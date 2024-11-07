@@ -64,7 +64,7 @@ button:hover {
     color: #ffcc00; /* Highlight color on hover */
 }
 
-.user-avatar {
+.user-avatar, .company-avatar {
     color: goldenrod;
     display: flex;
     align-items: center; /* Center the items */
@@ -85,7 +85,7 @@ button:hover {
     object-fit: cover; /* Maintain aspect ratio */
 }
 
-.user-name {
+.user-name, .company-name {
     margin-left: 10px;
     font-weight: bold; /* Make the username bold */
 }

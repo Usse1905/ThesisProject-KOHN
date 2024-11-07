@@ -33,6 +33,23 @@ module.exports = {
           res.status(500).send({ message: "Internal Server Error", error: error.message });
       }
   },
+
+  getCompanyReqs: async (req, res) => {
+    try {
+        const id = req.params.id;
+        const companyequest = await projectdb.UserRequests.findAll({
+            where: { companyId: id },
+            include: [
+                { model: projectdb.Users, as: 'User' },
+                { model: projectdb.Companies, as: 'Company' }
+            ]
+        });
+        res.status(200).send(companyequest);
+    } catch (error) {
+        console.error("Error fetching user requests:", error);
+        res.status(500).send({ message: "Internal Server Error", error: error.message });
+    }
+},
   
     getOnereq : async(req, res) => {
         try{

@@ -1,13 +1,23 @@
+
+let io;
+
 const setSocketIO = (socketIOInstance) => {
   io = socketIOInstance;
 };
 
-const emitNotification = (userId, newNotificationCount) => {
+// Emit notification (unchanged)
+const emitNotification = (userId, companyId, newNotificationCount) => {
   if (io) {
-    io.emit('newNotification', { userId, newNotificationCount });
+    io.emit('newNotification', { userId, companyId, newNotificationCount });
   } else {
     console.error('Socket.io instance is not initialized');
   }
 };
 
-module.exports = { setSocketIO, emitNotification };
+// Broadcast message to a specific room (company or user)
+const broadcastMessage = (roomId, message) => {
+  // Broadcast the message to everyone in the global room
+  io.to(roomId).emit('receiveMessage', message);
+};
+
+module.exports = { setSocketIO, emitNotification, broadcastMessage };

@@ -29,7 +29,8 @@ module.exports = {
 
      //Login
      login : async (req, res) => {
-    const { userName, password } = req.body;
+    const { userName, password, role } = req.body;
+    if (role === "User"){
          const user = await projectdb.Users.findOne({ where: { userName: userName } });
 
          if (!user || !(await bcrypt.compare(password, user.password))) {
@@ -38,7 +39,19 @@ module.exports = {
 
          const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET);
        res.json({ message: 'Login successful', token,user:user });
-     },
+     }
+    
+    if (role === "Company"){
+      const company = await projectdb.Companies.findOne({ where: { name: userName } });
+
+         if (!company || !(await bcrypt.compare(password, company.password))) {
+         return res.status(401).json({ message: 'Invalid credentials' });
+       }
+
+         const token = jwt.sign({ id: company.id, role: company.role }, process.env.JWT_SECRET);
+       res.json({ message: 'Login successful', token,company:company });
+    }
+  },
 
 
 

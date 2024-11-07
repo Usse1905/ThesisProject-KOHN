@@ -8,14 +8,7 @@ module.exports = (sequelize, DataTypes) => {
                 key: 'id'
             }
         },
-        companyId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'Companies',
-                key: 'id'
-            }
-        },
+        
         content: {
             type: DataTypes.TEXT,
             allowNull: false,
@@ -23,21 +16,18 @@ module.exports = (sequelize, DataTypes) => {
         roomId: {
             type: DataTypes.STRING,
             allowNull: false,
-            index: true,
+            index: true,  
         },
     }, {
-        timestamps: true,
+        timestamps: true,  
     });
 
     Message.associate = function (models) {
         Message.belongsTo(models.Users, {
             foreignKey: 'userId',
-            as: 'User',
+            as: 'User',  // Associate message with a user
         });
-        Message.belongsTo(models.Companies, {
-            foreignKey: 'companyId',
-            as: 'Company',
-        });
+        
     };
 
     return Message;

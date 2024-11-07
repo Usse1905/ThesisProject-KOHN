@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../../../UserProvider';
-import { UserRound, BadgeInfo, FileStack, Bell, MessageCircle, ImagePlus, ImageDown } from 'lucide-react';
+import { useCompany } from '../../../../CompanyProvider.jsx';
+import { UserRound, BadgeInfo, FileStack, Bell, MessageCircle, ImagePlus, ImageDown, Car  } from 'lucide-react';
 import moment from "moment";
 import axios from 'axios';
 import EditUserInfo from './EditUserInfo';
@@ -10,26 +10,37 @@ import OrderHistory from './OrderHistory';
 import UserInfo from './UserInfo';
 import "../../../ComponentsCss/User/UserProfile.css";
 
-const UserProfile = () => {
-    const { user, updateUserContext } = useUser();
-    const [selectedTab, setSelectedTab] = useState('UserInfo');
+const CompanyProfile = () => {
+    const { company, updateCompanyContext } = useCompany();
+    const [selectedTab, setSelectedTab] = useState('CompanyInfo');
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
-        userName: user.userName,
-        email: user.email,
-        phoneNumber: user.phoneNumber ? user.phoneNumber : 0,
-        address: user.address ? user.address : "",
+        name: company.name,
+        email: company.email,
+        phoneNumber: company.phoneNumber ? company.phoneNumber : 0,
+        address: company.address ? company.address : "",
     });
-    const [userreqs, setUserreqs] = useState([]);
-    const [imageFile, setImageFile] = useState(null);  // Track selected image
+    const [companyOrders, setCompanyOrders] = useState([]);
+    const [companyCars, setCompanyCars] = useState([]);
+    const [imageFile, setImageFile] = useState(null);
     const [messages, setMessages] = useState([]);
 
     // Function to fetch requests for the user (moved out of useEffect)
     const handleGetreq = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/oneuserreqs/${user.id}`);
+            const response = await axios.get(`http://localhost:8080/api/onecompanyreqs/${company.id}`);
             console.log("requests for this user are", response.data);
-            setUserreqs(response.data);
+            setCompanyOrders(response.data);
+        } catch (error) {
+            console.error("Error fetching request:", error.response ? error.response.data : error.message);
+        }
+    };
+
+    const handleGetcars = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/cars/companycars/${company.id}`);
+            console.log("cars for this company are", response.data);
+            setCompanyCars(response.data);
         } catch (error) {
             console.error("Error fetching request:", error.response ? error.response.data : error.message);
         }
@@ -72,9 +83,9 @@ const UserProfile = () => {
 
         try {
             const imageUrl = await uploadImageToServer(imageFile);
-            const response = await axios.put(`http://localhost:8080/api/updateuser/${user.id}`, { image: imageUrl });
+            const response = await axios.put(`http://localhost:8080/company/updateCompany/${company.id}`, { image: imageUrl });
             console.log('Update user response:', response.data);
-            updateUserContext(response.data);
+            updateCompanyContext(response.data);
             console.log('Image updated successfully:', response.data);
             setFormData({ ...formData, image: imageUrl });
             setImageFile(null);  // Reset selected image after upload
@@ -86,11 +97,11 @@ const UserProfile = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:8080/api/updateuser/${user.id}`, formData);
-            updateUserContext(response.data);
-            console.log('User updated successfully:', response.data);
+            const response = await axios.put(`http://localhost:8080/company/updateCompany/${company.id}`, formData);
+            updateCompanyContext(response.data);
+            console.log('Company updated successfully:', response.data);
             setIsEditing(false);
-            setSelectedTab('UserInfo');
+            setSelectedTab('CompanyInfo');
         } catch (error) {
             console.error('Error updating user:', error);
         }
@@ -108,10 +119,22 @@ const UserProfile = () => {
         }
     };
 
-    const handleReorderRequest = async (requestId) => {
+    const handleConfirmRequest = async (requestId) => {
         try {
             const response = await axios.put(`http://localhost:8080/api/updaterequest/${requestId}`, {
-                status: "Pending"
+                status: "Confirmed"
+            });
+            await handleGetreq();  // Refresh the requests after reorder
+            console.log('Request updated successfully:', response.data);
+        } catch (error) {
+            console.error('Error updating request:', error);
+        }
+    };
+
+    const handleDeliverRequest = async (requestId) => {
+        try {
+            const response = await axios.put(`http://localhost:8080/api/updaterequest/${requestId}`, {
+                status: "Delivered"
             });
             await handleGetreq();  // Refresh the requests after reorder
             console.log('Request updated successfully:', response.data);
@@ -122,16 +145,16 @@ const UserProfile = () => {
 
     const renderContent = () => {
         switch (selectedTab) {
-            case 'OrderHistory':
-                return <OrderHistory userreqs={userreqs} handleCancelRequest={handleCancelRequest} handleReorderRequest={handleReorderRequest} />;
-            case 'Notifications':
-                return <Notifications userreqs={userreqs} />;
+            case 'OrdersReceived':
+                return <ReceivedOrders companyOrders={companyOrders} handleCancelRequest={handleCancelRequest} handleConfirmRequest={handleConfirmRequest} handleDeliverRequest={handleDeliverRequest} />;
+            case 'Cars':
+                return <CompanyCars companyCars={companyCars} />;
             case 'Messages':
-                return <Messages messages={messages} setMessages={setMessages} currentUserId={user.id} />;
+                return <Messages messages={messages} />;
             case 'EditUserInfo':
                 return <EditUserInfo formData={formData} handleChange={handleChange} handleUpdate={handleUpdate} />;
             default:
-                return <UserInfo user={user} onEdit={() => { setIsEditing(true); setSelectedTab('EditUserInfo'); }} />;
+                return <CompanyInfo company={company} onEdit={() => { setIsEditing(true); setSelectedTab('EditCompanyInfo'); }} />;
         }
     };
 
@@ -140,17 +163,17 @@ const UserProfile = () => {
 
     useEffect(() => {
         handleGetreq(); // Initial fetch when component mounts
-    }, [user.id]);  // Dependencies: runs again if user.id changes
+    }, [company.id]);  // Dependencies: runs again if user.id changes
 
     return (
         <div className="dashboard">
             <div className="sidebar">
-                <div className="user-info">
-                    {user.image || imageFile ? (
+                <div className="company-info">
+                    {company.image || imageFile ? (
                         <div className="image-upload-section">
                             <img
-                                src={user.image || URL.createObjectURL(imageFile)} // Use the uploaded image or the selected file
-                                alt={`${user.userName}'s profile`}
+                                src={company.image || URL.createObjectURL(imageFile)} // Use the uploaded image or the selected file
+                                alt={`${company.name}'s profile`}
                                 className="sidebar-profile-image"
                             />
                             <input
@@ -185,12 +208,12 @@ const UserProfile = () => {
                             <button onClick={handleUpdateImage}>Update Image</button>
                         </div>
                     )}
-                    <h2>{user.userName}</h2>
+                    <h2>{company.name}</h2>
                 </div>
                 <ul className="sidebar-menu">
-                    <li onClick={() => setSelectedTab('UserInfo')}><BadgeInfo style={{ marginRight: "10px" }} />User Info</li>
-                    <li onClick={() => { setSelectedTab('OrderHistory'); handleGetreq(); }}><FileStack style={{ marginRight: "10px" }} />Order History</li>
-                    <li onClick={() => { setSelectedTab('Notifications'); }}><Bell style={{ marginRight: "10px" }} />Notifications</li>
+                    <li onClick={() => setSelectedTab('CompanyInfo')}><BadgeInfo style={{ marginRight: "10px" }} />Company Info</li>
+                    <li onClick={() => { setSelectedTab('OrdersReceived'); handleGetreq(); }}><FileStack style={{ marginRight: "10px" }} />Orders Received</li>
+                    <li onClick={() => { setSelectedTab('Cars'); }}><Car  style={{ marginRight: "10px" }} />Company Cars</li>
                     <li onClick={() => { setSelectedTab('Messages'); handleGetMessages(1) }}><MessageCircle style={{ marginRight: "10px" }} />Messages</li>
                 </ul>
             </div>
@@ -201,4 +224,4 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default CompanyProfile;

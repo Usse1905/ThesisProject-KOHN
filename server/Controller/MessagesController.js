@@ -1,17 +1,36 @@
 const Message = require("../Model/ModelMessages.js");
 const projectdb = require("../database/indexDb.js");
 
+const GLOBAL_ROOM_ID = 'global-chat-room';  // Fixed room ID for the global chat
+
 module.exports = {
+    // Controller - saveMessage
     saveMessage: async (req, res) => {
-        const { userId, companyId, content, roomId } = req.body;
+        const { userId, content } = req.body;  // Removed companyId, using global room
 
         // Basic validation
-        if (!userId || !companyId || !content || !roomId) {
-            return res.status(400).json({ message: 'User ID, content, and room ID are required' });
+        if (!userId || !content) {
+            return res.status(400).json({ message: 'User ID and content are required' });
         }
 
         try {
-            const message = await projectdb.Message.create({ userId, companyId, content, roomId });
+            // Save the message to the database, using the global room ID
+            const message = await projectdb.Message.create({
+                userId, 
+                content, 
+                roomId: GLOBAL_ROOM_ID  // Use the global room ID
+            });
+
+            // Emit message to the global room using Socket.IO
+            // Assume broadcastMessage is a function you export from SocketManager.js
+            broadcastMessage(GLOBAL_ROOM_ID, {
+                userId,
+                content,
+                roomId: GLOBAL_ROOM_ID,
+                timestamp: new Date().toISOString(),
+            });
+
+            // Respond with the saved message
             res.status(201).json(message);
         } catch (error) {
             console.error('Error saving message:', error);
@@ -19,17 +38,19 @@ module.exports = {
         }
     },
 
+    // Controller - getMessages
     getMessages: async (req, res) => {
         const { roomId } = req.params;
 
-        if (!roomId) {
-            return res.status(400).json({ message: 'Room ID is required' });
+        // Ensure we are fetching messages from the global room
+        if (roomId !== GLOBAL_ROOM_ID) {
+            return res.status(400).json({ message: `Only the '${GLOBAL_ROOM_ID}' room is allowed` });
         }
 
         try {
             const messages = await projectdb.Message.findAll({
                 where: { roomId },
-                order: [['createdAt', 'ASC']],
+                order: [['createdAt', 'ASC']],  // Ensure messages are ordered by creation time
             });
             res.status(200).json(messages);
         } catch (error) {

@@ -84,7 +84,7 @@
 }
 
 /* Styling for the user info container */
-.user-info {
+.user-info, .company-info {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   max-width: 800px;
@@ -95,7 +95,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
 }
 
-.user-info-content {
+.user-info-content, .company-info-content {
   display: flex;
   justify-content: space-between;
   gap: 30px; /* Adds space between the left and right columns */
@@ -103,16 +103,16 @@
 }
 
 /* Left side column */
-.user-info-left {
+.user-info-left, .company-info-left {
   flex: 1; /* Take up equal space */
 }
 
 /* Right side column */
-.user-info-right {
+.user-info-right, .company-info-right {
   flex: 1; /* Take up equal space */
 }
 
-.user-info p {
+.user-info p, .company-info p {
   margin-bottom: 15px 0;
 }
 
@@ -158,7 +158,7 @@
 }
 
 /* Styling for the Edit User Info form */
-.edit-user-form {
+.edit-user-form, .edit-company-form {
   background-color: #ffffff;
   padding: 30px;
   border-radius: 8px;
@@ -168,7 +168,7 @@
   font-family: 'Arial', sans-serif;
 }
 
-.edit-user-form h2 {
+.edit-user-form h2, .edit-company-form h2 {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;

@@ -1,41 +1,46 @@
 import React, { useEffect, useRef } from 'react';
 import { useUser } from '../UserProvider';
+import { useCompany } from '../CompanyProvider'; // Assuming you have a useCompany hook
 import { useNavigate } from 'react-router-dom';
-import { Bell, MessageCircle, LogOut } from 'lucide-react';
+import { UserRound, Bell, MessageCircle, LogOut } from 'lucide-react';
 import io from 'socket.io-client';
 import Mylogo from "../../../client/logo.png";
 import "../ComponentsCss/OtherComponentsCss/NavBar.css";
 
-const socket = io('http://localhost:8080'); // Your backend socket server URL
+const socket = io('http://localhost:8080', {
+    withCredentials: true,
+    extraHeaders: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  }); // Your backend socket server URL
 
 const NavBar = () => {
     const { user, notificationCount, updateNotifications } = useUser();
+    const { company } = useCompany(); // Assuming `company` is the object you get from `useCompany`
     const navigate = useNavigate();
     const isMounted = useRef(true);
-    // Listen for new notification events
+
+    // Listen for new notification events for the user
     useEffect(() => {
-        // This ref tracks the current user so we can clean up on user change
         if (user) {
             socket.on('newNotification', (data) => {
                 if (data.userId === user.id) {
-                    // Update the notification count when a new notification arrives
                     updateNotifications((prevCount) => prevCount + data.newNotificationCount);
                 }
             });
         }
-    
-        // Clean up the socket listener only when the user changes
+
         return () => {
             if (isMounted.current) {
-                // If the component is mounted, we clean up on user change
                 socket.off('newNotification');
             }
         };
-    }, [user, updateNotifications])
+    }, [user, updateNotifications]);
 
     const handleLogout = () => {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('company'); // Clear company info if it's logged out
         navigate('/login');
     };
 
@@ -54,6 +59,7 @@ const NavBar = () => {
                 <a href="/allcars">About Us</a>
                 <a href="/adminlogin">Admin</a>
             </nav>
+
             {user ? (
                 <div className="user-avatar">
                     <div className='nav-icons'>
@@ -71,7 +77,16 @@ const NavBar = () => {
                         </div>
                         <div className="user-name">{user.userName}</div>
                     </div>
-                    
+                    <div className="logout-container" onClick={handleLogout}>
+                        <LogOut />
+                        <span>Logout</span>
+                    </div>
+                </div>
+            ) : company ? (
+                <div className="company-avatar">
+                    <div className="company-name" onClick={() => navigate("/companyprofile")}>
+                        {company.name}
+                    </div>
                     <div className="logout-container" onClick={handleLogout}>
                         <LogOut />
                         <span>Logout</span>

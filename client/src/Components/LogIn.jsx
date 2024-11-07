@@ -3,11 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserProvider';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import io from 'socket.io-client';
 import "../../src/index.css"
+
+const socket = io('http://localhost:8080', {
+  withCredentials: true,  // Allow cookies to be sent
+  extraHeaders: {
+    Authorization: `Bearer ${localStorage.getItem('token')}`, // Pass the JWT token
+  },
+});
 
 const Login = () => {
   const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('')
+  const [role, setRole] = useState('');
   const {setUser} = useUser()
 
   const navigate = useNavigate()
@@ -18,6 +27,7 @@ const Login = () => {
       const response = await axios.post('http://localhost:8080/api/login',{
         userName,
         password,
+        role
       } );
       console.log(response.data);
       alert(response.data.message);
@@ -26,8 +36,6 @@ const Login = () => {
       navigate("/allcars")
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
-
-      
       } 
     }
 
@@ -41,7 +49,12 @@ const Login = () => {
       
         <label className='login-label'>Password:</label>
         <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      
+
+        <label className='login-label'>Role:</label>
+        <select className="login-input" type="options" value={role} onChange={(e) => setRole(e.target.value)} required >
+          <option value="User">User</option>
+          <option value="Company">Company</option>
+        </select>
       <div className='login-submit-div'>
         <button type="submit" className='login-submit-button'>Login</button>
       <p className='login-altlink'>
