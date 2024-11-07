@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useUser } from '../UserProvider';
 import { useNavigate } from 'react-router-dom';
 import { Bell, MessageCircle, LogOut } from 'lucide-react';
@@ -11,9 +11,10 @@ const socket = io('http://localhost:8080'); // Your backend socket server URL
 const NavBar = () => {
     const { user, notificationCount, updateNotifications } = useUser();
     const navigate = useNavigate();
-
+    const isMounted = useRef(true);
     // Listen for new notification events
     useEffect(() => {
+        // This ref tracks the current user so we can clean up on user change
         if (user) {
             socket.on('newNotification', (data) => {
                 if (data.userId === user.id) {
@@ -22,12 +23,15 @@ const NavBar = () => {
                 }
             });
         }
-
-        // Clean up the socket listener when the component unmounts or user changes
+    
+        // Clean up the socket listener only when the user changes
         return () => {
-            socket.off('newNotification');
+            if (isMounted.current) {
+                // If the component is mounted, we clean up on user change
+                socket.off('newNotification');
+            }
         };
-    }, [user, updateNotifications]);
+    }, [user, updateNotifications])
 
     const handleLogout = () => {
         localStorage.removeItem('user');
@@ -45,7 +49,7 @@ const NavBar = () => {
                 <button className='search-button'>Search</button>
             </div>
             <nav className='links'>
-                <a href="/allcars">Home</a>
+                <a href="/allcars">Cars</a>
                 <a href="/allcars">Companies</a>
                 <a href="/allcars">About Us</a>
                 <a href="/adminlogin">Admin</a>

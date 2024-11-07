@@ -139,3 +139,33 @@ button:hover {
 .bell-container {
     position: relative;
 }
+
+/* Notification Dropdown */
+.notification-dropdown {
+    position: absolute;
+    top: 30px; /* Adjust based on your layout */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  
+  .notification-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .notification-dropdown li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .notification-dropdown li:hover {
+    background-color: #f0f0f0;
+  }
+  

@@ -8,10 +8,8 @@ export const UserProvider = ({ children }) => {
         return savedUser ? JSON.parse(savedUser) : null;
     });
     
-
-    // State to track notification count
     const [notificationCount, setNotificationCount] = useState(0);
-    const [userReqs,setUserReqs] = useState([]);
+    const [notifications, setNotifications] = useState([]);
 
     const getRequests = async () => {
         try {
@@ -27,10 +25,13 @@ export const UserProvider = ({ children }) => {
         setUser(updatedUser);
     };
 
-    // Update notification count
-    const updateNotifications = (newNotifications) => {
-        setNotificationCount(newNotifications);
-    };
+    const updateNotifications = (count) => {
+        setNotificationCount(count);
+      };
+    
+      const updateNotificationsList = (newNotifications) => {
+        setNotifications(newNotifications);
+      };
 
     // Update localStorage when user or notificationCount changes
     useEffect(() => {
@@ -41,21 +42,11 @@ export const UserProvider = ({ children }) => {
         }
     }, [user]);
 
-    // Keep track of notifications based on user requests
-    useEffect(() => {
-        if (user) {
-            const count = userReqs.reduce((acc, request) => {
-                if (request.statusHistory && request.statusHistory.length > 0) {
-                    return acc + request.statusHistory.length;
-                }
-                return acc;
-            }, 0);
-            setNotificationCount(count);
-        }
-    }, [user]);
-
     return (
-        <UserContext.Provider value={{ user, setUser, updateUserContext, notificationCount, updateNotifications }}>
+        <UserContext.Provider value={{ user, setUser, updateUserContext, notificationCount,
+            notifications,
+            updateNotifications,
+            updateNotificationsList }}>
             {children}
         </UserContext.Provider>
     );

@@ -1,6 +1,3 @@
-// socketManager.js
-let io = null; // This will hold the socket.io instance once initialized.
-
 const setSocketIO = (socketIOInstance) => {
   io = socketIOInstance;
 };

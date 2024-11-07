@@ -1,7 +1,6 @@
 .dashboard {
     display: flex;
     height: 100vh;
-    background-color: #f2f2f2;
   }
   
   .sidebar {
@@ -91,7 +90,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: whitesmoke;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
 }

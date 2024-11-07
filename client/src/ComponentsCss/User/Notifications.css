@@ -1,0 +1,109 @@
+/* Container for all notifications */
+.notifications-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    max-width: 650px;
+    margin: 0 auto;
+  }
+  
+  /* Each notification item box */
+  .notification-item {
+    background-color: #f4f6f9;
+    border: 1px solid #e0e5ec;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align text at the top */
+    flex-wrap: wrap; /* Ensure items wrap properly */
+    max-width: 100%; /* Prevent overflow */
+    overflow: hidden; /* Prevent content overflow */
+  }
+  
+  /* Hover effect for each notification */
+  .notification-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Text inside the notification */
+  .notification-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: calc(100% - 30px); /* Adjust width for icon space */
+    overflow-wrap: break-word; /* Allow long words to break */
+    margin-bottom: 15px;
+    
+  }
+  
+  /* Notification text */
+  .notification-text {
+    font-size: 14px;
+    margin: 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Ensure text wraps properly */
+  }
+  
+  /* Different colors for status */
+  .pending-status {
+    color: #f1c40f;
+    font-weight: bold;
+  }
+  
+  .canceled-status {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  .confirmed-status {
+    color: #2ecc71;
+    font-weight: bold;
+  }
+  
+  /* Old status style */
+  .old-status {
+    color: #7f8c8d;
+    text-decoration: line-through;
+    margin-left: 5px; /* Space between status and surrounding text */
+    margin-right: 5px
+  }
+  
+  /* New status style */
+  .new-status {
+    font-weight: bold;
+    margin-left: 5px; /* Space between status and surrounding text */
+    margin-right: 5px
+  }
+  
+  /* Time of notification */
+  .notification-time {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-top: 5px;
+    display: block;
+    font-style: italic;
+  }
+  
+  /* Positioning the icon */
+  .status-icon {
+    font-size: 18px;
+    color: inherit; /* Inherit the color of the status */
+    cursor: pointer;
+    margin-right: 15px; /* Add space between the icon and the text */
+     /* Align icon to the top of the text */
+    flex-shrink: 0; /* Prevent the icon from shrinking if there's a lot of text */
+  }
+  
+  /* For cases with no status changes */
+  .notification-item.no-status p {
+    color: #e74c3c;
+    font-style: italic;
+  }
+  

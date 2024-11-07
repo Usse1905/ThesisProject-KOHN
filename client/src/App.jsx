@@ -17,6 +17,7 @@ import { CompanyProvider } from "./CompanyProvider";
 import NavBar from "./OtherComponents/NavBar";
 import RequestSubmitted from "./Components/User/RequestSubmitted";
 import UserProfile from "./Components/User/User Profile/UserProfile";
+import LandingPage from "./Components/LandingPage";
 import 'leaflet/dist/leaflet.css';
 
 
@@ -24,12 +25,14 @@ const App = () => {
   const token = localStorage.getItem('token');
   const isAdmin = token ? JSON.parse(atob(token.split('.')[1])).role === 'admin' : false;  
   return (
+    <div className="app-container">
     <UserProvider>
       <CompanyProvider>
         <BrowserRouter>
         <NavBar/>
-        <div>
+        
           <Routes>
+          <Route path="/" element={<LandingPage/>}/>
             <Route path="/SignupCompany" element={<SignupCompany/>}/>
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
@@ -43,10 +46,11 @@ const App = () => {
             <Route path="/admin" element={<ProtectedAdminRoute element={<AdminDashboard />} isAdmin={isAdmin} />} />
             <Route path="/adminlogin" element={<AdminLogin/>}/>
           </Routes>
-       </div>
+       
       </BrowserRouter>
     </CompanyProvider>
   </UserProvider>
+  </div>
   )
 }
 

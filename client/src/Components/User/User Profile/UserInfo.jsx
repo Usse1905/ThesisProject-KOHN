@@ -14,7 +14,7 @@ const UserInfo = ({ user, onEdit }) => (
       </div>
       <div className="user-info-right">
         <p>Address: {user.address ? user.address : "N/A"}</p>
-        <p>CIN: {user.cin ? user.cin : "N/A"}</p>
+        <p>License Number: {user.cin ? user.cin : "N/A"}</p>
         <p>Joined: {moment(user.joined).format('LL')}</p>
         <p>License Obtained: {user.dateOfLicense ? 2024 - user.dateOfLicense + " Years ago" : 'N/A'}</p>
       </div>

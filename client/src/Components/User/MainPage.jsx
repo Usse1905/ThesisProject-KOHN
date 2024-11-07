@@ -6,6 +6,7 @@ import "../../ComponentsCss/User/MainPage.css"
 
 const MainPage = () => {
 const [data,setData] = useState([])
+const [companyData,setCompanyData] = useState([])
 const [filteredData,setFilteredData]=useState([])
 const [refresh,setRefresh] = useState(false)
 const [cartype,setCartype] = useState("")
@@ -17,17 +18,29 @@ const [sortOrder,setSortOrder] = useState("")
 
 const navigate = useNavigate()
 
+  
+
   useEffect(()=>{
-    axios.get(`http://localhost:8080/cars/allcars`)
+    axios.get(`http://localhost:8080/company/getAllCompanies`)
         .then((response)=>{
             console.log("data is ", response.data)
+            setCompanyData(response.data)
+        })
+        .catch((error)=>{
+            console.log("error is ", error) 
+        })
+  },[])
+  
+useEffect(()=>{
+    axios.get(`http://localhost:8080/cars/allcars`)
+        .then((response)=>{
+            console.log("company data is ", response.data)
             setData(response.data)
         })
         .catch((error)=>{
             console.log("error is ", error) 
         })
   },[refresh])
-
 
   useEffect(()=>{
     let filterData = ()=>{
@@ -89,6 +102,11 @@ const handleSortChange = (e) => {
   setSortOrder(e)
 };
 
+const getCompanyName = (id) => {
+  const company = companyData.find((comp) => comp.id === id);
+  return company ? company.name : "Unknown Company"; 
+};
+
 
 const alltypes = [...new Set(data.map((element)=>{
   return element.carType
@@ -103,7 +121,7 @@ const allac = [...new Set(data.map((element)=>{
 }))]
 
 const allcompanies = [...new Set(data.map((element)=>{
-  return element.companyId
+  return getCompanyName(element.companyId)
 }))]
 
 
@@ -167,7 +185,7 @@ const allcompanies = [...new Set(data.map((element)=>{
                     <h1>{element.Name}</h1>
                 </div>
                 <div className="other-specs">
-                    <p>from {element.companyId}</p>
+                    <p>from {getCompanyName(element.companyId)}</p>
                     <p>{element.carType}</p>
                     <p>{element.shift}</p>
                     <p>{element.ac}</p>
