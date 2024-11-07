@@ -15,6 +15,9 @@ import AdminLogin from "./Components/Admin/AdminLogin";
 import { UserProvider } from "./UserProvider";
 import { CompanyProvider } from "./CompanyProvider";
 import NavBar from "./OtherComponents/NavBar";
+import AboutUs from  "c:/Users/DELL/Desktop/project/ThesisProject-KOHN/client/src/OtherComponents/Aboutus"
+import Footer from "./OtherComponents/Footer"
+
 
 
 const App = () => {
@@ -37,8 +40,11 @@ const App = () => {
             <Route path="/Company/Profile" element={<ProfilePage/>}/>
             <Route path="/admin" element={<ProtectedAdminRoute element={<AdminDashboard />} isAdmin={isAdmin} />} />
             <Route path="/adminlogin" element={<AdminLogin/>}/>
+            <Route path="/AboutUs" element={<AboutUs/>}isAdmin={isAdmin} />
+
           </Routes>
        </div>
+       <Footer /> {Footer}
       </BrowserRouter>
     </CompanyProvider>
   </UserProvider>

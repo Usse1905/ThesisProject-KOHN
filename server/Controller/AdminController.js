@@ -49,10 +49,10 @@ approveCompany : async (req, res) => {
 
  markNotificationsAsSeen : async (req, res) => {
     try {
-      // Update all unapproved companies to mark their notifications as seen
+      
       await projectdb.Companies.update(
         { notificationSeen: true },
-        { where: { isApproved: false } } // Only update companies that are unapproved
+        { where: { isApproved: false } } 
       );
   
       res.json({ message: 'Notifications marked as seen' });

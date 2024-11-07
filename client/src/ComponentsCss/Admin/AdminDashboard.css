@@ -1,81 +1,102 @@
-/* AdminDashboard.css */
+
 
 .admin-dashboard {
-  display: flex; /* Enables flexbox layout */
-  flex-direction: column;/* Stacks children vertically */
-  align-items:  stretch;  /* Centers children horizontally */
-  justify-content: flex-start;
-  background-image: url('https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2022/09/23074716/sports-vs-supercars-cover-230920221250.jpg');
-  background-size: cover; /* Ensures the background covers the entire div */
-  background-position: center; /* Centers the background image */
-  color: yellow; /* Default text color for all text within this div */
-  padding: 50px 20px 20px; /* Adds padding at the top, right/left, and bottom */
-  min-height: 100vh; /* Ensures the dashboard takes the full height of the viewport */
+  background: url("https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2022/09/23074716/sports-vs-supercars-cover-230920221250.jpg") no-repeat center center fixed;
+  background-size: cover; 
+  background-attachment: fixed;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 30px;
+  overflow-y: auto; 
 }
 
-h1 {
-  text-align: center; /* Centers the dashboard title */
-  margin-bottom: 20px; /* Adds space below the title */
-  margin-top: 50px; /* Adds space above the title (adjust value as needed) */
+.admin-dashboard h1 {
+  color: #ffd700; 
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.error-message, .notification {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #ffd700;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
 }
 
 
-.error-message {
-  color: red; /* Error message color */
-  text-align: center; /* Centers the error message */
-  font-weight: bold; /* Makes the error message stand out */
+.company-list, .car-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
 }
 
-.notification {
-  background-color: rgba(255, 255, 0, 0.8); /* Semi-transparent yellow for notification */
-  padding: 10px; /* Adds padding around the notification text */
-  border: 1px solid yellow; /* Adds a yellow border around the notification */
-  margin-bottom: 20px; /* Adds space below the notification */
-  text-align: center; /* Centers the notification text */
-  border-radius: 5px; /* Rounds the corners of the notification */
+.company-item, .car-item {
+  background-color: #333333;
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  padding: 20px;
+  color: #ffffff;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.company-list,
-.car-list {
-  list-style-type: none; /* Removes bullet points from lists */
-  padding: 0; /* Removes default padding for lists */
+.car-item img.car-image {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  border: 2px solid #ffd700;
 }
 
-.company-item,
-.car-item {
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black for items */
-  border: 1px solid yellow; /* Adds a yellow border to the items */
-  border-radius: 8px; /* Rounds the corners of the items */
-  margin: 10px 0; /* Adds space above and below each item */
-  padding: 15px; /* Adds padding inside each item for better spacing */
-  color: white; /* Text color for items */
+.car-details h3, .company-item strong {
+  color: #ffd700;
+  margin: 10px 0;
 }
 
-.company-details {
-  margin: 10px 0; /* Space between the details */
-  padding: 10px; /* Adds padding to the details container */
-  background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background for contrast */
-  border-radius: 5px; /* Rounded corners */
+.car-details p, .company-detail {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #eaeaea;
 }
 
-.company-detail {
-  display: block; /* Ensures each detail is on a new line */
-  margin: 5px 0; /* Space between details */
-  color: white; /* Text color for visibility */
+.approve-button, .delete-button {
+  background-color: #ffd700;
+  color: #000000;
+  padding: 8px 16px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
-.approve-button,
-.delete-button {
-  background-color: yellow; /* Button background color */
-  color: black; /* Button text color */
-  border: none; /* Removes default border from buttons */
-  border-radius: 5px; /* Rounds the corners of the buttons */
-  padding: 10px 15px; /* Adds padding inside buttons */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  transition: background-color 0.3s; /* Smooth transition for background color on hover */
+.approve-button:hover, .delete-button:hover {
+  background-color: #ffcc00;
 }
 
-.approve-button:hover,
-.delete-button:hover {
-  background-color: darkorange; /* Darker yellow on hover for feedback */
+a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

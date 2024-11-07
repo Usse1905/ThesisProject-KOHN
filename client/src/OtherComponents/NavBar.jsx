@@ -1,4 +1,4 @@
-// src/OtherComponents/NavBar.js
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserProvider';
@@ -19,12 +19,12 @@ const NavBar = () => {
 
     const handleAuthButtonClick = () => {
         if (isAuthenticated) {
-            localStorage.removeItem('token'); // Remove token on logout
-            setIsAuthenticated(false);        // Update state
-            setUser(null);                    // Clear user context if needed
-            navigate('/login');               // Redirect to login
+            localStorage.removeItem('token'); 
+            setIsAuthenticated(false);        
+            setUser(null);                    
+            navigate('/login');               
         } else {
-            navigate('/login');               // Redirect to login if not logged in
+            navigate('/login');               
         }
     };
 
@@ -36,9 +36,9 @@ const NavBar = () => {
             </div>
             <nav className='links'>
                 <a href="/allcars">Home</a>
-                <a href="/allcars">Companies</a>
-                <a href="/allcars">About Us</a>
-                <a href="/adminlogin">Admin</a>
+                <a href="/Company/Profile">Companies</a>
+                <a href="/AboutUs">About Us</a>
+                <a href="/adminlogin"></a>
             </nav>
             {isAuthenticated ? (
                 <div className="user-avatar">

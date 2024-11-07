@@ -1,0 +1,103 @@
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow:visible;
+}
+
+.about-us {
+  background-image: url('https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2022/09/23074716/sports-vs-supercars-cover-230920221250.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  color: #FFD700; 
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-us::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.about-us h2 {
+  position: relative;
+  z-index: 2;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #FFD700;
+  margin: 100px 0 0 0;
+}
+
+.about-us-content {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.7); 
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 800px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20%; 
+  margin-top: auto; 
+}
+
+.about-us p, .about-edit-textarea {
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #FFD700;
+  margin-top:100px;
+}
+
+.about-edit-textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  background-color: #333;
+  color: #FFD700;
+  border: 1px solid #FFD700;
+  border-radius: 4px;
+  resize: none;
+}
+
+.edit-controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.edit-button, .save-button, .cancel-button {
+  background-color: #FFD700;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-button:hover, .save-button:hover, .cancel-button:hover {
+  background-color: #333;
+  color: #FFD700;
+}
