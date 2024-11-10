@@ -1,15 +1,42 @@
-.bodyForm {
+
+
+/* .bodyForm {
     background-color: white;
+
     text-align: center;
     width: 450px;
-}
+} */
+/* src/App.css or any other component-specific CSS file */
 
+/* Apply background to the entire app container */
+html, body {
+    height: 100%;
+    margin: 0;
+    background-image: url('../background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+  }
+  
+  .app-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-container {
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    flex-grow: 1;
+  }
+  
 .image-car{
     flex: 1;
     padding: 20px;
     width: 100%;
     height: auto;
-    /* width: 500px; */
+    width: 300px;
     border-radius: 8px;
 
 }
@@ -17,7 +44,7 @@
 /*  */
 
 .containerCar {
-    background-color: white;
+    background-color: black;
     padding: 10px 20px;
     width: 500px;
     text-align: center;
@@ -31,7 +58,7 @@
 .detailCar {
     font-size: x-large;
     text-align: center;
-    color: #4206a3;
+    color: yellow;
 }
 
 
@@ -43,7 +70,7 @@
     margin-bottom: 5px;
     text-align: left;
     font-weight: bold;
-    color:blue;
+    color:yellow;
 }
 
 .input-propCar {
@@ -60,10 +87,10 @@
     padding: 10px 15px;
     border-radius: 6px;
     margin: 15px;
-    border: #4206a3;
-    color: white;
+    border:yellow;
+    color:black;
     cursor: pointer;
-    background-color: #4206a3;
+    background-color: white;
     width: 20%;
     font-size: 16px;
 }
