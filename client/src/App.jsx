@@ -33,17 +33,17 @@ const App = () => {
       <CompanyProvider>
         <BrowserRouter>
         <NavBar/>
-        
+        <div>
           <Routes>
-          <Route path="/" element={<LandingPage/>}/>
+            <Route path="/" element={<LandingPage/>}/>
             <Route path="/SignupCompany" element={<SignupCompany/>}/>
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
             <Route path="/allcars" element={<MainPage/>}/>
-            <Route path="/userprofile" element={<UserProfile/>}/>
             <Route path="/one" element={<OneCar/>}/>
             <Route path="/addrequest" element={<AddUserRequest/>}/>
-            <Route path="/reqsubmitted" element={<RequestSubmitted/>}/>
+            <Route path="/requestsubmitted" element={<RequestSubmitted/>}/>
+            <Route path="/userprofile" element={<UserProfile/>}/>
             <Route path="/Company/AddCar" element={<AddCar/>}/>
             <Route path="/Company/Profile" element={<ProfilePage/>}/>
             <Route path="/admin" element={<ProtectedAdminRoute element={<AdminDashboard />} isAdmin={isAdmin} />} />
@@ -51,9 +51,11 @@ const App = () => {
             <Route path="/AboutUs" element={<AboutUs/>}isAdmin={isAdmin} />
 
           </Routes>
-       </BrowserRouter>
-      </CompanyProvider>
-    </UserProvider>
+       </div>
+       <Footer /> {Footer}
+      </BrowserRouter>
+    </CompanyProvider>
+  </UserProvider>
   </div>
   )
 }
