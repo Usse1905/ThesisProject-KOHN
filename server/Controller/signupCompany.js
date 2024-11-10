@@ -1,5 +1,5 @@
 const Users = require('../Model/ModelUsers.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 let x = require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const DB=require("../database/indexDb.js")
@@ -7,6 +7,7 @@ const DB=require("../database/indexDb.js")
 module.exports = {
 
      //Signup
+
      signupCompany : async (req, res) => {
         const {name, address, phoneNumber, website, email, password, licensesinceWhen, lei } = req.body;
        const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,6 +22,7 @@ module.exports = {
             password: hashedPassword,
             licensesinceWhen,
             lei,
+            isApproved: false, 
             });
           res.status(201).json({ message: 'Company created', company });
        } catch (error) {

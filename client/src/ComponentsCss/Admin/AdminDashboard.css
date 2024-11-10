@@ -1,0 +1,102 @@
+
+
+.admin-dashboard {
+  background: url("https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2022/09/23074716/sports-vs-supercars-cover-230920221250.jpg") no-repeat center center fixed;
+  background-size: cover; 
+  background-attachment: fixed;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 30px;
+  overflow-y: auto; 
+}
+
+.admin-dashboard h1 {
+  color: #ffd700; 
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.error-message, .notification {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #ffd700;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+}
+
+
+.company-list, .car-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.company-item, .car-item {
+  background-color: #333333;
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  padding: 20px;
+  color: #ffffff;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.car-item img.car-image {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  border: 2px solid #ffd700;
+}
+
+.car-details h3, .company-item strong {
+  color: #ffd700;
+  margin: 10px 0;
+}
+
+.car-details p, .company-detail {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #eaeaea;
+}
+
+.approve-button, .delete-button {
+  background-color: #ffd700;
+  color: #000000;
+  padding: 8px 16px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.approve-button:hover, .delete-button:hover {
+  background-color: #ffcc00;
+}
+
+a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

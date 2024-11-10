@@ -21,47 +21,50 @@
 .search-container {
     display: flex;
     align-items: center;
-    gap: 5px; /* Space between input and button */
+    gap: 5px;
 }
 
 .search-input {
     padding: 8px;
+    font-size: 0.9rem;
     border-radius: 5px;
-    border: 1px solid #ccc; /* Light border */
-    transition: border-color 0.3s; /* Transition for hover effect */
+    border: 1px solid rgba(255, 215, 0, 0.7);
+    transition: border-color 0.3s;
 }
 
 .search-input:focus {
-    border-color: goldenrod; /* Highlight border on focus */
+    border-color: #FFC107;
 }
 
 .search-button {
     padding: 8px 12px;
+    font-size: 0.9rem;
     border: none;
     border-radius: 5px;
-    background-color: goldenrod;
-    color: white;
+    background-color: rgba(255, 215, 0, 0.8);
+    color: black;
     cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition */
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #ffcc00; /* Lighter shade on hover */
+.search-button:hover {
+    background-color: #FFC107;
 }
 
 .links {
     display: flex;
-    gap: 30px; /* Space out links evenly */
+    gap: 20px;
 }
 
 .links a {
     text-decoration: none;
-    color: goldenrod;
-    transition: color 0.3s; /* Smooth color transition */
+    color: rgba(255, 215, 0, 0.9);
+    font-size: 1rem;
+    transition: color 0.3s;
 }
 
 .links a:hover {
-    color: #ffcc00; /* Highlight color on hover */
+    color: #FFC107;
 }
 
 .user-avatar, .company-avatar {
@@ -79,10 +82,10 @@ button:hover {
 }
 
 .avatar {
-    width: 40px; 
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    object-fit: cover; /* Maintain aspect ratio */
+    object-fit: cover;
 }
 
 .user-name, .company-name {
@@ -91,9 +94,10 @@ button:hover {
 }
 
 .login-link {
-    color: goldenrod; /* Link color */
-    text-decoration: none; /* No underline */
-    font-weight: bold; /* Bold link text */
+    color: rgba(255, 215, 0, 0.9);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 .login-link:hover {

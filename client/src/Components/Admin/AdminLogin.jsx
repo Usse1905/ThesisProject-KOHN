@@ -9,41 +9,41 @@ const AdminLogin = () => {
     const navigate = useNavigate();
   
     const handleLogin = async (e) => {
-      e.preventDefault();
-      try {
-        const response = await axios.post('http://localhost:8080/Admin/signin', { email, password });
-        localStorage.setItem('token', response.data.token);
-        navigate('/admin'); 
-      } catch (error) {
-        console.error('Login failed', error);
-        alert('Login failed. Please check your credentials or try again later.');
-      }
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:8080/Admin/signin', { email, password });
+            localStorage.setItem('token', response.data.token);
+            navigate('/admin'); 
+        } catch (error) {
+            console.error('Login failed', error);
+            alert('Login failed. Please check your credentials or try again later.');
+        }
     };
   
     return (
-      <div className="admin-login-container">
-        <form onSubmit={handleLogin} className="admin-login-form">
-          <h2 className="admin-login-title">Admin Sign In</h2>
-          <input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            placeholder="Admin Email" 
-            required 
-            className="admin-input-field"
-          />
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            placeholder="Password" 
-            required 
-            className="admin-input-field"
-          />
-          <button type="submit" className="admin-login-button">Login</button>
-        </form>
-      </div>
+        <div className="admin-login-container">
+            <form onSubmit={handleLogin} className="admin-login-form">
+                <h2 className="admin-login-title">Admin Sign In</h2>
+                <input 
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="Admin Email" 
+                    required 
+                    className="admin-input-field"
+                />
+                <input 
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    placeholder="Password" 
+                    required 
+                    className="admin-input-field"
+                />
+                <button type="submit" className="admin-login-button">Login</button>
+            </form>
+        </div>
     );
-  };
+};
   
-  export default AdminLogin;
+export default AdminLogin;

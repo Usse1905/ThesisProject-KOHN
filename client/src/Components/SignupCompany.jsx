@@ -24,10 +24,11 @@ const SignupCompany = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/signupCompany', formData);
+      const response = await axios.post('http://localhost:8080/api/signupcompany', formData);
       alert('Signup successful');
       localStorage.setItem('token', response.data.token);
     } catch (error) {
+  
       alert('Error during signup');
     }
   };

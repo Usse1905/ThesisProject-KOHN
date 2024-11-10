@@ -47,4 +47,18 @@ approveCompany : async (req, res) => {
   },
 
 
+ markNotificationsAsSeen : async (req, res) => {
+    try {
+      
+      await projectdb.Companies.update(
+        { notificationSeen: true },
+        { where: { isApproved: false } } 
+      );
+  
+      res.json({ message: 'Notifications marked as seen' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error marking notifications as seen', error });
+    }
+  }
+  
 }

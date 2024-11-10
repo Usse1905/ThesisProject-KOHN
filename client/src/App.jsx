@@ -19,6 +19,9 @@ import RequestSubmitted from "./Components/User/RequestSubmitted";
 import UserProfile from "./Components/User/User Profile/UserProfile";
 import LandingPage from "./Components/LandingPage";
 import 'leaflet/dist/leaflet.css';
+import AboutUs from  "c:/Users/DELL/Desktop/project/ThesisProject-KOHN/client/src/OtherComponents/Aboutus"
+import Footer from "./OtherComponents/Footer"
+
 
 
 const App = () => {
@@ -45,6 +48,8 @@ const App = () => {
             <Route path="/Company/Profile" element={<ProfilePage/>}/>
             <Route path="/admin" element={<ProtectedAdminRoute element={<AdminDashboard />} isAdmin={isAdmin} />} />
             <Route path="/adminlogin" element={<AdminLogin/>}/>
+            <Route path="/AboutUs" element={<AboutUs/>}isAdmin={isAdmin} />
+
           </Routes>
        </BrowserRouter>
       </CompanyProvider>
