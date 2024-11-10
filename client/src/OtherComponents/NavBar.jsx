@@ -61,7 +61,7 @@ const NavBar = () => {
       <nav className='links'>
         <a href="/allcars">Cars</a>
         <a href="/allcars">Companies</a>
-        <a href="/allcars">About Us</a>
+        <a href="/AboutUs">About Us</a>
         <a href="/adminlogin">Admin</a>
       </nav>
 
