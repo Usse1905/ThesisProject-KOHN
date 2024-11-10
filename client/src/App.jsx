@@ -19,7 +19,7 @@ import RequestSubmitted from "./Components/User/RequestSubmitted";
 import UserProfile from "./Components/User/User Profile/UserProfile";
 import LandingPage from "./Components/LandingPage";
 import 'leaflet/dist/leaflet.css';
-import AboutUs from  "c:/Users/DELL/Desktop/project/ThesisProject-KOHN/client/src/OtherComponents/Aboutus"
+import AboutUs from  "../src/OtherComponents/ABoutUs"
 import Footer from "./OtherComponents/Footer"
 
 

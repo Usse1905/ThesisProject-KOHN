@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="footer-section about">
           <h2 className="footer-title">About Us</h2>
           <p>
-            At Tunisia Car Rentals, we are committed to making your car rental experience smooth and enjoyable, offering a variety of options for travelers across Tunisia.
+            At Carya, we are committed to making your car rental experience smooth and enjoyable, offering a variety of options for travelers across Tunisia.
           </p>
         </div>
         
@@ -35,7 +35,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Tunisia Car Rentals. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Carya. All Rights Reserved.</p>
       </div>
     </footer>
   );
