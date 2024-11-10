@@ -1,4 +1,4 @@
-/* Background container for full-page car image */
+
 .admin-login-container {
   display: flex;
   justify-content: center;
@@ -8,7 +8,7 @@
   position: relative;
 }
 
-/* Overlay effect for readability */
+
 .admin-login-container::before {
   content: '';
   position: absolute;
@@ -16,14 +16,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+  background: rgba(0, 0, 0, 0.6); 
   z-index: 1;
 }
 
-/* Form container with shadow and rounded corners */
+
 .admin-login-form {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.85); 
   padding: 2rem 3rem;
   max-width: 400px;
   width: 100%;
@@ -33,52 +33,53 @@
   z-index: 2;
 }
 
-/* Title styling */
+
 .admin-login-title {
   font-size: 24px;
   font-weight: 600;
-  color: #333;
+  color: #ffcc00; 
   margin-bottom: 1.5rem;
 }
 
-/* Input field styling */
+
 .admin-input-field {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #ffcc00; 
   border-radius: 5px;
   font-size: 16px;
-  color: #333;
+  color: #ffcc00; 
+  background-color: rgba(255, 255, 255, 0.1); 
   transition: border-color 0.3s ease;
 }
 
-/* Input field focus effect */
+
 .admin-input-field:focus {
-  border-color: #ff5a00;
+  border-color: #ffcc00; 
   outline: none;
 }
 
-/* Button styling with hover effect */
+
 .admin-login-button {
   width: 100%;
   padding: 0.75rem;
   font-size: 16px;
   font-weight: 600;
-  color: #ffffff;
-  background-color: #ff5a00;
+  color: #ffffff; 
+  background-color: #ffcc00; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-/* Button hover effect */
+
 .admin-login-button:hover {
-  background-color: #e14a00;
+  background-color: #e1a500; 
 }
 
-/* Small effect to give a modern look */
+
 .admin-input-field::placeholder {
-  color: #888;
+  color: #ffcc00; 
 }

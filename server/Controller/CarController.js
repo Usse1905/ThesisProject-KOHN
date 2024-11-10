@@ -1,5 +1,4 @@
 // controllers/carController.js
-// const { Where } = require('sequelize/lib/utils');
 // const  Cars  = require('../Model/ModelCars.js');
 const projectdb = require("../database/indexDb.js")
 
@@ -28,6 +27,18 @@ module.exports={
             res.status(500).send({ message: "Internal Server Error", error })
           }
         },
+        getCompanyCars : async (req, res) => {
+          try {
+              const id = req.params.id;
+              const companyequest = await projectdb.Cars.findAll({
+                  where: { companyId: id }
+              });
+              res.status(200).send(companyequest);
+          } catch (error) {
+              console.error("Error fetching user requests:", error);
+              res.status(500).send({ message: "Internal Server Error", error: error.message });
+          }
+      },
   addCar:async(req,res)=>{
     try{
         const body=req.body

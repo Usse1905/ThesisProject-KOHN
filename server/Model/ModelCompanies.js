@@ -1,63 +1,63 @@
 module.exports = (sequelize, DataTypes) => {
-
-    const Companies = sequelize.define('Companies', {
-
+  const Companies = sequelize.define('Companies', {
       name: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
+          type: DataTypes.STRING(20),
+          allowNull: false,
       },
       address: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
+          type: DataTypes.STRING(100),
+          allowNull: true,
       },
-      
-      phoneNumber:{
-        type : DataTypes.INTEGER,
-        allowNull:false
+      phoneNumber: {
+          type: DataTypes.INTEGER,
+          allowNull: false
       },
-
-      website : {
-        type : DataTypes.STRING(255),
-        allowNull : false
+      website: {
+          type: DataTypes.STRING(50),
+          allowNull: false
       },
-
       email: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-        unique:true,
+          type: DataTypes.STRING(50),
+          allowNull: false,
+          unique: true,
       },
-
       password: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
-
       isApproved: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
+      },
+      licensesinceWhen: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+      },
+      lei: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+      },
+      notificationSeen: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
-      },
+        allowNull: false,
+      }
+  }, {
+      timestamps: false,
+  });
 
-      licensesinceWhen:{
-        type : DataTypes.INTEGER,
-        allowNull:false
-      },
-      
-      lei:{
-        type : DataTypes.INTEGER,
-        allowNull:false
-      },
-      
-    }, {
-      timestamps: false,  
-    });
-    
-    Companies.associate = function (models) {
+  Companies.associate = function (models) {
       Companies.hasMany(models.Cars, {
-        foreignKey: 'companyId',
-        as: 'Cars',
+          foreignKey: 'companyId',
+          as: 'Cars',
       });
-    };
-    return Companies;
+      
+      Companies.hasMany(models.UserRequests, {
+          foreignKey: 'companyId',
+          as: 'UserRequests',
+      });
   };
 
+  return Companies;
+};

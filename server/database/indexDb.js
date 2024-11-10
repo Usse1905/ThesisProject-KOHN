@@ -1,3 +1,4 @@
+
 const { Sequelize, DataTypes } = require("sequelize");
 const Cfg = require('./configDb.js');
 const projectdb = {}
@@ -11,6 +12,8 @@ projectdb.Users = require("../Model/ModelUsers.js")(connection,DataTypes);
 projectdb.Companies = require("../Model/ModelCompanies.js")(connection,DataTypes);
 projectdb.Cars = require("../Model/ModelCars.js")(connection,DataTypes);
 projectdb.UserRequests = require("../Model/ModelUserRequests.js")(connection,DataTypes);
+projectdb.Message = require("../Model/ModelMessages.js")(connection,DataTypes);
+
 
 Object.keys(projectdb).forEach(model => {
     if (projectdb[model].associate) {
@@ -18,7 +21,8 @@ Object.keys(projectdb).forEach(model => {
     }
   });
 
-  // connection.sync({ force : true })  
+  
+  //  connection.sync({ alter : true })
 
   async function testConnection() {
     try {

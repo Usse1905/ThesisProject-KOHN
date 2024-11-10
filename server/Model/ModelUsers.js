@@ -1,54 +1,72 @@
 module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define('User', {
+  const Users = sequelize.define('Users', {
       userName: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
-        unique:true,
+          type: DataTypes.STRING(60),
+          allowNull: true,
+          unique: true,
       },
       password: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
+          type: DataTypes.STRING(255),
+          allowNull: true,
       },
       email: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-        unique:true,
+          type: DataTypes.STRING(60),
+          allowNull: true,
+          unique: true,
       },
       phoneNumber: {
-        type: DataTypes.STRING(15),
-        allowNull: true,
-        unique:true
+          type: DataTypes.INTEGER,
+          unique: true,
+          allowNull: true,
+      },
+      address: {
+          type: DataTypes.STRING(100),
+          allowNull: true,
+          unique: true,
+      },
+      cin: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
       },
       dateOfBirth: {
-        type: DataTypes.DATE,
-        allowNull: false,
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          defaultValue: 0
+      },
+      dateOfLicense: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          defaultValue: 0
       },
       image: {
-        type: DataTypes.BLOB,
-        allowNull: true,
-        unique:false,
+          type: DataTypes.STRING(300),
+          allowNull: true,
+          unique: true,
       },
-      role:{
-        type: DataTypes.ENUM('user','admin','company'),
-        allowNull: false,
+      joined: {
+          type: DataTypes.DATE,
       },
-    }, {
-      timestamps: false,  
-    });
+      role: {
+          type: DataTypes.ENUM('user', 'admin', 'company'),
+          allowNull: true,
+      },
+  }, {
+      timestamps: false,
+  });
 
-    User.associate = function (models) {
-        User.hasMany(models.Cars, {
+  Users.associate = function (models) {
+      Users.hasMany(models.Cars, {
           foreignKey: 'userId',
           as: 'Cars',
-        });
-      };
-      User.associate = function (models) {
-        User.hasMany(models.UserRequests, {
+      });
+      Users.hasMany(models.UserRequests, {
           foreignKey: 'userId',
           as: 'UserRequests',
-        });
-      }; 
-       
-
-    return User;
-  };
+      });
+      Users.hasMany(models.Message, {
+          foreignKey: 'userId',
+          as:'messages',
+      });
+  }
+  return Users
+}

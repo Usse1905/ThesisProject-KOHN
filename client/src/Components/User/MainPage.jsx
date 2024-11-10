@@ -1,9 +1,12 @@
 import React , { useEffect , useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../../ComponentsCss/User/MainPage.css"
+
 
 const MainPage = () => {
 const [data,setData] = useState([])
+const [companyData,setCompanyData] = useState([])
 const [filteredData,setFilteredData]=useState([])
 const [refresh,setRefresh] = useState(false)
 const [cartype,setCartype] = useState("")
@@ -15,17 +18,29 @@ const [sortOrder,setSortOrder] = useState("")
 
 const navigate = useNavigate()
 
+  
+
   useEffect(()=>{
-    axios.get(`http://localhost:8080/cars/allcars`)
+    axios.get(`http://localhost:8080/company/getAllCompanies`)
         .then((response)=>{
             console.log("data is ", response.data)
+            setCompanyData(response.data)
+        })
+        .catch((error)=>{
+            console.log("error is ", error) 
+        })
+  },[])
+  
+useEffect(()=>{
+    axios.get(`http://localhost:8080/cars/allcars`)
+        .then((response)=>{
+            console.log("company data is ", response.data)
             setData(response.data)
         })
         .catch((error)=>{
             console.log("error is ", error) 
         })
   },[refresh])
-
 
   useEffect(()=>{
     let filterData = ()=>{
@@ -87,6 +102,11 @@ const handleSortChange = (e) => {
   setSortOrder(e)
 };
 
+const getCompanyName = (id) => {
+  const company = companyData.find((comp) => comp.id === id);
+  return company ? company.name : "Unknown Company"; 
+};
+
 
 const alltypes = [...new Set(data.map((element)=>{
   return element.carType
@@ -101,17 +121,17 @@ const allac = [...new Set(data.map((element)=>{
 }))]
 
 const allcompanies = [...new Set(data.map((element)=>{
-  return element.companyId
+  return getCompanyName(element.companyId)
 }))]
 
 
   return (
-    <div className="main">
+    <div className="main">{data.length > 0 && (
       <div className="filters">
-        <select onChange={(e)=>handleSortChange(e.target.value)} value={sortOrder}>
+        <select onChange={(e)=>handleSortChange(e.target.value) } value={sortOrder}>
           <option value="">Sort by price</option>
-          <option value="priceLow">Most expensive</option>
-          <option value="priceHigh">Cheapest</option>
+          <option value="priceLow">Cheapest</option>
+          <option value="priceHigh">Most expensive</option>
         </select> 
         <select onChange={(e)=>handleSortChange(e.target.value)} value={sortOrder}>
           <option value="">Sort by Year</option>
@@ -147,23 +167,39 @@ const allcompanies = [...new Set(data.map((element)=>{
             <option key={el} value={el}>{el}</option>
           ))}
         </select>
-      </div>
-      <div  className="cars">
-        {(search || cartype || shift || ac || companyid ? filteredData : data).map((element,index)=>{
-          return <>
-          <div className="car" onClick={()=>navigate("/one",{ state:element })}>
-            <div className="namehead"><h1>{element.Name}</h1></div>
-            <div className="other-specs">
-              <p>from {element.companyId}</p>
-              <p>{element.carType}</p>
-              <p>{element.shift}</p>
-              <p>{element.ac}</p>
+
+      </div>)}
+      <div className="cars">
+
+    {(search || cartype || shift || ac || companyid ? filteredData : data).map((element, index) => (
+        <div className="car-container" key={index}>
+            <div
+                className="car"
+                onClick={() => navigate("/one", { state: element })}
+                style={{
+                    backgroundImage: `url(${element.image})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                <div className="namehead">
+                    <h1>{element.Name}</h1>
+                </div>
+                <div className="other-specs">
+                    <p>from {getCompanyName(element.companyId)}</p>
+                    <p>{element.carType}</p>
+                    <p>{element.shift}</p>
+                    <p>{element.ac}</p>
+                </div>
             </div>
-            <div className="price"><h1>{element.price} TND/Day</h1></div>
-          </div>
-          </>
-        })}
-      </div>
+            <div className="price">
+                <h1>{element.price} TND/Day</h1>
+            </div>
+        </div>
+    ))}
+</div>
+
     </div>
   )
 }
