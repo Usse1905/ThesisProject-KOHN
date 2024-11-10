@@ -44,7 +44,7 @@ updateCompany : async(req,res)=>{
 try{
     const body=req.body
     const id=req.params.id
-    const updateComp=projectdb.Companies.update(body,{
+    const updateComp= await projectdb.Companies.update(body,{
         where:{id}
     })
     const getOneCamp=await projectdb.Companies.findOne({where:{id}})
