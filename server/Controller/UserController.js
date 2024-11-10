@@ -24,15 +24,13 @@ module.exports = {
          res.status(400).json({ error: error.message });
        }
      },
-
-
-
      //Login
      login : async (req, res) => {
     const { userName, password, role } = req.body;
     if (role === "User"){
+      console.log('Before DB query');
          const user = await projectdb.Users.findOne({ where: { userName: userName } });
-
+         console.log('After DB query', user);
          if (!user || !(await bcrypt.compare(password, user.password))) {
          return res.status(401).json({ message: 'Invalid credentials' });
        }
@@ -42,7 +40,7 @@ module.exports = {
      }
     
     if (role === "Company"){
-      const company = await projectdb.Companies.findOne({ where: { name: userName } });
+      const company = await projectdb.Companies.findOne({ where: { name: userName } })
 
          if (!company || !(await bcrypt.compare(password, company.password))) {
          return res.status(401).json({ message: 'Invalid credentials' });

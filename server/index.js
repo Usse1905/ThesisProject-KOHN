@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const http = require('http'); // Import http module
+let x = require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const socketIo = require('socket.io'); // Import socket.io
 const projectdb = require("./database/indexDb.js");
@@ -17,13 +18,15 @@ const { setSocketIO,broadcastMessage  } = require("../server/SocketManager.js");
 const app = express();
 const PORT = 8080;
 
-app.use(express.json());
+app.use(express.json())
 app.use(cors({
-    origin: "http://localhost:5173", // Allow your React app's origin
-    methods: ["GET", "POST","PUT","DELETE"],
-    allowedHeaders: ["Content-Type"],
-    credentials: true, // Allow credentials (cookies, etc.) if needed
-  }));
+  origin: "http://localhost:5173", // Allow your React app's origin
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: [ "Content Type" ,"X-Auth-Token"],  
+  credentials: true,  // Allow credentials (cookies, etc.)
+}));
+app.options('*', cors()); 
+
 
 app.use("/cars", CarRoutes);
 app.use("/company", CompanyRoutes);
@@ -37,33 +40,34 @@ app.use(express.static(__dirname + '../react-client/indexFront.jsx')); // Adjust
 
 const server = http.createServer(app);
 const io = socketIo(server, {
-    cors: {
-      origin: "http://localhost:5173", // Allow your React app's origin
-      methods: ["GET", "POST","PUT","DELETE"],
-      allowedHeaders: ["Content-Type","Authorization"],
-      credentials: true, // Allow credentials (cookies, etc.) if needed
-    },
-    transports: ['websocket', 'polling']
-  });
+  cors: {
+    origin: "http://localhost:5173", 
+    credentials: true,
+  },
+});
 
   setSocketIO(io);
 
   io.use((socket, next) => {
-    const token = socket.handshake.headers['authorization']; // Grab the token from the header
+    console.log('Socket handshake:', socket.handshake);  // Log the entire handshake object
+  
+    const token = socket.handshake.extraHeaders ? socket.handshake.extraHeaders['X-Auth-Token'] : undefined;
+    console.log('Received token:', token);  // Log the token specifically
   
     if (!token) {
-      return next(new Error('Authentication error')); // If no token is found, deny connection
+      console.error('No token found');
+      return next(new Error('Authentication error: No token found'));
     }
   
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
-        return next(new Error('Authentication error')); // If JWT is invalid, deny connection
+        return next(new Error('Authentication error: Invalid token'));
       }
-  
-      socket.userId = decoded.id;  // Add decoded user info to socket object
-      next();  // Proceed to the connection
+      socket.userId = decoded.id;
+      next();
     });
   });
+  
 
   io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
@@ -80,7 +84,7 @@ const io = socketIo(server, {
             userId,
             content,
             roomId: 'global-chat-room',  // Use the global room ID
-            timestamp: new Date().toISOString(),
+            timestamp: new Date().toISOString()
         };
 
         try {
@@ -92,11 +96,6 @@ const io = socketIo(server, {
         } catch (error) {
             console.error('Error saving message:', error);
         }
-    });
-
-    // Clean up when a user disconnects
-    socket.on('disconnect', () => {
-        console.log('User disconnected:', socket.id);
     });
 
     socket.on('disconnect', (reason) => {

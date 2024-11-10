@@ -5,12 +5,7 @@ import io from 'socket.io-client';
 import '../../../ComponentsCss/User/Messages.css'; 
 
 // Initialize Socket.IO client
-const socket = io('http://localhost:8080', {
-    withCredentials: true,
-    extraHeaders: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  });
+;
 
 // Fixed room ID for the global chat room
 const GLOBAL_ROOM_ID = 'global-chat-room';  // You can choose any string for the global room
@@ -18,7 +13,11 @@ const GLOBAL_ROOM_ID = 'global-chat-room';  // You can choose any string for the
 const Messages = ({ messages, setMessages, currentUserId }) => {
     
     const [messageContent, setMessageContent] = useState("");  // State for the input message
-
+    const socket = io('http://localhost:8080', {
+    withCredentials: true,
+    transports: ['websocket']
+}
+   )
     // Fetch messages initially
     const handleGetMessages = async () => {
         try {

@@ -46,10 +46,9 @@ const App = () => {
             <Route path="/admin" element={<ProtectedAdminRoute element={<AdminDashboard />} isAdmin={isAdmin} />} />
             <Route path="/adminlogin" element={<AdminLogin/>}/>
           </Routes>
-       
-      </BrowserRouter>
-    </CompanyProvider>
-  </UserProvider>
+       </BrowserRouter>
+      </CompanyProvider>
+    </UserProvider>
   </div>
   )
 }

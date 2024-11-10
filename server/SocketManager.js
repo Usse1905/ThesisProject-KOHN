@@ -10,7 +10,7 @@ const emitNotification = (userId, companyId, newNotificationCount) => {
   if (io) {
     io.emit('newNotification', { userId, companyId, newNotificationCount });
   } else {
-    console.error('Socket.io instance is not initialized');
+    console.error('Socket.io instance is not initialized')
   }
 };
 
