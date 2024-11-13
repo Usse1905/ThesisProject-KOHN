@@ -1,5 +1,5 @@
 .
-INSERT INTO Users (userName, email, password,dateOfBirth,dateOfLicense,role) VALUES 
+INSERT INTO users (userName, email, password,dateOfBirth,dateOfLicense,role) VALUES 
 ('John Doe', 'john.doe@example.com', 'password1',1995,2017,"user"),
 ('Jane Smith', 'jane.smith@example.com', 'password2',1990,2009,"user"),
 ('Michael Brown', 'michael.brown@example.com', 'password3',1991,2011,"user"),
@@ -14,14 +14,14 @@ INSERT INTO Users (userName, email, password,dateOfBirth,dateOfLicense,role) VAL
 ('Ava Thompson', 'ava.thompson@example.com', 'password12',1996,2023,"user");
 
 source 
-INSERT INTO Admins (userName, email, password) VALUES
+INSERT INTO admins (userName, email, password) VALUES
 ('Oussema Karoui', 'oussema.karoui@example.com', 'passwordouss'),
 ('Hadda jaouabi', 'hadda.jaouabi@example.com', 'passwordhadda'),
 ('Khouloud Trabelsi', 'khouloud.trabelsioe@example.com', 'passwordkhou'),
 ('Nourhen Abdellaoui', 'nourhen.abdellaoui@example.com', 'passwordnour');
 
 
-INSERT INTO Cars (Name,image, price, carType, mileage, year, shift, ac , companyId, userId) VALUES
+INSERT INTO cars (Name,image, price, carType, mileage, year, shift, ac , companyId, userId) VALUES
 ('Hyundai Grand i10','https://catalogue.automobile.tn/big/2023/12/46462.webp?t=1',90,'Compact',50,2020,'Manual','Air Conditionner',1,1),
 ('Kia Picanto','https://catalogue.automobile.tn/big/2024/08/47191.webp?t=1',100,'Compact',50,2020,'Automatic','Air Conditionner',1,1),
 ('Hyundai Grand i20',"https://imgd.aeplcdn.com/664x374/n/cw/ec/150603/i20-exterior-right-front-three-quarter-7.jpeg?isig=0&q=80",80,'Compact',50,2020,'Automatic','Air Conditionner',2,2),
@@ -36,7 +36,7 @@ INSERT INTO Cars (Name,image, price, carType, mileage, year, shift, ac , company
 ('KIA Sportage',"https://catalogue.automobile.tn/big/2023/09/46768.webp?t=1",130,'SUV',50,2020,'Manual','Air Conditionner',3,9);
 
 
-INSERT INTO Companies (name, address, phoneNumber, website,email,password,isApproved, licensesinceWhen, lei) VALUES
+INSERT INTO companies (name, address, phoneNumber, website,email,password,isApproved, licensesinceWhen, lei) VALUES
 ('Tunisia Renting','19 City street Lafayette',71564239,'tunisiarentig.com','tunisiarentig@gmail.com','TR2015',true,2007,1234),
 ('Ikri','dora street La Marsa',71000111,'ikri.com','ikri@gmail.com','ikri2012',true,2021,5678),
 ('Karya & Karya','Habib Street Charguia',71221356,'kx2.com','kx2@gmail.com','karya2018',true,2018,10111213),

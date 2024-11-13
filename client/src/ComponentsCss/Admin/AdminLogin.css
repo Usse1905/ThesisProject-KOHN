@@ -23,7 +23,7 @@
 /* Form container with shadow and rounded corners */
 .admin-login-form {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.85); /* Dark background for the form */
   padding: 2rem 3rem;
   max-width: 400px;
   width: 100%;
@@ -37,7 +37,7 @@
 .admin-login-title {
   font-size: 24px;
   font-weight: 600;
-  color: #333;
+  color: #ffcc00; /* Yellow color for the title */
   margin-bottom: 1.5rem;
 }
 
@@ -46,16 +46,17 @@
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #ffcc00; /* Yellow border for input fields */
   border-radius: 5px;
   font-size: 16px;
-  color: #333;
+  color: #ffcc00; /* Yellow text for input fields */
+  background-color: rgba(255, 255, 255, 0.1); /* Light background for input */
   transition: border-color 0.3s ease;
 }
 
 /* Input field focus effect */
 .admin-input-field:focus {
-  border-color: #ff5a00;
+  border-color: #ffcc00; /* Yellow border on focus */
   outline: none;
 }
 
@@ -65,8 +66,8 @@
   padding: 0.75rem;
   font-size: 16px;
   font-weight: 600;
-  color: #ffffff;
-  background-color: #ff5a00;
+  color: #ffffff; /* White text for the button */
+  background-color: #ffcc00; /* Yellow background for the button */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -75,10 +76,10 @@
 
 /* Button hover effect */
 .admin-login-button:hover {
-  background-color: #e14a00;
+  background-color: #e1a500; /* Darker yellow on hover */
 }
 
 /* Small effect to give a modern look */
 .admin-input-field::placeholder {
-  color: #888;
+  color: #ffcc00; /* Yellow placeholder text */
 }

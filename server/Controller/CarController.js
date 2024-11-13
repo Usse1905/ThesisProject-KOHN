@@ -1,5 +1,4 @@
 // controllers/carController.js
-// const { Where } = require('sequelize/lib/utils');
 // const  Cars  = require('../Model/ModelCars.js');
 const projectdb = require("../database/indexDb.js")
 

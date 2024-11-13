@@ -1,73 +1,98 @@
-.bodyForm {
-    background-color: black;
-    text-align: center;
-    width: 450px;
-}
-
-.image-car{
-    flex: 1;
-    padding: 20px;
-    width: 100%;
-    height: auto;
-    width: 300px;
-    border-radius: 8px;
-
-}
-
-/*  */
-
 .containerCar {
-    background-color: black;
-    padding: 10px 20px;
-    width: 500px;
+    display: flex; 
+    /* justify-content: flex-start;  */
+    align-items: flex-start; 
+    min-height: 100vh; 
+    background: url('https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2022/09/23074716/sports-vs-supercars-cover-230920221250.jpg') center/cover no-repeat;
+    position: relative;
+    padding: 20px;
+  }
+  
+  
+  .bodyForm {
+    background-color: #1b1b1b;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 8px;
+    width: 350px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-left: 20px; 
+    flex: 1; 
+  }
+  
+  
+  .image-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px; 
+    margin-right: 20px;
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  
+  .upload-message {
+    color: #ffc107;
+    font-size: 1.2em;
+    margin-bottom: 10px;
     text-align: center;
-    margin: auto;
-    margin-top: 20px;
-    transition: transform 0.2s;
-    border-radius: 15px;
-    box-shadow: 0 0 20px;
-}
-
-.detailCar {
-    font-size: x-large;
-    text-align: center;
-    color: yellow;
-}
-
-
-.label-car {
-    font-size: 15px;
-    display: block;
+  }
+  
+  
+  .image-car {
     width: 100%;
-    margin-top: 8px;
-    margin-bottom: 5px;
-    text-align: left;
-    font-weight: bold;
-    color:yellow;
-}
-
-.input-propCar {
-    display: block;
+    max-width: 250px; 
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  
+  .input-propCar {
+    width: 330px; 
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 4px;
+    background-color: #333;
+    color: #ffc107;
+    margin-bottom: 10px; 
+  }
+  
+  
+  .addCar {
     width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    font-size: 12px;
-}
-
-.addCar {
-    padding: 10px 15px;
-    border-radius: 6px;
-    margin: 15px;
-    border:yellow;
-    color:black;
-    cursor: pointer;
-    background-color: white;
-    width: 20%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffc107;
+    color: #1b1b1b;
     font-size: 16px;
-}
-
-.addCar:hover {
-    background-color: #0056b3;
-}
+    cursor: pointer;
+  }
+  
+  .addCar:hover {
+    background-color: #e0a800;
+  }
+  
+  
+  .label-car {
+    color: #ffc107;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+ 
+  h1,h3 {
+    color: #ffc107;
+  }
+  
+  
+  img {
+    background-color:whitesmoke;
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }

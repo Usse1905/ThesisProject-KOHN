@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       password: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
 
@@ -47,17 +47,23 @@ module.exports = (sequelize, DataTypes) => {
         type : DataTypes.INTEGER,
         allowNull:false
       },
+
+      notificationSeen: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      }
       
     }, {
       timestamps: false,  
     });
     
-    Companies.associate = function (models) {
-      Companies.hasMany(models.Cars, {
-        foreignKey: 'companyId',
-        as: 'Cars',
-      });
-    };
-    return Companies;
+  Companies.associate = function (models) {
+    Companies.hasMany(models.Cars, {
+      foreignKey: 'companyId',
+      as: 'Cars',
+    });
   };
+  return Companies;
+};
 

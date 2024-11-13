@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     const UserRequests = sequelize.define('UserRequests', {
       carName: {
         type: DataTypes.STRING(50),
-        allowNull: true,
+        allowNull: false,
         unique:true,
       },
       email: {
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       image: {
-        type: DataTypes.BLOB,
+        type: DataTypes.STRING(300),
         allowNull: true
       },
       pickupDate:{
@@ -51,6 +51,13 @@ module.exports = (sequelize, DataTypes) => {
           as: 'User',
         });
       };
+
+      UserRequests.associate = function (models) {
+        UserRequests.belongsTo(models.Companies, {
+          foreignKey: 'companyId',
+          as: 'Company',
+        });
+      };  
 
     
     return UserRequests;
