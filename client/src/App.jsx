@@ -51,7 +51,7 @@ const App = () => {
             <Route path="/requestsubmitted" element={<RequestSubmitted/>}/>
             <Route path="/userprofile" element={<UserProfile/>}/>
             <Route path="/Company/AddCar" element={<AddCar/>}/>
-            <Route path="/Company/Profile" element={<ProfilePage/>}/>
+            <Route path="/Company/Profile/:id" element={<ProfilePage/>}/>
             <Route path="/admin" element={<ProtectedAdminRoute element={<AdminDashboard />} isAdmin={isAdmin} />} />
             <Route path="/adminlogin" element={<AdminLogin/>}/>
             <Route path="/AboutUs" element={<AboutUs/>}isAdmin={isAdmin} />
