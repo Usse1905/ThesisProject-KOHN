@@ -9,7 +9,7 @@ const{getAllCompany,getOneCompany,addCompany,updateCompany,deleteCompany}=requir
 router.get('/getAllCompanies',getAllCompany)
 router.get('/getOneCompany/:id',getOneCompany)
 router.post('/addCompagny',addCompany)
-router.put('/updateCompagny/:id',updateCompany)
+router.put('/updateCompany/:id',updateCompany)
 router.delete('/deleteCompagny/:id',deleteCompany)
 
 

@@ -15,33 +15,48 @@ import AdminLogin from "./Components/Admin/AdminLogin";
 import { UserProvider } from "./UserProvider";
 import { CompanyProvider } from "./CompanyProvider";
 import NavBar from "./OtherComponents/NavBar";
+import RequestSubmitted from "./Components/User/RequestSubmitted";
+import UserProfile from "./Components/User/User Profile/UserProfile";
+import LandingPage from "./Components/LandingPage";
+import 'leaflet/dist/leaflet.css';
+import AboutUs from  "../src/OtherComponents/ABoutUs"
+import Footer from "./OtherComponents/Footer"
+
 
 
 const App = () => {
   const token = localStorage.getItem('token');
   const isAdmin = token ? JSON.parse(atob(token.split('.')[1])).role === 'admin' : false;  
   return (
+    <div className="app-container">
     <UserProvider>
       <CompanyProvider>
         <BrowserRouter>
         <NavBar/>
         <div>
           <Routes>
+            <Route path="/" element={<LandingPage/>}/>
             <Route path="/SignupCompany" element={<SignupCompany/>}/>
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
             <Route path="/allcars" element={<MainPage/>}/>
             <Route path="/one" element={<OneCar/>}/>
             <Route path="/addrequest" element={<AddUserRequest/>}/>
+            <Route path="/requestsubmitted" element={<RequestSubmitted/>}/>
+            <Route path="/userprofile" element={<UserProfile/>}/>
             <Route path="/Company/AddCar" element={<AddCar/>}/>
             <Route path="/Company/Profile/:id" element={<ProfilePage/>}/>
             <Route path="/admin" element={<ProtectedAdminRoute element={<AdminDashboard />} isAdmin={isAdmin} />} />
             <Route path="/adminlogin" element={<AdminLogin/>}/>
+            <Route path="/AboutUs" element={<AboutUs/>}isAdmin={isAdmin} />
+
           </Routes>
        </div>
+       <Footer /> {Footer}
       </BrowserRouter>
     </CompanyProvider>
   </UserProvider>
+  </div>
   )
 }
 
