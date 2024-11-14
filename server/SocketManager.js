@@ -1,6 +1,8 @@
 
 let io;
 
+let userSocketMap = {}
+
 const setSocketIO = (socketIOInstance) => {
   io = socketIOInstance;
 };
@@ -20,4 +22,4 @@ const broadcastMessage = (roomId, message) => {
   io.to(roomId).emit('receiveMessage', message);
 };
 
-module.exports = { setSocketIO, emitNotification, broadcastMessage };
+module.exports = { setSocketIO, emitNotification, broadcastMessage, userSocketMap };

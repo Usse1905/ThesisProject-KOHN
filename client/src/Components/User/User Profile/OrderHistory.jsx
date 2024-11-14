@@ -1,11 +1,33 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import moment from 'moment';
+import axios from 'axios';
+import { useSocket } from '../../../SocketProvider';
+import { useUser } from '../../../UserProvider';
 import DirectionsMap from './DirectionsMap';
 
 
-const OrderHistory = ({  userreqs, handleCancelRequest, handleReorderRequest }) => (
+const OrderHistory = ({  userreqs, handleGetreq }) => {
 
-    <div>
+  const {socket} = useSocket()
+  const {user} = useUser()
+
+
+  const handleStatusChange = async (requestId, newStatus) => {
+    try {
+      const response = await axios.put(`http://localhost:8080/api/updaterequest/${requestId}`, {
+        status: newStatus,
+      });
+      await handleGetreq()
+      console.log('Request status updated:', response.data);
+
+    } catch (error) {
+      console.error('Error updating request status:', error);
+    }
+  };  
+
+
+   return <div>
         {userreqs.map((rq, i) => {
   console.log('Request Data:', rq);
   return (
@@ -18,9 +40,9 @@ const OrderHistory = ({  userreqs, handleCancelRequest, handleReorderRequest }) 
       <p className='request-dates'>Vehicle will be picked up on {moment(rq.pickupDate).format('LL')} and returned on {moment(rq.returnDate).format('LL')}</p>
       <p className='request-price'>Total price: <strong>{rq.totalPrice} DT</strong></p>
       {rq.status === "Pending" ? 
-          <button onClick={() => handleCancelRequest(rq.id)}>Cancel Request</button> : 
+          <button onClick={() => handleStatusChange(rq.id,"Canceled")}>Cancel Request</button> : 
           rq.status === "Canceled" ? 
-          <button onClick={() => handleReorderRequest(rq.id)}>Reorder</button> : 
+          <button onClick={() => handleStatusChange(rq.id,"Pending")}>Reorder</button> : 
           rq.status === "Confirmed" ? 
           (
             <>
@@ -36,6 +58,6 @@ const OrderHistory = ({  userreqs, handleCancelRequest, handleReorderRequest }) 
 })}
 
     </div>
-);
+}
 
 export default OrderHistory;
