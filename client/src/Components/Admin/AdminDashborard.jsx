@@ -1,4 +1,4 @@
-
+// src/components/AdminDashboard.js
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import "../../ComponentsCss/Admin/AdminDashboard.css"; 
@@ -9,7 +9,7 @@ const AdminDashboard = () => {
   const [error, setError] = useState(null);
   const [hasNewSignups, setHasNewSignups] = useState(false);
 
- 
+  // Fetch unapproved companies
   const fetchUnapprovedCompanies = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
@@ -30,7 +30,7 @@ const AdminDashboard = () => {
     }
   }, []);
 
-
+  // Mark notifications as seen
   const markNotificationsAsSeen = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -47,7 +47,7 @@ const AdminDashboard = () => {
     }
   };
 
-  
+  // Fetch car listings
   const fetchCars = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
@@ -64,7 +64,7 @@ const AdminDashboard = () => {
     }
   }, []);
 
-  
+  // Approve a company
   const approveCompany = async (companyId) => {
     try {
       const token = localStorage.getItem('token');
@@ -74,14 +74,14 @@ const AdminDashboard = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      fetchUnapprovedCompanies(); 
+      fetchUnapprovedCompanies(); // Refresh the list
     } catch (error) {
       console.error('Error approving company:', error);
       setError('Failed to approve the company.');
     }
   };
 
-
+  // Delete a car
   const deleteCar = async (carId) => {
     try {
       const token = localStorage.getItem('token');
@@ -91,14 +91,14 @@ const AdminDashboard = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      fetchCars(); 
+      fetchCars(); // Refresh the list
     } catch (error) {
       console.error('Error deleting car:', error);
       setError('Failed to delete car.');
     }
   };
 
-  
+  // Initial data fetch on mount
   useEffect(() => {
     fetchUnapprovedCompanies();
     fetchCars();
@@ -110,7 +110,7 @@ const AdminDashboard = () => {
 
       {error && <p className="error-message">{error}</p>}
 
-      
+      {/* Notification Message for New Signups */}
       {hasNewSignups && (
         <p className="notification">
           New company signup requests pending approval!
@@ -145,30 +145,20 @@ const AdminDashboard = () => {
       </section>
 
       <section>
-  <h2>Car Listings</h2>
-  {cars.length > 0 ? (
-    <ul className="car-list">
-      {cars.map((car) => (
-        <li key={car.id} className="car-item">
-          <img src={car.image} alt={`${car.Name}`} className="car-image" />
-          <div className="car-details">
-            <h3>{car.Name}</h3>
-            <p><strong>Price:</strong> ${car.price}</p>
-            <p><strong>Type:</strong> {car.carType}</p>
-            <p><strong>Mileage:</strong> {car.mileage} km</p>
-            <p><strong>Year:</strong> {car.year}</p>
-            <p><strong>Shift:</strong> {car.shift}</p>
-            <p><strong>AC:</strong> {car.ac}</p>
-            <p><strong>Location:</strong> {car.location}</p>
-          </div>
-          <button className="delete-button" onClick={() => deleteCar(car.id)}>Delete</button>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p>No car listings found.</p>
-  )}
-</section>
+        <h2>Car Listings</h2>
+        {cars.length > 0 ? (
+          <ul className="car-list">
+            {cars.map((car) => (
+              <li key={car.id} className="car-item">
+                <span>{car.Name} ({car.year}) - ${car.price} - {car.carType} - Mileage: {car.mileage} km</span>
+                <button className="delete-button" onClick={() => deleteCar(car.id)}>Delete</button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No car listings found.</p>
+        )}
+      </section>
     </div>
   );
 };
