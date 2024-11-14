@@ -1,15 +1,15 @@
 
 
-body, html {
+/* body, html {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
   overflow:visible;
-}
+} */
 
 .about-us {
-  background-image: url('https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2022/09/23074716/sports-vs-supercars-cover-230920221250.jpg');
+  /* background-image: url('https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2022/09/23074716/sports-vs-supercars-cover-230920221250.jpg'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

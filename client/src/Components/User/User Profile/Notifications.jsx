@@ -12,7 +12,7 @@ const getStatusColor = (status) => {
     case 'confirmed':
       return 'confirmed-status';
     default:
-      return ''; // Default to no additional class
+      return ''; 
   }
 };
 
@@ -29,35 +29,45 @@ const getStatusIcon = (status) => {
   }
 };
 
-const Notifications = ({ userreqs }) => (
-  <div className="notifications-container">
-    {userreqs.map((rq, index) => (
-      <div className="notification-item" key={index}>
-        
-        {rq.statusHistory && rq.statusHistory.length > 0 ? (
-          rq.statusHistory.map((notf, i) => (
-            <div key={i} className="notification-text-container">
-              {getStatusIcon(notf.newStatus)}<p className={`notification-text ${getStatusColor(notf.newStatus)}`}>
-                Your Request {rq.requestNumber} has been Changed from 
-                <span className="old-status"> {notf.oldStatus}</span> to 
-                <span className="new-status"> {notf.newStatus}</span>
-                 </p>
-                <span className="notification-time">
-                  {moment(notf.changedAt).format('LLLL')}
-                </span>
-             
-              {/* Add icon based on new status */}
-              
-            </div>
-          ))
-        ) : (
-          <p className="notification-text no-status">
-            Your Request {rq.requestNumber} has no status changes
-          </p>
-        )}
-      </div>
-    ))}
-  </div>
-);
+
+
+const Notifications = ({ userreqs }) => {
+
+  return (
+    <div className="notifications-container">
+      {userreqs.map((rq, index) => {
+        const sortedStatusHistory = rq.statusHistory?.slice().sort((a, b) => {
+          const dateA = moment(a.changedAt);
+          const dateB = moment(b.changedAt);
+          
+          return dateB.isBefore(dateA) ? -1 : 1; 
+        });
+
+        return (
+          <div className="notification-item" key={index}>
+            {sortedStatusHistory && sortedStatusHistory.length > 0 ? (
+              sortedStatusHistory.map((notf, i) => (
+                <div key={i} className="notification-text-container">
+                  <p className={`notification-text ${getStatusColor(notf.newStatus)}`}>
+                    {getStatusIcon(notf.newStatus)}Your Request {rq.requestNumber} has been Changed from 
+                    <span className="old-status"> {notf.oldStatus}</span> to 
+                    <span className="new-status"> {notf.newStatus}</span>
+                  </p>
+                  <span className="notification-time">
+                    {moment(notf.changedAt).format('LLLL')}
+                  </span>
+                </div>
+              ))
+            ) : (
+              <p className="notification-text no-status">
+                Your Request {rq.requestNumber} has no status changes
+              </p>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default Notifications;

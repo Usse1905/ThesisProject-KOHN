@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 const UserContext = createContext();
 
@@ -7,9 +7,6 @@ export const UserProvider = ({ children }) => {
         const savedUser = localStorage.getItem('user');
         return savedUser ? JSON.parse(savedUser) : null;
     });
-    
-    const [notificationCount, setNotificationCount] = useState(0);
-    const [notifications, setNotifications] = useState([]);
 
     const getRequests = async () => {
         try {
@@ -25,28 +22,8 @@ export const UserProvider = ({ children }) => {
         setUser(updatedUser);
     };
 
-    const updateNotifications = (count) => {
-        setNotificationCount(count);
-      };
-    
-      const updateNotificationsList = (newNotifications) => {
-        setNotifications(newNotifications);
-      };
-
-    // Update localStorage when user or notificationCount changes
-    useEffect(() => {
-        if (user) {
-            localStorage.setItem('user', JSON.stringify(user));
-        } else {
-            localStorage.removeItem('user');
-        }
-    }, [user]);
-
     return (
-        <UserContext.Provider value={{ user, setUser, updateUserContext, notificationCount,
-            notifications,
-            updateNotifications,
-            updateNotificationsList }}>
+        <UserContext.Provider value={{ user, setUser, updateUserContext }}>
             {children}
         </UserContext.Provider>
     );
