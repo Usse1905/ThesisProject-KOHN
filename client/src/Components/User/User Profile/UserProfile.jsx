@@ -24,7 +24,6 @@ const UserProfile = () => {
     const [imageFile, setImageFile] = useState(null);  // Track selected image
     const [messages, setMessages] = useState([]);
 
-    // Function to fetch requests for the user (moved out of useEffect)
     const handleGetreq = async () => {
         try {
             const response = await axios.get(`http://localhost:8080/api/oneuserreqs/${user.id}`);
@@ -60,8 +59,8 @@ const UserProfile = () => {
     const uploadImageToServer = async (file) => {
         const formData = new FormData();
         formData.append('file', file);
-        const response = await axios.post('http://localhost:8080/api/upload', formData); // Your backend upload URL
-        return response.data.url; // URL of the uploaded image
+        const response = await axios.post('http://localhost:8080/api/upload', formData); 
+        return response.data.url; 
     };
 
     const handleUpdateImage = async () => {
@@ -96,34 +95,11 @@ const UserProfile = () => {
         }
     };
 
-    const handleCancelRequest = async (requestId) => {
-        try {
-            const response = await axios.put(`http://localhost:8080/api/updaterequest/${requestId}`, {
-                status: "Canceled"
-            });
-            await handleGetreq();  // Refresh the requests after update
-            console.log('Request updated successfully:', response.data);
-        } catch (error) {
-            console.error('Error updating request:', error);
-        }
-    };
-
-    const handleReorderRequest = async (requestId) => {
-        try {
-            const response = await axios.put(`http://localhost:8080/api/updaterequest/${requestId}`, {
-                status: "Pending"
-            });
-            await handleGetreq();  // Refresh the requests after reorder
-            console.log('Request updated successfully:', response.data);
-        } catch (error) {
-            console.error('Error updating request:', error);
-        }
-    };
 
     const renderContent = () => {
         switch (selectedTab) {
             case 'OrderHistory':
-                return <OrderHistory userreqs={userreqs} handleCancelRequest={handleCancelRequest} handleReorderRequest={handleReorderRequest} />;
+                return <OrderHistory userreqs={userreqs} handleGetreq={handleGetreq}/>;
             case 'Notifications':
                 return <Notifications userreqs={userreqs} />;
             case 'Messages':
@@ -140,7 +116,7 @@ const UserProfile = () => {
 
     useEffect(() => {
         handleGetreq(); // Initial fetch when component mounts
-    }, [user.id]);  // Dependencies: runs again if user.id changes
+    }, [user.id]);  
 
     return (
         <div className="dashboard">
@@ -161,9 +137,9 @@ const UserProfile = () => {
                                 style={{ display: 'none' }}  // Hide the file input
                             />
                             <ImagePlus
-                                onClick={() => fileInputRef.current.click()} // Trigger the file input click event
+                                onClick={() => fileInputRef.current.click()} 
                                 size={24}
-                                style={{ cursor: 'pointer' }}  // Style it to look clickable
+                                style={{ cursor: 'pointer' }}  
                             />
                             {imageFile && <ImageDown onClick={handleUpdateImage} />}
                         </div>

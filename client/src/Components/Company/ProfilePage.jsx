@@ -1,79 +1,92 @@
-import React, { useState,useEffect } from 'react'
-import axios from "axios"
+
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+// import Swal from 'sweetalert2';
+import "./companyProfile.css"; 
+import { Link } from 'react-router-dom';
 
 const ProfilePage = () => {
-  const[cars,setCars]=useState([])
-  const [companies,setCompanies]=useState([])
-  const[selectedCompagnieId,setSelectedCompagnieId]=useState(null)
-  useEffect(()=>{
-    const callListCars=async()=>{
-      try{
-        const res=await axios.get("http://localhost:8080/cars/allcars")
-      // console.log(cars)
-      setCars(res.data)
-      }catch(error){
-        console.log(error);
-        
-      }
-    }
+  const navigate = useNavigate();
+  const { id } = useParams(); 
+  const [company, setCompany] = useState(null); 
+  const [cars, setCars] = useState([]); 
 
-    const callListCompanies=async()=>{
-      try{
-        const res= await axios.get("http://localhost:8080/company/getAllCompanies")
-        // console.log(companies);
-        
-      setCompanies(res.data)
-      }catch(error){
+  useEffect(() => {
+    const callListCompanies = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/company/getOneCompany/${id}`);
+        setCompany(res.data); 
+        console.log(res);
+      } catch (error) {
         console.log(error);
-        
       }
     };
 
-    callListCars();
+    const callListCars = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/cars/allcars");
+        const filteredCars = res.data.filter(car => car.companyId === Number(id));
+        setCars(filteredCars); 
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     callListCompanies();
+    callListCars();
+  }, [id]); 
 
-  },[])
+  const duplicatedCars = [...cars, ...cars]; 
 
-  const handeldelete=async(id)=>{
-    try{
-
-      await axios.delete("http://localhost:8080/cars/deleteCar/"+id)
-      window.location.reload()
-    }catch(error){
+  const handleDelete = async (id) => {
+    try {
+      const cars = await axios.delete(`http://localhost:8080/cars/deleteCar/${id}`);
+      setCars(cars => cars.filter(car => car.id !==Number(id))); 
+      Swal.fire('Succès', 'Car deleted', 'success');
+      console.log(cars);
+    } catch (error) {
+      Swal.fire('Erreur', 'An error occurred', 'error');
       console.log(error);
-      
     }
+  };
+
+  if (!company) {
+    return <p>Loading Company...</p>;
   }
-  const filteredCars=selectedCompagnieId
-  ?cars.filter(car=> car.companyId===selectedCompagnieId):cars;
+
   
-   return (
-    <div>
-      <h1>ProfilePage</h1>
-      <select onChange={(e)=> setSelectedCompagnieId(Number(e.target.value))}>
-        <option value="">Select company</option>
-        {companies.map((element)=>(
-          <option key={element.id} value={element.id}>{element.name}</option>
-          
-        ))}
-        
-      </select>
-
-      <div>
-      {filteredCars.map((element,key)=>{
-      return(
-          <div className='carComp' key={element.id}>
-            <h2>{element.Name}</h2>
-            <p>{element.price}TND</p>
-            <img src={element.image} alt={element.Name}/>
-            <button className="deleteCarCompagnie" onClick={()=>handeldelete(element.id)}>Delete</button>
-            {/* <button className="updateCarCompagnie" onClick={handelClick}> Update</button> */}
-          </div> )
-      })}
+  
+  return (
+    <div className="profile-page">
+      <h1 className="companyDetail">{company.name}</h1>
+      <p className="companyDetail"><strong>Address :</strong> {company.address}</p>
+      <p className="companyDetail"><strong>Phone :</strong> {company.phoneNumber}</p>
+      <p className="companyDetail"><strong>Website:</strong> {company.website}</p>
+      <p className="companyDetail"><strong>Email:</strong> {company.email}</p>
+      
+      <h2>Car List</h2>
+      <div className="carbycomp">
+        {duplicatedCars.length === 0 ? (
+          <p>No cars found for this company.</p>
+        ) : (
+          <div className="cars-list">
+            {duplicatedCars.map((car) => (
+              <div key={car.id} className="car-item">
+                <h3>{car.Name}</h3>
+                <p><strong>Price :</strong> {car.price} TND</p>
+                <img src={car.image} alt={car.Name} />
+                <button className="deleteCarButton" onClick={() => handleDelete(car.id)}>
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <button className='addNewCar'><Link to="/Company/AddCar"> Add a new Car</Link></button>
     </div>
-    
-    </div>
-  )
-}
+  );
+};
 
-export default ProfilePage
+export default ProfilePage;

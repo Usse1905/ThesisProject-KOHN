@@ -1,0 +1,52 @@
+/* General Styles for Tabs */
+.tabs {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: start;
+    margin: 20px 0;
+}
+
+.tab {
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border-radius: 5px 5px 0 0;
+}
+
+.tab:hover {
+    background-color: #f0f0f0;
+}
+
+.tab.active {
+    background-color:goldenrod;
+    color: white;
+}
+
+.company-info, .company-cars {
+    padding: 20px;
+}
+
+.cars-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.car-card {
+    width: 200px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.car-card h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.car-card p {
+    margin: 5px 0;
+}

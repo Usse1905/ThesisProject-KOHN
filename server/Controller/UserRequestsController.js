@@ -1,5 +1,6 @@
-const { emitNotification } = require("../SocketManager.js");
+
 const { where } = require("sequelize");
+const {userSocketMap} = require('../SocketManager.js');
 const projectdb = require("../database/indexDb.js");
 const Users = require("../Model/ModelUsers.js")
 const Companies = require("../Model/ModelCompanies.js")
@@ -83,7 +84,7 @@ module.exports = {
             const id = req.params.id;
         
             const previousRequest = await projectdb.UserRequests.findByPk(id);
-            console.log("previous request is ", previousRequest);
+            // console.log("Previous request is ", previousRequest);
         
             // Update the request
             const [updatedRows] = await projectdb.UserRequests.update(body, {
@@ -94,7 +95,7 @@ module.exports = {
               ]
             });
         
-            console.log("these are update rows", updatedRows);
+            // console.log("These are update rows", updatedRows);
         
             if (updatedRows === 0) {
               return res.status(404).json({ message: "Request Not Found!" });
@@ -104,34 +105,46 @@ module.exports = {
             if (previousRequest && previousRequest.status !== body.status) {
               previousRequest.statusHistory = previousRequest.statusHistory || [];
               previousRequest.statusHistory.push({
-                  oldStatus: previousRequest.status,
-                  newStatus: body.status,
-                  changedAt: new Date(),
+                oldStatus: previousRequest.status,
+                newStatus: body.status,
+                changedAt: new Date(),
               });
         
               // Update the request with the new status history
-              await previousRequest.save(); // This should persist the changes to the DB
+              await previousRequest.save(); // Persist status history changes in the DB
+        
+              // Update the status history column for the request
               await projectdb.UserRequests.update(
                 { statusHistory: previousRequest.statusHistory },
                 { where: { id },
-                include: [
-                  { model: projectdb.Users, as: 'User' },
-                  { model: projectdb.Companies, as: 'Company' }
-              ] }
-            );
-            console.log("Status history saved successfully.");
-
-              // Emit the notification to the user using socketManager
-              const userId = previousRequest.userId;
-              console.log("Emitting notification for user:", userId);
-              emitNotification(userId, 1); // Send the count of status history
-            } else {
-              console.log("No status change detected.");
+                  include: [
+                    { model: projectdb.Users, as: 'User' },
+                    { model: projectdb.Companies, as: 'Company' }
+                  ] }
+              );
+              console.log("Status history saved successfully.")
             }
+
+            const user = await projectdb.Users.findByPk(previousRequest.userId); 
+
+            const userSocketId = userSocketMap[user.id]
+            console.log("this is the user socket object ",userSocketId);
+            
+
+            if (user && userSocketId) {
+              req.io.emit('newNotification', {
+                message: `Your request has been updated.`,
+                userId: user.id,
+                timestamp: new Date(),
+              });
+
+      console.log('Notification emitted to user:', user.id);
+    }
+            
         
             // Retrieve the updated request and send it as the response
             const updatedRequest = await projectdb.UserRequests.findOne({ where: { id } });
-            console.log("Updated request:", updatedRequest);
+            // console.log("Updated request:", updatedRequest);
         
             res.status(200).json(updatedRequest);
           } catch (error) {
@@ -139,6 +152,7 @@ module.exports = {
             res.status(500).send(error.message);
           }
         },
+        
         deleteReq : async (req, res) => {
               try {
                 const reqId = req.params.id;
