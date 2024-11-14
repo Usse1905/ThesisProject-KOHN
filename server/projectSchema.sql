@@ -14,15 +14,15 @@ INSERT INTO Users (userName, email, password,dateOfBirth,dateOfLicense,role) VAL
 ('Liam White', 'liam.white@example.com', 'password11',1995,2021,"user"),
 ('Ava Thompson', 'ava.thompson@example.com', 'password12',1996,2023,"user");
 
-
-INSERT INTO Admins (userName, email, password) VALUES
+source 
+INSERT INTO admins (userName, email, password) VALUES
 ('Oussema Karoui', 'oussema.karoui@example.com', 'passwordouss'),
 ('Hadda jaouabi', 'hadda.jaouabi@example.com', 'passwordhadda'),
 ('Khouloud Trabelsi', 'khouloud.trabelsioe@example.com', 'passwordkhou'),
 ('Nourhen Abdellaoui', 'nourhen.abdellaoui@example.com', 'passwordnour');
 
 
-INSERT INTO Cars (Name,image, price, carType, mileage, year, shift, ac , companyId, userId) VALUES
+INSERT INTO cars (Name,image, price, carType, mileage, year, shift, ac , companyId, userId) VALUES
 ('Hyundai Grand i10','https://catalogue.automobile.tn/big/2023/12/46462.webp?t=1',90,'Compact',50,2020,'Manual','Air Conditionner',1,1),
 ('Kia Picanto','https://catalogue.automobile.tn/big/2024/08/47191.webp?t=1',100,'Compact',50,2020,'Automatic','Air Conditionner',1,1),
 ('Hyundai Grand i20',"https://imgd.aeplcdn.com/664x374/n/cw/ec/150603/i20-exterior-right-front-three-quarter-7.jpeg?isig=0&q=80",80,'Compact',50,2020,'Automatic','Air Conditionner',2,2),

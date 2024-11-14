@@ -1,72 +1,49 @@
-
-
-/* .bodyForm {
-    background-color: white;
-
+.bodyForm {
+    background-color:white;
     text-align: center;
     width: 450px;
-} */
-/* src/App.css or any other component-specific CSS file */
+}
 
-/* Apply background to the entire app container */
-html, body {
-    height: 100%;
-    margin: 0;
-    background-image: url('../background.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-  }
-  
-  .app-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .app-container {
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    flex-grow: 1;
-  }
-  
 .image-car{
     flex: 1;
     padding: 20px;
     width: 100%;
+    max-width: 250px; 
     height: auto;
-    width: 300px;
     border-radius: 8px;
-
-}
-
-/*  */
-
-.containerCar {
-    background-color: black;
-    padding: 10px 20px;
-    width: 500px;
-    text-align: center;
-    margin: auto;
-    margin-top: 20px;
-    transition: transform 0.2s;
-    border-radius: 15px;
-    box-shadow: 0 0 20px;
-}
-
-.detailCar {
-    font-size: x-large;
-    text-align: center;
-    color: yellow;
-}
-
-
-.label-car {
-    font-size: 15px;
-    display: block;
+  }
+  
+  
+  .input-propCar {
+    width: 330px; 
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 4px;
+    background-color: #333;
+    color: #ffc107;
+    margin-bottom: 10px; 
+  }
+  
+  
+  .addCar {
     width: 100%;
-    margin-top: 8px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffc107;
+    color: #1b1b1b;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .addCar:hover {
+    background-color: #80a674;
+  }
+  
+  
+  .label-car {
+    color: #ffc107;
+    display: block;
     margin-bottom: 5px;
     text-align: left;
     font-weight: bold;

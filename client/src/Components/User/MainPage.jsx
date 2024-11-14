@@ -23,7 +23,6 @@ const navigate = useNavigate()
   useEffect(()=>{
     axios.get(`http://localhost:8080/company/getAllCompanies`)
         .then((response)=>{
-            console.log("data is ", response.data)
             setCompanyData(response.data)
         })
         .catch((error)=>{
@@ -34,7 +33,7 @@ const navigate = useNavigate()
 useEffect(()=>{
     axios.get(`http://localhost:8080/cars/allcars`)
         .then((response)=>{
-            console.log("company data is ", response.data)
+
             setData(response.data)
         })
         .catch((error)=>{

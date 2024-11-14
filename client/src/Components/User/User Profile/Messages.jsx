@@ -4,11 +4,7 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import '../../../ComponentsCss/User/Messages.css'; 
 
-// Initialize Socket.IO client
-;
-
-// Fixed room ID for the global chat room
-const GLOBAL_ROOM_ID = 'global-chat-room';  // You can choose any string for the global room
+const GLOBAL_ROOM_ID = 'global-chat-room';  
 
 const Messages = ({ messages, setMessages, currentUserId }) => {
     

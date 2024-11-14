@@ -13,7 +13,9 @@ const AdminRoutes = require("./Routes/AdminRoutes.js");
 const UserReqRoutes = require("./Routes/UserRequestsRoutes.js");
 const uploadRoutes = require("./Routes/UploadRoutes.js");
 const messageRoutes = require("./Routes/MessagesRoutes.js");
-const { setSocketIO,broadcastMessage  } = require("../server/SocketManager.js");
+const { setSocketIO,broadcastMessage, userSocketMap  } = require("../server/SocketManager.js");
+const { log } = require("console");
+
 
 const app = express();
 const PORT = 8080;
@@ -22,11 +24,26 @@ app.use(express.json())
 app.use(cors({
   origin: "http://localhost:5173", // Allow your React app's origin
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: [ "Content Type" ,"X-Auth-Token"],  
+  allowedHeaders: [ 'Content-Type', 'Authorization', 'X-Requested-With'],  
   credentials: true,  // Allow credentials (cookies, etc.)
 }));
 app.options('*', cors()); 
 
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: "http://localhost:5173", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  },
+});
+
+  setSocketIO(io);
+
+  app.use((req, res, next) => {
+    req.io = io;  // Attach `io` to the `req` object
+    next();  // Pass to the next middleware or route handler
+  });
 
 app.use("/cars", CarRoutes);
 app.use("/company", CompanyRoutes);
@@ -38,21 +55,10 @@ app.use("/api", uploadRoutes);
 app.use("/chat", messageRoutes);
 app.use(express.static(__dirname + '../react-client/indexFront.jsx')); // Adjust this path as needed
 
-const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-    origin: "http://localhost:5173", 
-    credentials: true,
-  },
-});
 
-  setSocketIO(io);
 
   io.use((socket, next) => {
-    console.log('Socket handshake:', socket.handshake);  // Log the entire handshake object
-  
-    const token = socket.handshake.extraHeaders ? socket.handshake.extraHeaders['X-Auth-Token'] : undefined;
-    console.log('Received token:', token);  // Log the token specifically
+    const token = socket.handshake.query.token;  // Get token from query parameters
   
     if (!token) {
       console.error('No token found');
@@ -68,15 +74,20 @@ const io = socketIo(server, {
     });
   });
   
-
   io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
+
+    socket.on('registerUser', (userId) => {
+      userSocketMap[userId] = {userId:socket.id}; // Store the socket ID for this user
+      console.log(`User ${userId} registered with socket ID: ${socket.id}`);
+    });
 
     // Join the global chat room
     socket.on('joinRoom', ({ userId }) => {
         socket.join('global-chat-room');  // Join the global room
         console.log(`User ${userId} joined the global chat room.`);
     });
+
 
     // Listen for new messages and broadcast them
     socket.on('sendMessage', async ({ userId, content }) => {
@@ -98,8 +109,15 @@ const io = socketIo(server, {
         }
     });
 
-    socket.on('disconnect', (reason) => {
-      console.log('A user disconnected. Reason:', reason);
+    socket.on('disconnect', () => {
+      // Remove the user's socket ID when they disconnect
+      for (const userId in userSocketMap) {
+        if (userSocketMap[userId] === socket.id) {
+          console.log(`User ${userId} disconnected`);
+          delete userSocketMap[userId];
+          break;
+        }
+      }
     });
   
     socket.on('error', (error) => {
@@ -112,4 +130,4 @@ server.listen(PORT, () => {
     console.log(`Server listening at http://localhost:${PORT}`);
 });
 
-module.exports = { io };
+module.exports = { io, userSocketMap };

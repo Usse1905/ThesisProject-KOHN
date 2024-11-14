@@ -6,9 +6,9 @@ import './index.css'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <SocketProvider>
     <App />
     </SocketProvider>
-  </React.StrictMode>,
+  //  </React.StrictMode>,
 )
