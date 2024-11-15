@@ -1,0 +1,79 @@
+/* Main container for the Companies list */
+.companies {
+    font-family: sans-serif;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
+    gap: 20px; /* Spacing between cards */
+    padding: 20px; /* Padding around the grid */
+     /* Soft background color */
+  }
+  
+  /* Each company card */
+  .company-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Card style */
+  .company {
+    background-color: goldenrod; /* White background for the card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Ensures no content spills outside the rounded corners */
+    width: 100%;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .company:hover {
+    transform: translateY(-5px); /* Subtle lift on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+  }
+  
+  /* Header inside the card */
+  .namehead-company h1 {
+    font-size: 1.6rem;
+    color: #333; /* Dark text for readability */
+    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: capitalize;
+  }
+  
+  /* Specs and details inside the card */
+  .other-specs-company p {
+    font-size: 1rem;
+    color: black; /* Lighter gray text for less important info */
+    margin: 5px 0;
+    line-height: 1.6;
+  }
+  
+  /* Accent color for links or buttons (optional) */
+  .company p a {
+    color: #007BFF; /* Link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .company p a:hover {
+    color: #0056b3; /* Darker blue when hovering over links */
+  }
+  
+  /* Special Styles for address, phone, website, etc. */
+  .other-specs-company p:nth-child(1),
+  .other-specs-company p:nth-child(2) {
+    font-weight: 500;
+  }
+  
+  /* Styling for the address, website, and phone number */
+  .other-specs-company p {
+    font-size: 0.9rem;
+    color: black;
+  }
+  
+  .other-specs-company p strong {
+    font-weight: bold;
+  }
+  
+  

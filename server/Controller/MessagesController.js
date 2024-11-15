@@ -1,15 +1,16 @@
 const Message = require("../Model/ModelMessages.js");
 const projectdb = require("../database/indexDb.js");
+const {broadcastMessage} = require("../SocketManager.js")
 
 const GLOBAL_ROOM_ID = 'global-chat-room';  // Fixed room ID for the global chat
 
 module.exports = {
     // Controller - saveMessage
     saveMessage: async (req, res) => {
-        const { userId, content } = req.body;  // Removed companyId, using global room
+        const { userId, companyId, content } = req.body;  // Removed companyId, using global room
 
         // Basic validation
-        if (!userId || !content) {
+        if (!userId || !content || !companyId) {
             return res.status(400).json({ message: 'User ID and content are required' });
         }
 
@@ -17,18 +18,19 @@ module.exports = {
             // Save the message to the database, using the global room ID
             const message = await projectdb.Message.create({
                 userId, 
+                companyId,
                 content, 
                 roomId: GLOBAL_ROOM_ID  // Use the global room ID
             });
 
             // Emit message to the global room using Socket.IO
             // Assume broadcastMessage is a function you export from SocketManager.js
-            broadcastMessage(GLOBAL_ROOM_ID, {
-                userId,
-                content,
-                roomId: GLOBAL_ROOM_ID,
-                timestamp: new Date().toISOString(),
-            });
+            // broadcastMessage(GLOBAL_ROOM_ID, {
+            //     userId,
+            //     content,
+            //     roomId: GLOBAL_ROOM_ID,
+            //     timestamp: new Date().toISOString(),
+            // });
 
             // Respond with the saved message
             res.status(201).json(message);

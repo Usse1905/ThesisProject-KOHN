@@ -10,13 +10,12 @@ const projectdb = require('../database/indexDb.js');
 
 module.exports = {
 
-     //Signup
      signup : async (req, res) => {
         const { userName, password, email,cin,dateOfBirth,dateOfLicense,role } = req.body;
        const hashedPassword = await bcrypt.hash(password, 10);
 
        try {
-           const user = await projectdb.Users.create({ userName, password: hashedPassword, email,cin,dateOfBirth,dateOfLicense, joined : new Date(),role });
+           const user = await projectdb.Users.create({ userName, password: hashedPassword, email, cin,dateOfBirth,dateOfLicense, joined : new Date(),role });
 
           res.status(201).json({ message: 'User created', user });
        } catch (error) {

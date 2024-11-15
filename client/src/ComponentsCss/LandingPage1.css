@@ -1,0 +1,172 @@
+/* Landing Page Styles */
+
+.landing-body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    transition: transform 0.3s ease;
+}
+
+/* Top Half Layout */
+.top-half {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.left-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.right-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: transparent;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.section:hover {
+    background: #333;
+    color: #fff;
+    transform: translateY(-10px);
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.section p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: goldenrod;
+}
+
+.section button {
+    background-color: goldenrod;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.section button:hover {
+    background-color: #1976d2;
+    transform: scale(1.05);
+}
+
+/* Bottom Half Layout */
+.bottom-half {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom-half .left-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-half .right-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Same section styling for bottom half */
+.bottom-half .section {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Keyframes for animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.landing-container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.section h2 {
+    animation: fadeIn 1s ease-out;
+}
+
+.section button {
+    animation: fadeIn 1.3s ease-out;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .top-half, .bottom-half {
+        flex-direction: column;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .landing-image {
+        width: 100%;
+    }
+
+    .landing-container {
+        padding: 20px;
+    }
+}

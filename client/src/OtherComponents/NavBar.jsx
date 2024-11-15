@@ -8,16 +8,20 @@ import Mylogo from "../../../client/logo.png";
 import "../ComponentsCss/OtherComponentsCss/NavBar.css";
 
 const NavBar = () => {
-  const { socket, markAllNotificationsAsRead, notificationCount,setNotificationCount } = useSocket();  
+  const { socket, markAllNotificationsAsRead, notificationCount,setNotificationCount, messageCount, setMessageCount, markMessagesAsRead } = useSocket();  
   const { user } = useUser();
   const { company } = useCompany();
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleStorageChange = () => {
-      const storedCount = localStorage.getItem("notificationCount");
-      if (storedCount !== null) {
-        setNotificationCount(parseInt(storedCount, 10)); // Update state from localStorage
+      const storedCountn = localStorage.getItem("notificationCount");
+      const storedCountm = localStorage.getItem("messageCount");
+      if (storedCountn !== null) {
+        setNotificationCount(parseInt(storedCountn, 10)); // Update state from localStorage
+      }
+      if (storedCountm !== null) {
+        setMessageCount(parseInt(storedCountm, 10)); // Update state from localStorage
       }
     };
 
@@ -34,15 +38,20 @@ const NavBar = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('company');
-    localStorage.setItem("notificationCount", "0");
+    // localStorage.setItem("notificationCount", "0");
     navigate('/login');
   };
 
   const handleBellClick = () => {
-    // Mark all notifications as read by clearing the notification count in localStorage
     localStorage.setItem("notificationCount", 0);
     markAllNotificationsAsRead()
-    navigate('/userprofile'); // Redirect to notifications page
+    navigate('/userprofile'); 
+  };
+
+  const handleMessageClick = () => {
+    localStorage.setItem("messageCount", 0);
+    markMessagesAsRead()
+    navigate('/userprofile'); 
   };
 
   return (
@@ -76,7 +85,13 @@ const NavBar = () => {
                 <span className="notification-badge">{notificationCount}</span> 
               )}
             </div>
-            <MessageCircle size={30} />
+            <div className="message-container" onClick={handleMessageClick} style={{backgroundColor:"#333"
+            }}>
+              <MessageCircle size={30} />
+              {messageCount > 0 && (
+                <span className="message-badge" >{messageCount}</span> 
+              )}
+            </div>
           </div>
           
           <div className="logout-container" onClick={handleLogout}>
@@ -86,7 +101,7 @@ const NavBar = () => {
         </div>
       ) : company ? (
         <div className="company-avatar">
-          <div className="company-name" onClick={() => navigate("/companyprofile")}>
+          <div className="company-name" onClick={() => navigate("/Company/Profile")}>
             {company.name}
           </div>
           <div className="logout-container" onClick={handleLogout}>

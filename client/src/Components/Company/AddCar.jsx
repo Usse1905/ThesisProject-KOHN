@@ -1,5 +1,6 @@
 import {React,useState} from 'react'
 import { useNavigate} from 'react-router-dom'
+import { useCompany } from '../../CompanyProvider'
 import axios from "axios"
 import "../../../src/App.css"
 const AddCar=()=>{
@@ -12,6 +13,7 @@ const AddCar=()=>{
   const[year,setYear]=useState("");
   const[shift,setShift]=useState("");
   const[ac,setAc]=useState("");
+  const {company} = useCompany()
   // const[companyId,setCompanyId]=useState("");
   // const [loading, setLoading] = useState(false); // Loading state for image upload
   // const [formLoading, setFormLoading] = useState(false); // Loading state for form submission
@@ -31,6 +33,8 @@ console.log("Submitting Car Data:", { Name, image, price, carType, mileage, year
 
 try{
   await axios.post("http://localhost:8080/cars/addCar",{
+    userId:1,
+    companyId: company.id,
     Name,
     image,
     price,
@@ -41,7 +45,7 @@ try{
     ac,
     
   })
-  // navigate("/")
+  navigate("/Company/Profile")
 console.log('car added succefully',res.data);
 // reseting dorm fields
     setName("")

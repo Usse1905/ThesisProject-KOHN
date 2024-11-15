@@ -53,6 +53,19 @@
     
 }
 
+.car-card{
+    background-color: white;
+}
+
+.car-image{
+    height: 200px;
+}
+
+.car-image img{
+    height: 150px;
+    width: 200px;
+}
+
 .car:hover {
     transform: scale(1.05); /* Slight zoom on hover */
     

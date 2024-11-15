@@ -27,6 +27,7 @@ const SignupCompany = () => {
       const response = await axios.post('http://localhost:8080/api/signupcompany', formData);
       alert('Signup successful');
       localStorage.setItem('token', response.data.token);
+      navigate("/login")
     } catch (error) {
   
       alert('Error during signup');

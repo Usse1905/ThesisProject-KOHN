@@ -130,7 +130,7 @@
 }
 
 /* NavBar.css */
-.notification-badge {
+.notification-badge, .message-badge {
     position: absolute;
     top: -5px;
     right: -5px;
@@ -140,11 +140,11 @@
     padding: 3px 8px;
     font-size: 12px;
 }
-.bell-container {
+.bell-container, .message-container {
     position: relative;
 }
 
-/* Notification Dropdown */
+
 .notification-dropdown {
     position: absolute;
     top: 30px; /* Adjust based on your layout */

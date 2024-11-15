@@ -8,6 +8,14 @@ module.exports = (sequelize, DataTypes) => {
                 key: 'id'
             }
         },
+        companyId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'Companies',
+                key: 'id'
+            }
+        },
         
         content: {
             type: DataTypes.TEXT,
@@ -25,7 +33,15 @@ module.exports = (sequelize, DataTypes) => {
     Message.associate = function (models) {
         Message.belongsTo(models.Users, {
             foreignKey: 'userId',
-            as: 'User',  // Associate message with a user
+            as: 'User',  
+        });
+        
+    };
+
+    Message.associate = function (models) {
+        Message.belongsTo(models.Companies, {
+            foreignKey: 'companyId',
+            as: 'Company',  
         });
         
     };

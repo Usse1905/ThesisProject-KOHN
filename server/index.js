@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require('cors');
-const http = require('http'); // Import http module
+const http = require('http'); 
 let x = require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const socketIo = require('socket.io'); // Import socket.io
+const socketIo = require('socket.io'); 
 const projectdb = require("./database/indexDb.js");
 const UserRoutes = require("./Routes/UserRoutes.js");
 const CarRoutes = require("./Routes/CarRoutes");
@@ -75,11 +75,18 @@ app.use(express.static(__dirname + '../react-client/indexFront.jsx')); // Adjust
   });
   
   io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
+    console.log('A user/company connected:', socket.id);
 
-    socket.on('registerUser', (userId) => {
-      userSocketMap[userId] = {userId:socket.id}; // Store the socket ID for this user
-      console.log(`User ${userId} registered with socket ID: ${socket.id}`);
+    socket.on('registerUser', (payload) => {
+      if (payload.userId) {
+        userSocketMap[payload.userId] = { socketId: socket.id, type: 'user' };
+        console.log(`User ${payload.userId} registered with socket ID: ${socket.id}`);
+      } else if (payload.companyId) {
+        userSocketMap[payload.companyId] = { socketId: socket.id, type: 'company' };
+        console.log(`Company ${payload.companyId} registered with socket ID: ${socket.id}`);
+      } else {
+        console.error('No userId or companyId found in registration payload');
+      }
     });
 
     // Join the global chat room
@@ -90,9 +97,10 @@ app.use(express.static(__dirname + '../react-client/indexFront.jsx')); // Adjust
 
 
     // Listen for new messages and broadcast them
-    socket.on('sendMessage', async ({ userId, content }) => {
+    socket.on('sendMessage', async ({ userId, companyId, content }) => {
         const messageData = {
             userId,
+            companyId,
             content,
             roomId: 'global-chat-room',  // Use the global room ID
             timestamp: new Date().toISOString()
