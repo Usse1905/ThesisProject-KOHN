@@ -133,14 +133,14 @@ const DirectionsMap = ({ companyAddress, userAddress }) => {
             {/* Marker for Pickup Location */}
             {pickupCoords && (
                 <Marker position={pickupCoords}>
-                    <Popup>{companyAddress}</Popup> {/* Display actual address in the popup */}
+                    <Popup>Pickup Point : {companyAddress}</Popup> {/* Display actual address in the popup */}
                 </Marker>
             )}
 
             {/* Marker for Rental Location */}
             {rentalCoords && (
                 <Marker position={rentalCoords}>
-                    <Popup>{userAddress}</Popup> {/* Display actual address in the popup */}
+                    <Popup>Your position : {userAddress}</Popup> {/* Display actual address in the popup */}
                 </Marker>
             )}
         </MapContainer>

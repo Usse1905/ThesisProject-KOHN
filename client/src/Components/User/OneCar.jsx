@@ -10,7 +10,7 @@ const OneCar = () => {
   
 
   return (
-    <div className="onecar" style={{ backgroundImage: `url(${car.image})`,
+    <div className="onecar" style={{ backgroundImage: `url(${car.image}`,
     backgroundRepeat: 'no-repeat', 
     backgroundSize: 'cover', 
     backgroundPosition: 'center'  }}>

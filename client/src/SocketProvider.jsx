@@ -8,26 +8,34 @@ export const SocketProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [notifications, setNotifications] = useState([]);  
   const [notificationCount, setNotificationCount] = useState(JSON.parse(localStorage.getItem("notificationCount")));  
+  const [messageCount, setMessageCount] = useState(JSON.parse(localStorage.getItem("messageCount")));
   const user = JSON.parse(localStorage.getItem("user")) || null;
+  const company = JSON.parse(localStorage.getItem("company")) || null;
 
   useEffect(() => {
-    if (!token || !user) {
-      console.log('No token or user available, skipping WebSocket connection');
-      return; // Skip socket initialization if no token or user
+    // Don't try to connect if no token, user, or company is available
+    if (!token || (!user && !company)) {
+      console.log('No token or user/company available, skipping WebSocket connection');
+      return;
     }
 
+    // Check if a socket connection is already established
     if (!socket) {
-      console.log('Token and user available, establishing WebSocket connection');
+      console.log('Token and user/company available, establishing WebSocket connection');
       const newSocket = io('http://localhost:8080', {
         withCredentials: true,
-        query: { token }, 
+        query: { token },
         transports: ['websocket'],
-        reconnection: false,
+        reconnection: true,
       });
 
       newSocket.on('connect', () => {
         console.log('Socket connected:', newSocket.id);
-        newSocket.emit('registerUser', user.id); // Emit user registration after socket connection
+        // Register either the user or company based on available data
+        newSocket.emit('registerUser', {
+          userId: user?.id,
+          companyId: company?.id
+        });
       });
 
       newSocket.on('disconnect', () => {
@@ -40,11 +48,22 @@ export const SocketProvider = ({ children }) => {
 
       // Listen for 'newNotification' events from the server
       newSocket.on('newNotification', (notification) => {
-        if (notification.userId === user.id) {
+        if (notification.userId === user?.id || notification.companyId === company?.id) {
           setNotifications((prevNotifications) => [...prevNotifications, notification]);
           setNotificationCount((prevCount) => {
             const updatedCount = prevCount + 1;
             localStorage.setItem('notificationCount', updatedCount.toString()); // Persist count
+            return updatedCount;
+          });
+        }
+      });
+
+      // Listen for new messages
+      newSocket.on('receiveMessage', (message) => {
+        if (message.roomId === 'global-chat-room') {
+          setMessageCount((prevCount) => {
+            const updatedCount = prevCount + 1;
+            localStorage.setItem('messageCount', updatedCount.toString()); // Persist count
             return updatedCount;
           });
         }
@@ -58,7 +77,7 @@ export const SocketProvider = ({ children }) => {
         }
       };
     }
-  }, [token, socket, user]);
+  }, [token, socket, user, company]); // Dependency array: only re-run if token, user, or company changes
 
   const updateToken = (newToken) => {
     localStorage.setItem('token', newToken);
@@ -73,12 +92,21 @@ export const SocketProvider = ({ children }) => {
     }
   };
 
+  const markMessagesAsRead = () => {
+    setMessageCount(0); 
+    localStorage.setItem("messageCount", "0");
+  };
+
   return (
     <SocketContext.Provider value={{ 
       socket, 
       updateToken, 
       notifications, 
       notificationCount, 
+      messageCount,
+      setMessageCount,
+      setNotificationCount,
+      markMessagesAsRead,
       markAllNotificationsAsRead
     }}>
       {children}

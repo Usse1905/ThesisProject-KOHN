@@ -11,6 +11,34 @@
     max-width: 250px; 
     height: auto;
     border-radius: 8px;
+
+}
+
+/*  */
+
+.containerCar {
+    background-color: #333;
+    padding: 10px 20px;
+    width: 500px;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    transition: transform 0.2s;
+    border-radius: 15px;
+    box-shadow: 0 0 20px;
+}
+
+.detailCar {
+    font-size: x-large;
+    text-align: center;
+    color: goldenrod;
+}
+
+
+.label-car {
+    font-size: 15px;
+    display: block;
+=======
   }
   
   
@@ -47,7 +75,7 @@
     margin-bottom: 5px;
     text-align: left;
     font-weight: bold;
-    color:yellow;
+    color:goldenrod;
 }
 
 .input-propCar {
@@ -67,7 +95,8 @@
     border:yellow;
     color:black;
     cursor: pointer;
-    background-color: white;
+    background-color: goldenrod;
+
     width: 20%;
     font-size: 16px;
 }

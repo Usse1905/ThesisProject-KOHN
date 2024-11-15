@@ -1,7 +1,7 @@
 import React , { useEffect , useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../../ComponentsCss/User/MainPage.css"
+import "../../ComponentsCss/Company/Companies.css"
 
 
 const Companies = () => {
@@ -40,7 +40,7 @@ const navigate = useNavigate()
                     <p>{element.phoneNumber}</p>
                     <p>{element.website}</p>
                     <p>{element.email}</p>
-                    <p>Renting license since {element.licenssinceWhen}</p>
+                    <p>Renting license since {element.licensesinceWhen}</p>
                     <p>Legal Entity Identifier {element.lei}</p>
                 </div>
             </div>

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useSocket } from '../../../SocketProvider';
+import { useCompany } from '../../../CompanyProvider';
 import moment from 'moment';
 import axios from 'axios';
-import io from 'socket.io-client';
 import '../../../ComponentsCss/User/Messages.css'; 
 
 const GLOBAL_ROOM_ID = 'global-chat-room';  
 
-const Messages = ({ messages, setMessages, currentUserId }) => {
+const Messages = ({ messages, setMessages, companyId }) => {
     
     const [messageContent, setMessageContent] = useState("");  // State for the input message
-    const socket = io('http://localhost:8080', {
-    withCredentials: true,
-    transports: ['websocket']
-}
-   )
+    const {socket}= useSocket()
+    const {company} = useCompany()
+   
     // Fetch messages initially
     const handleGetMessages = async () => {
         try {
@@ -34,7 +33,8 @@ const Messages = ({ messages, setMessages, currentUserId }) => {
     const handleSendMessage = () => {
         if (messageContent.trim()) {
             socket.emit('sendMessage', {
-                userId: currentUserId,
+                userId: 1,
+                companyId:companyId,
                 content: messageContent,
             });
             setMessageContent('');  // Clear the input after sending
@@ -44,16 +44,17 @@ const Messages = ({ messages, setMessages, currentUserId }) => {
     // Set up socket listener when the component mounts
     useEffect(() => {
         // Join the global room
-        socket.emit('joinRoom', { userId: currentUserId });
+        socket.on('joinRoom', { companyId: companyId });
 
         // Listen for new messages in the global chat room
         socket.on('receiveMessage', handleNewMessage);
+
 
         // Clean up on component unmount
         return () => {
             socket.off('receiveMessage', handleNewMessage);
         };
-    }, [currentUserId]);
+    }, [companyId]);
 
     // Fetch messages when the component mounts
     useEffect(() => {
@@ -68,11 +69,11 @@ const Messages = ({ messages, setMessages, currentUserId }) => {
                 messages.map((msg, index) => (
                     <div
                         key={index}
-                        className={`message ${msg.userId === currentUserId ? 'sent' : 'received'}`}
+                        className={`message ${msg.companyId === companyId ? 'sent' : 'received'}`}
                     >
                         <div className="message-bubble">
                             <p className="message-content">
-                                <strong>{msg.userId}</strong>: {msg.content}
+                                 {msg.content}
                             </p>
                             <p className="message-time">{moment(msg.createdAt).format('HH:mm')}</p>
                         </div>

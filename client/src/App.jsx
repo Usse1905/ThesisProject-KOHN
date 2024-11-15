@@ -9,8 +9,8 @@ import AddUserRequest from "./Components/User/AddUserRequest";
 import OneCar from "./Components/User/OneCar";
 import Companies from "./Components/Company/Companies";
 import OneCompany from "./Components/Company/OneCompany";
-import AddCar from "./Components/Company/AddCar";
-import ProfilePage from "./Components/Company/ProfilePage";
+import AddCar from "../src/Components/Company/AddCar.jsx";
+import CompanyProfile from "../src/Components/Company/Company Profile/CompanyProfile.jsx";
 import AdminDashboard from "./Components/Admin/AdminDashborard";
 import ProtectedAdminRoute from "./Components/Admin/ProtectAdmineRoute";
 import AdminLogin from "./Components/Admin/AdminLogin";
@@ -18,7 +18,7 @@ import { UserProvider } from "./UserProvider";
 import { CompanyProvider } from "./CompanyProvider";
 import NavBar from "./OtherComponents/NavBar";
 import NotificationPopup from "./Components/User/User Profile/NotificationPopUp";
-import RequestSubmitted from "./Components/User/RequestSubmitted";
+import RequestSubmitted from "./Components/User/RequestSubmitted.jsx";
 import UserProfile from "./Components/User/User Profile/UserProfile";
 import LandingPage from "./Components/LandingPage";
 import 'leaflet/dist/leaflet.css';
@@ -48,10 +48,10 @@ const App = () => {
             <Route path="/allcompanies" element={<Companies/>}/>
             <Route path="/onecompany" element={<OneCompany/>}/>
             <Route path="/addrequest" element={<AddUserRequest/>}/>
-            <Route path="/requestsubmitted" element={<RequestSubmitted/>}/>
+            <Route path="/reqsubmitted" element={<RequestSubmitted/>}/>
             <Route path="/userprofile" element={<UserProfile/>}/>
             <Route path="/Company/AddCar" element={<AddCar/>}/>
-            <Route path="/Company/Profile/:id" element={<ProfilePage/>}/>
+            <Route path="/Company/Profile" element={<CompanyProfile/>}/>
             <Route path="/admin" element={<ProtectedAdminRoute element={<AdminDashboard />} isAdmin={isAdmin} />} />
             <Route path="/adminlogin" element={<AdminLogin/>}/>
             <Route path="/AboutUs" element={<AboutUs/>}isAdmin={isAdmin} />

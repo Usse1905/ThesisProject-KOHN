@@ -1,7 +1,23 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from "axios";
-import "../../../src/App.css";
+
+import {React,useState} from 'react'
+import { useNavigate} from 'react-router-dom'
+import { useCompany } from '../../CompanyProvider'
+import axios from "axios"
+import "../../../src/App.css"
+const AddCar=()=>{
+  // states:
+  const[Name,setName]=useState("");
+  const[image,setImage]=useState("");
+  const[price,setPrice]=useState("");
+  const[carType,setCarType]=useState("");
+  const[mileage,setMileage]=useState("");
+  const[year,setYear]=useState("");
+  const[shift,setShift]=useState("");
+  const[ac,setAc]=useState("");
+  const {company} = useCompany()
+  // const[companyId,setCompanyId]=useState("");
+  // const [loading, setLoading] = useState(false); // Loading state for image upload
+  // const [formLoading, setFormLoading] = useState(false); // Loading state for form submission
 
 const AddCar = () => {
   
@@ -39,37 +55,32 @@ const AddCar = () => {
   const handelSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting Car Data:", { Name, image, price, carType, mileage, year, shift, ac });
-
-    try {
-      await axios.post("http://localhost:8080/cars/addCar", {
-        Name,
-        image,
-        price,
-        carType,
-        mileage,
-        year,
-        shift,
-        ac,
-        userId: 1
-      });
-      navigate("/");
-
-      
-      setName("");
-      setImage("");
-      setPrice("");
-      setCarType("");
-      setMileage("");
-      setYear("");
-      setShift("");
-      setAc("");
-    } catch (error) {
-      console.error("Error saving car in database", error.response || error.message);
-      alert('Failed to save car in database');
-    } finally {
-      setLoading(false);
-    }
-  };
+try{
+  await axios.post("http://localhost:8080/cars/addCar",{
+    userId:1,
+    companyId: company.id,
+    Name,
+    image,
+    price,
+    carType,
+    mileage,
+    year,
+    shift,
+    ac,
+    
+  })
+  navigate("/Company/Profile")
+console.log('car added succefully',res.data);
+// reseting dorm fields
+    setName("")
+    setImage("")
+    setPrice("")
+    setCarType("")
+    setMileage("")
+    setYear("")
+    setShift("")
+    setAc("")
+    // setCompanyId("")
 
   return (
     <div className="containerCar">

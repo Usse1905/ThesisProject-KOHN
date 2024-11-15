@@ -4,7 +4,7 @@ import { UserRound, BadgeInfo, FileStack, Bell, MessageCircle, ImagePlus, ImageD
 import moment from "moment";
 import axios from 'axios';
 import EditUserInfo from './EditUserInfo';
-import Messages from './Messages';
+import UserMessages from './UserMessages.jsx';
 import Notifications from './Notifications';
 import OrderHistory from './OrderHistory';
 import UserInfo from './UserInfo';
@@ -35,9 +35,9 @@ const UserProfile = () => {
     };
 
     // Fetch messages for a specific room
-    const handleGetMessages = async (roomId) => {
+    const handleGetMessages = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/chat/messages/${roomId}`);
+            const response = await axios.get(`http://localhost:8080/chat/messages/global-chat-room`);
             console.log("Fetched messages:", response.data);
             setMessages(response.data);
         } catch (error) {
@@ -103,7 +103,7 @@ const UserProfile = () => {
             case 'Notifications':
                 return <Notifications userreqs={userreqs} />;
             case 'Messages':
-                return <Messages messages={messages} setMessages={setMessages} currentUserId={user.id} />;
+                return <UserMessages messages={messages} setMessages={setMessages} userId={user.id} />;
             case 'EditUserInfo':
                 return <EditUserInfo formData={formData} handleChange={handleChange} handleUpdate={handleUpdate} />;
             default:

@@ -51,13 +51,13 @@ const SignUp = () => {
         <input className="signup-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
         <label className='signup-label'>CIN:</label>
-        <input className="signup-input" type='text' value={cin} onChange={(e) => setCin(e.target.value)} required />
+        <input className="signup-input" type='number' value={cin} onChange={(e) => setCin(e.target.value)} required />
 
         <label className='signup-label'>What year were you born in :</label>
-        <input className="signup-input" type='text' value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
+        <input className="signup-input" type='number' value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
 
         <label className='signup-label'>What year did you obtain your Driver's license :</label>
-        <input className="signup-input" type='text' value={dateOfLicense} onChange={(e) => setDateOfLicense(e.target.value)} required />
+        <input className="signup-input" type='number' value={dateOfLicense} onChange={(e) => setDateOfLicense(e.target.value)} required />
       
       <div className='signup-select-div'>
         <label className='signup-label'>Role:</label>
